@@ -27,7 +27,7 @@ name                     : "kimyeonho"
 description              : "함께 나누는 기술블로그"
 url                      : "https://kyh0703.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
-repository               : # "kyh0703/minimal-mistakes"
+repository               : "kyh0703/kyh0703.github.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
@@ -105,18 +105,18 @@ analytics:
 
 # Site Author
 author:
-  name             : "Your Name"
+  name             : "yeonho"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am an **amazing** person."
+  bio              : ""
   location         : "seoul"
-  email            :
+  email            : "kyh0703@nate.com"
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
       # url: "mailto:your.name@email.com"
     - label: "Website"
       icon: "fas fa-fw fa-link"
-      # url: "https://your-website.com"
+      url: "https://kyh0703.github.io"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       # url: "https://twitter.com/"
@@ -125,7 +125,7 @@ author:
       # url: "https://facebook.com/"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url: "https://github.com/"
+      url: "https://github.com/kyh0703"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
@@ -141,7 +141,7 @@ footer:
       # url:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url:
+      url: "https://github.com/kyh0703"
     - label: "GitLab"
       icon: "fab fa-fw fa-gitlab"
       # url:
