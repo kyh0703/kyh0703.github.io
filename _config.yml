@@ -106,8 +106,8 @@ analytics:
 # Site Author
 author:
   name             : "yeonho"
-  avatar           : "/assets/images/bio-photo.jpg"
-  bio              : "I am an **amazing** person."
+  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  bio              : ""
   location         : "seoul"
   email            : "kyh0703@nate.com"
   links:
