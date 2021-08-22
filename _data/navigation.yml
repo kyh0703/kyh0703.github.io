@@ -5,6 +5,6 @@ main:
   - title: "Home"
     url: https://kyh0703.github.io
   - title: "Category"
-    url: /sitemap/
+    url: categories
   - title: "About"
     url: about
