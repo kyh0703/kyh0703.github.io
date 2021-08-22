@@ -20,16 +20,16 @@ footer_scripts:
 
 # Site Settings
 locale                   : "ko-KR"
-title                    : "연호의 기술 블로그"
+title                    : "기술의 추월차선"
 title_separator          : "-"
-subtitle                 : "환영합니다"
-name                     : "kimyeonho"
+subtitle                 : #""
+name                     : "yeonho"
 description              : "함께 나누는 기술블로그"
 url                      : "https://kyh0703.github.io"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "kyh0703/kyh0703.github.io"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-logo                     : # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
+logo                     : "/assets/images/logo.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
@@ -106,8 +106,8 @@ analytics:
 # Site Author
 author:
   name             : "yeonho"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : ""
+  avatar           : "/assets/images/bio-photo.jpg"
+  bio              : "I am an **amazing** person."
   location         : "seoul"
   email            : "kyh0703@nate.com"
   links:
