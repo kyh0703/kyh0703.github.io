@@ -47,6 +47,8 @@ comments:
   utterances:
     theme                : "github-dark"
     issue_term           : "pathname"
+    repo                 : "kyh0703/blog-comments"
+    crossorigin          : "anonymous"
   giscus:
     repo_id              : # Shown during giscus setup at https://giscus.app
     category_name        : # Full text name of the category
