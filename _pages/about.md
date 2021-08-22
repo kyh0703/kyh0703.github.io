@@ -1,5 +1,5 @@
 ---
-title:  "블로그를 시작한 계기"
+title:  "연호씨의 블로그"
 permalink: /about/
 layout: single
 published: true
