@@ -9,4 +9,4 @@ main:
   - title: "Category"
     url: /sitemap/
   - title: "About"
-    url: /sitemap/
+    url: about
