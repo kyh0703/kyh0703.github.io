@@ -1,5 +1,5 @@
 ---
-title:  "호랑이는 죽어서 가죽을 남기고, 개발자는 마크다운을 남긴다."
+title:  "호랑이는 죽어서 가죽을 남기고, 개발자는 마크다운을 남긴다"
 permalink: /about/
 layout: single
 published: true
@@ -9,8 +9,6 @@ categories:
 tags:
   - Blog
 ---
-
-# 
 
 
 
