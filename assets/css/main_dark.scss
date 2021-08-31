@@ -6,3 +6,9 @@
 
 @import "minimal-mistakes/skins/dark";
 @import "minimal-mistakes"; // main partials
+@import url(//font.elice.io/EliceDigitalBaeum.css);
+
+html,
+body {
+  font-family: "Elice Digital Baeum", sans-serif;
+}
