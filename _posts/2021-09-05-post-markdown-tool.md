@@ -2,11 +2,9 @@
 title:  "마크다운 어떻게 하면 편하게 사용할 수 있을까?"
 excerpt: Github Pages의 Typora 적용
 categories:
-  - etc
+  - Etc
 tags:
-  - github page
-  - typora
-  - jekyll
+  - etc
 date: "2021-09-05 18:00"
 last_modified_at: 2021-09-05T18:00:00.540Z
 ---
