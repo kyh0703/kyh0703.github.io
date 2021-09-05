@@ -42,7 +42,7 @@ CTRL + 4 : H4
 
 \`\`\`문자뒤에 사용할 언어를 입력하면 다음과 같이 표기됩니다
 
-![image-20210905230005400](../assets/images/posts/2021-09-05-post-markdown-tool/image-20210905230005400.png)
+![image-20210905230005400](../../assets/images/posts/2021-09-05-post-markdown-tool/image-20210905230005400.png)
 
 #### 3. 표
 
