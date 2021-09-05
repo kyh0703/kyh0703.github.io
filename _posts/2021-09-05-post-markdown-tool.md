@@ -4,9 +4,10 @@ excerpt: Github Pages의 Typora 적용
 categories:
   - Etc
 tags:
-  - etc
+  - [etc, markdown, typora]
 date: "2021-09-05 18:00"
 last_modified_at: 2021-09-05T18:00:00.540Z
+typora-copy-images-to: ../../assets/images/posts/${filename}
 ---
 
 ## 문서작업이 편해지는 마크다운
@@ -39,9 +40,11 @@ CTRL + 4 : H4
 
 #### 2. 소스코드
 
-\`\`\`문자뒤에 사용할 언어를 입력하면 다음과 같이 표기됩니다.
+\`\`\`문자뒤에 사용할 언어를 입력하면 다음과 같이 표기됩니다
 
-![image-20210905224749162](../../assets/images/posts/2021-09-05-post-markdown-tool/image-20210905224749162.png)3. 표
+![image-20210905230005400](../../assets/images/posts/2021-09-05-post-markdown-tool/image-20210905230005400.png)
+
+#### 3. 표
 
 ```bash
 CTRL + T
@@ -63,7 +66,7 @@ CTRL + T
 
 * 문서 경로 지정하기
 
-![image-20210905224850766](../../assets/images/posts/2021-09-05-post-markdown-tool/image-20210905224850766.png)
+
 
 >  저는 집에서 블로그 작성 목적으로 사용하기에 특정경로를 고정으로 지정하여 넣어주었습니다.
 
