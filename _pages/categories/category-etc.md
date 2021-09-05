@@ -1,5 +1,5 @@
 ---
-title: "잡담"
+title: "기타"
 layout: archive
 permalink: categories/etc
 author_profile: true
