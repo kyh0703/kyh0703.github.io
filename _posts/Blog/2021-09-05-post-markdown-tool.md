@@ -2,9 +2,9 @@
 title:  "마크다운 어떻게 하면 편하게 사용할 수 있을까?"
 excerpt: Github Pages의 Typora 적용
 categories:
-  - Etc
+  - Blog
 tags:
-  - [etc, markdown, typora]
+  - [blog, markdown, typora]
 date: "2021-09-05 18:00"
 last_modified_at: 2021-09-05T18:00:00.540Z
 ---
@@ -71,8 +71,9 @@ CTRL + T
 >
 >  복사 이미지 경로설정으로 로컬과 웹에 이미지 저장을 편하게 사용하기 위해서는 다음과 같은 경로에서 마크다운을 작성하셔야됩니다.
 >
->  ├─_posts
->  │  └─Etc
+>  kyh0703.github.io/_posts/Blog
+
+
 
 #### 6. 순서도
 
@@ -94,21 +95,7 @@ sequenceDiagram
     Bob-->>John: Jolly good!
 ```
 
-
-
-```mermaid
-sequenceDiagram
-    participant Alice
-    participant Bob
-    Alice->>John: Hello John, how are you?
-    loop Healthcheck
-        John->>John: Fight against hypochondria
-    end
-    Note right of John: Rational thoughts <br/>prevail!
-    John-->>Alice: Great!
-    John->>Bob: How about you?
-    Bob-->>John: Jolly good!
-```
+![image-20210906224251733](../../assets/images/posts/2021-09-05-post-markdown-tool/image-20210906224251733.png)
 
 
 

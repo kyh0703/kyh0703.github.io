@@ -9,33 +9,11 @@
             📂 <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span style="font-family:'Coming Soon';">{{sum}}</style> <span style="font-family:'Cafe24Oneprettynight';">개</style>
       </li>
       <li>
-        <span class="nav__sub-title">Coding Test</span>
+            <span class="nav__sub-title">Etc</span>
             <ul>
                 {% for category in site.categories %}
-                    {% if category[0] == "Algorithm" %}
-                        <li><a href="/categories/algorithm" class="">알고리즘 구현 (with C++) ({{category[1].size}})</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-            <ul>
-                {% for category in site.categories %}
-                    {% if category[0] == "Programmers" %}
-                        <li><a href="/categories/programmers" class="">프로그래머스 ({{category[1].size}})</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-                <span class="nav__sub-title">ETC</span>
-            <ul>
-                {% for category in site.categories %}
-                    {% if category[0] == "Etc" %}
-                        <li><a href="/categories/etc" class=""> 테스트 ({{category[1].size}})</a></li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
-            <ul>
-                {% for category in site.categories %}
-                    {% if category[0] == "STL" %}
-                        <li><a href="/categories/stl" class="">C++ STL & 표준 ({{category[1].size}})</a></li>
+                    {% if category[0] == "Blog" %}
+                        <li><a href="/categories/blog" class=""> 블로그 ({{category[1].size}})</a></li>
                     {% endif %}
                 {% endfor %}
             </ul>
