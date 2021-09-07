@@ -78,6 +78,11 @@ RUN apk add --no-cache build-base curl git
 
 유저를 생성하였을 경우 지정한 유저로 전환합니다.
 
+```dockerfile
+RUN useradd kyh0703
+USER kyh0703
+```
+
 #### COPY
 
 호스트OS에 있는 파일을 복사하기 위해 사용됩니다.
