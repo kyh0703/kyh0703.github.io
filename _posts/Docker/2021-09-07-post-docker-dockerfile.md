@@ -58,7 +58,7 @@ RUN apk add --no-cache build-base curl git
 
 #### FROM
 
-먼저 Dockerfile을 만들기에 앞서 ``FROM`` 명령어를 통해 Base이미지를 선택해주셔야 됩니다. Base이미지란 centos같이 OS이미지가 될 수도 있고 어떤 특정 언어를 빌드 할 수 있는 이미지 일 수도 있습니다. git과 같이 도커도 dockerhub가 따로 있으며 공개적으로 올라온 이미지들을 로컬에 pull하여 이미지를 사용 할 수 있으며, 공개하지 않을 이미지들은 마찬가지로 dockerhub나 개인적인 리포지토리를 구성하여 도커이미지파일들을 보관 할 수 있습니다.
+먼저 Dockerfile을 만들기에 앞서 ``FROM`` 명령어를 통해 Base이미지를 선택해주셔야 됩니다. Base이미지란 centos같이 OS이미지가 될 수도 있고 어떤 특정 언어를 빌드 할 수 있는 이미지 일 수도 있습니다. git과 같이 도커도 dockerhub가 따로 있으며 공개적으로 올라온 이미지들을 로컬에 pull하여 이미지를 사용 할 수 있으며, 공개하지 않을 이미지들은 마찬가지로 dockerhub나 개인적인 리포지토리를 구성하여 도커 이미지들을 보관 할 수 있습니다.
 
 ![image-20210907222632414](../../assets/images/posts/2021-09-07-post-docker-dockerfile/image-20210907222632414.png)
 
