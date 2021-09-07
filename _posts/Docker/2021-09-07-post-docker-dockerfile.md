@@ -72,7 +72,7 @@ RUN apk add --no-cache build-base curl git
 
 #### WORKDIR
 
-컨테이너 내부안에서 작업 학 디렉토리를 의미합니다.
+컨테이너 내부에서 작업 할 디렉토리를 의미합니다.
 
 #### USER
 
