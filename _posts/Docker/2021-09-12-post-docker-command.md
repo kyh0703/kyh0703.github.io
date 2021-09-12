@@ -4,7 +4,7 @@ excerpt: 도커 명령어 친숙해지기
 categories:
   - Docker
 tags:
-  - [docker, container, dockerfile]
+  - [docker, docker command]
 date: "2021-09-12 19:00"
 last_modified_at: 2021-09-12T23:00:00.540Zs
 ---
