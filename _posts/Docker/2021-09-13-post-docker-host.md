@@ -52,7 +52,7 @@ $ docker run --net=NETWORK_TYPE
   이미 생성되어 있는 컨테이너와 네트워크를 공유합니다.
 
   ```bash
-  $ docker container run [생성된 컨테이너]
+  $ docker container run --link [생성된 컨테이너]
   ```
 
 * none
