@@ -115,25 +115,25 @@ services:
 
 #### 설치
 
-1. 다운로드
+* 다운로드
 
 ```bash
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
 
-2. 권한 부여
+* 권한 부여
 
 ```bash
  sudo chmod +x /usr/local/bin/docker-compose
 ```
 
-3.  docker-compose 확인
+* docker-compose 확인
 
 ```ba
 docker-compose --version
 ```
 
-4. 실패 시 경로 부여
+* 실패 시 경로 부여
 
 ```bash
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
