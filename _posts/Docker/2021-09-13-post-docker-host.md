@@ -67,10 +67,10 @@ $ docker run --net=NETWORK_TYPE
 
   도커를 생성할 때 우리는 호스트 영역을 공유할 수 있도록 옵션을 줄 수 있습니다. 지정한 디렉토리는 마운트되어 컨테이너가 호스트의 데이터를 사용하거나 저장할 수 있습니다.
 
-```bash
-# docker container run --it -v [호스트볼륨]:[컨테이너볼륨] /bin/bash
-$ docker container run --it -v /etc/gitlab-runner/toml.config:/var/etc/gitlab-runnet /bin/bash
-```
+  ```bash
+  # docker container run --it -v [호스트볼륨]:[컨테이너볼륨] /bin/bash
+  $ docker container run --it -v /etc/gitlab- runner/toml.config:/var/etc/gitlab-runnet /bin/bash
+  ```
 
 * SSH 복사
 
