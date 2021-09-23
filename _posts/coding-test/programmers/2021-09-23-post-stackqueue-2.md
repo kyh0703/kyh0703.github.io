@@ -74,7 +74,7 @@ int solution(vector<int> priorities, int location)
             priorities.erase(priorities.begin());
         }
         else
-          {
+        {
             priorities.erase(priorities.begin());
             answer++;
 
