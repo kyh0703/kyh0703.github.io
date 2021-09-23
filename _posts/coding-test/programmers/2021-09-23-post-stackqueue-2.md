@@ -1,12 +1,11 @@
 ---
-title: "프로그래머스 (스택/큐) - 프린터"
+title: "프로그래머스 (스택/큐)2 - 프린터"
 categories:
   - Programmers
 tags:
   - [programmers, queue]
-date: "2021-09-23 23:00"
+date: "2021-09-23 22:10"
 last_modified_at: 2021-09-23T23:00:00.540Zs
-
 ---
 
 #### 문제

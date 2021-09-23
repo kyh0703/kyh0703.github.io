@@ -1,11 +1,11 @@
 ---
-title: "프로그래머스 (스택/큐) - 기능개선"
+title: "프로그래머스 (스택/큐)1 - 기능개선"
 categories:
   - Programmers
 tags:
   - [programmers, queue]
-date: "2021-09-23 23:00"
-last_modified_at: 2021-09-23T23:00:00.540Zs
+date: "2021-09-23 22:00"
+last_modified_at: 2021-09-23T22:00:00.540Zs
 ---
 
 #### 문제
