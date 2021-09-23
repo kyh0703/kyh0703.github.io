@@ -1,5 +1,5 @@
 ---
-title:  "Docker 정복기(2) - Dockerfile"
+title: "도커(2) - Dockerfile"
 excerpt: 이미지를 만드는 도커파일
 categories:
   - Docker
@@ -13,11 +13,11 @@ last_modified_at: 2021-09-07T23:00:00.540Zs
 
 지난 시간에 도커의 개념과 도커가 어떻게 이루어지는지에 대해 간략하게나마 말씀드렸었습니다. 우리는 환경들을 기록하기 위해 **도커파일**을 만들고 그 환경들을 **이미지**라 부르게 됩니다. 또한 그 이미지들을 가지고 **컨테이너**를 만들게 됩니다. 이런 일련의 과정들을 이해하기 위해 아래의 그림을 한번 살펴보겠습니다.
 
-![image-20210907220638666](../../assets/images/posts/2021-09-07-post-docker-dockerfile/image-20210907220638666.png)
+![image-20210907220638666](../../../assets/images/posts/2021-09-07-post-docker-dockerfile/image-20210907220638666.png)
 
 회사에서나 학교에서 개발장비를 구축하게 되면 위와 같은 상황이 많이 발생합니다. 여기서 위에 고급개발자가 말하고 있는 명령어들을 ``도커파일``이라고 보시면 됩니다. 
 
-![image-20210907220417524](../../assets/images/posts/2021-09-07-post-docker-dockerfile/image-20210907220417524.png)
+![image-20210907220417524](../../../assets/images/posts/2021-09-07-post-docker-dockerfile/image-20210907220417524.png)
 
 다음 그림을 보시면 자바책에서 많이 보시던 그림이실텐데요. 마찬가지로 도커에서는 저 붕어빵 틀이 ``이미지`` 그리고 만들어진 붕어빵은 ``컨테이너``라고 보시면 됩니다. 이제 우리는 어떤 구성을 통해 컨테이너를 구성 할 수 있는지 알 수 있었는데요. 실제로 도커파일을 어떻게 작성해야 할까요?
 
@@ -60,7 +60,7 @@ RUN apk add --no-cache build-base curl git
 
 먼저 Dockerfile을 만들기에 앞서 ``FROM`` 명령어를 통해 Base이미지를 선택해주셔야 됩니다. Base이미지란 centos같이 OS이미지가 될 수도 있고 어떤 특정 언어를 빌드 할 수 있는 이미지 일 수도 있습니다. git과 같이 도커도 dockerhub가 따로 있으며 공개적으로 올라온 이미지들을 로컬에 pull하여 이미지를 사용 할 수 있으며, 공개하지 않을 이미지들은 마찬가지로 dockerhub나 개인적인 리포지토리를 구성하여 도커 이미지들을 보관 할 수 있습니다.
 
-![image-20210907222632414](../../assets/images/posts/2021-09-07-post-docker-dockerfile/image-20210907222632414.png)
+![image-20210907222632414](../../../assets/images/posts/2021-09-07-post-docker-dockerfile/image-20210907222632414.png)
 
 #### ARG
 

@@ -1,5 +1,5 @@
 ---
-title:  "Docker 정복기(1) - Docker"
+title: "도커(1) - Docker"
 excerpt: docker 개념 쉽게 이해해보기
 categories:
   - Docker
@@ -19,7 +19,7 @@ last_modified_at: 2021-09-06T23:00:00.540Z
 
 컨테이너는 ``코드, 런타임 환경, 시스템 도구, 라이브러리 등 소프트웨어``가 구동되기 위해 필요한 것입니다. 우리는 먼저 가상화플랫폼에 대해서 알아볼 필요가 있습니다. 가상화플랫폼을 어디서 경험해볼 수 있을까요? VMWare, VirtualBox, Xencenter등 가상화 프로그램을 통해서 경험을 해볼 수 있습니다. 앞서 얘기드린 프로그램들은 가상머신(VM)을 실행시키는 하이퍼바이저라고 합니다. 구조를 살펴보시면 다음과 같이 사용자OS를 기본으로 하이퍼바이저가 올라고 그 위에 가상머신이 올라가는것을 확인할 수 있습니다.
 
-![image-20210906231127624](../../assets/images/posts/2021-09-06-post-docker-concept/image-20210906231127624.png)
+![image-20210906231127624](../../../assets/images/posts/2021-09-06-post-docker-concept/image-20210906231127624.png)
 
 그러면 컨테이너 구조는 무엇일까요? 컨테이너를 이해하기서는 chroot라는 명령어를 기억하시면 많은 도움이 됩니다. chroot(Change Root Directory)는 문자그대로 루트 디렉토리를 변경하는 명령어입니다. 루트디렉토리를 변경하면 어떻게 될까요? 다음과 같이 chroot를 A디렉토리로 지정하게 되면 B로 접근이 불가능하게 됩니다.
 
@@ -29,7 +29,7 @@ $ chroot [새로운 루트 경로] [명령어]
 
 
 
-![image-20210906232110961](../../assets/images/posts/2021-09-06-post-docker-concept/image-20210906232110961.png)
+![image-20210906232110961](../../../assets/images/posts/2021-09-06-post-docker-concept/image-20210906232110961.png)
 
 chroot를 통해 격리된 공간을 구축할 수 있었고 발전을 통해 LXC(**L**inu**X** **C**ontinaer)라는게 탄생했습니다. LXC는 다음과 같이`` Namespace``와 ``Cgroup``이란  두가지 개념을 가지고 만들어집니다.
 
@@ -59,7 +59,7 @@ chroot를 통해 격리된 공간을 구축할 수 있었고 발전을 통해 LX
 
 위에 경험들은 누구나 쉽게 경험해보신적 있으실겁니다. 그러면 컨테이너는 어떨까요?
 
-![image-20210906234155777](../../assets/images/posts/2021-09-06-post-docker-concept/image-20210906234155777.png)
+![image-20210906234155777](../../../assets/images/posts/2021-09-06-post-docker-concept/image-20210906234155777.png)
 
 > * 애플리케이션의 신속한 개발과 일관성
 >   * 개발환경 구성시간이 필요없음
@@ -73,7 +73,7 @@ chroot를 통해 격리된 공간을 구축할 수 있었고 발전을 통해 LX
 
 하이퍼바이저는 호스트OS 위에 게스트OS가 올라가게 됩니다. 그에 비해 Docker는 호스트OS 바로 위에 DockerEngine이 올라가게 되어 가볍습니다. 또한 구동속도 또한 아주 빠르게 진행됩니다. 이러한 이점으로 인해 놀라울 정도로 빠르게 환경을 구성할 수 있게 됩니다!
 
-![image-20210906234526883](../../assets/images/posts/2021-09-06-post-docker-concept/image-20210906234526883.png)
+![image-20210906234526883](../../../assets/images/posts/2021-09-06-post-docker-concept/image-20210906234526883.png)
 
 도커 생태계는 놀랍고 그안에 많은 컨테이너들이 존재하게 됩니다. 도커르르 사용하여 **서버코드화**를 통해 여러가지 컨테이너들을 만들 수 있습니다.
 

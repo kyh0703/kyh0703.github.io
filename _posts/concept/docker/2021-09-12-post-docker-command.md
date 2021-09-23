@@ -1,5 +1,5 @@
 ---
-title:  "Docker 정복기(3) - Command"
+title: "도커(3) - Command"
 excerpt: 도커 명령어 친숙해지기
 categories:
   - Docker
@@ -62,7 +62,7 @@ $ docker image --help
 $ docker continaer --help
 ```
 
-![image-20210912193828711](../../assets/images/posts/2021-09-12-post-docker-command/image-20210912193828711.png)
+![image-20210912193828711](../../../assets/images/posts/2021-09-12-post-docker-command/image-20210912193828711.png)
 
 ### 마치며
 

@@ -1,5 +1,5 @@
 ---
-title:  "Docker 정복기(5) - docker-compose"
+title: "도커(5) - docker-compose"
 excerpt: 도커 마술사
 categories:
   - Docker
@@ -11,7 +11,7 @@ last_modified_at: 2021-09-15T23:00:00.540Zs
 
 ### 개발 환경 구성을 할 수 있다!
 
-![image-20210915222919713](../../assets/images/posts/2021-09-15-post-docker-compose/image-20210915222919713.png)
+![image-20210915222919713](../../../assets/images/posts/2021-09-15-post-docker-compose/image-20210915222919713.png)
 
 이제 위와 같이 일련의 과정을 통해서 컨테이너들을 생성할 수 있게 되었습니다!  그래서 열심히 이미지를 작성하여 개발환경을 ``코드화``하였고 언제든지 컨테이너를 실행할 수 있게 준비했습니다. 여기서 개발환경에는 ``mysql``, ``postgresql``, ``rabbitmq``가 필요하다고 가정해봅시다. 이 때 실행한 컨테이너를 다시 재기동해야되는 상황이 일어났습니다. 어떻게 해야될까요?
 

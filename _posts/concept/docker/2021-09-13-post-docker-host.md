@@ -1,5 +1,5 @@
 ---
-title:  "Docker 정복기(4) - Host"
+title: "도커(4) - Host"
 excerpt: 도커 호스트와 연결고리
 categories:
   - Docker
@@ -30,7 +30,7 @@ $ docker run --net=NETWORK_TYPE
 
 * bridge
 
-  ![image-20210913205248721](../../assets/images/posts/2021-09-13-post-docker-network/image-20210913205248721.png)
+  ![image-20210913205248721](../../../assets/images/posts/2021-09-13-post-docker-network/image-20210913205248721.png)
 
   bridge는 기본모드입니다. 따라서 컨테이너 생성 시 네트워크 타입에 대한 옵션을 주지 않는다면 기본으로 bridge모드로 선택되게 됩니다. 도커를 실행하게 되면 ``docker0 bridge``가 생기게 되고 우리가 컨테이너를 생성하게 되면 각각의 독립적인 공간(Namespace)가 만들어지고 ``docker0 bridge`` 에 연결됩니다. 그래서 우리는 ``docker0 bridge`` 통해 호스트 네트워크와 연결이 가능합니다. 아래와 같은 명령어를 통해 컨테이너 생성 시 호스트와 포트를 공유 할 수 있습니다.
 
@@ -43,7 +43,7 @@ $ docker run --net=NETWORK_TYPE
 
   host모드는 문자그대로 호스트와 네트워크를 공유합니다. 따라서 컨테이너 생성 시 포트를 따로 매핑 시킬 필요가 없습니다. **하지만 호스트네트워크 모드는 리눅스만 사용가능하다는 점 꼭 기억하세요.** 
 
-  ![image-20210913205727607](../../assets/images/posts/2021-09-13-post-docker-network/image-20210913205727607.png)
+  ![image-20210913205727607](../../../assets/images/posts/2021-09-13-post-docker-network/image-20210913205727607.png)
 
   위에 그려진 예시를 보게 되면 리눅스에 경우 호스트와 도커엔진이 바로 연결되어 있음을 확인할 수 있습니다. 반면 Window의 경우 리눅스 가상머신(VM)위에 도커 호스트가 올라가게 됨으로 호스트 네트워크를 같이 공유할 수 없습니다.
 
