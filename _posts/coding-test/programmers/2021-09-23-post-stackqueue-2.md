@@ -65,7 +65,7 @@ int solution(vector<int> priorities, int location)
         int max = *max_element(priorities.begin(), priorities.end());
         if (priorities.front() < max)
         {
-            if (0 == location)
+            if (location == 0)
                 location = priorities.size() - 1;
             else
                 location--;
@@ -78,7 +78,7 @@ int solution(vector<int> priorities, int location)
             priorities.erase(priorities.begin());
             answer++;
 
-            if (0 == location)
+            if (location == 0)
                 break;
 
             location--;
