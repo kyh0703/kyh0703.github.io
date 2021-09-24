@@ -3,7 +3,7 @@ title: "프로그래머스 (스택/큐)2 - 프린터"
 categories:
   - Programmers
 tags:
-  - [programmers, queue]
+  - [programmers, queue, c++]
 date: "2021-09-23 22:10"
 last_modified_at: 2021-09-23T23:00:00.540Zs
 ---
@@ -131,7 +131,7 @@ int solution(vector<int> priorities, int location)
         if (index == location)
             break;
     }
-    
+
     return answer;
 }
 ```

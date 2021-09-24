@@ -3,7 +3,7 @@ title: "프로그래머스 (스택/큐)1 - 기능개발"
 categories:
   - Programmers
 tags:
-  - [programmers, queue]
+  - [programmers, queue, c++]
 date: "2021-09-23 22:00"
 last_modified_at: 2021-09-23T22:00:00.540Zs
 ---

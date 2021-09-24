@@ -1,9 +1,9 @@
 ---
-title: "프로그래머스 (스택/큐)2 - 프린터"
+title: "프로그래머스 (스택/큐)2 - 다리를 지나는 트럭"
 categories:
   - Programmers
 tags:
-  - [programmers, queue]
+  - [programmers, queue, c++]
 date: "2021-09-24 18:00"
 last_modified_at: 2021-09-24T18:00:00.540Zs
 ---
