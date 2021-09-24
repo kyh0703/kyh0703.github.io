@@ -49,6 +49,8 @@ last_modified_at: 2021-09-23T23:00:00.540Zs
 
 #### C++
 
+* vector만 사용
+
 ```c++
 #include <string>
 #include <vector>
@@ -85,6 +87,51 @@ int solution(vector<int> priorities, int location)
         }
     }
 
+    return answer;
+}
+```
+
+* queue, priority_queue 사용(참조)
+
+```c++
+#include <string>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+int solution(vector<int> priorities, int location)
+{
+    int answer = 0;
+
+    queue<pair<int, int>> index_queue;
+    priority_queue<int> pq;
+
+    for (size_t i = 0; i < priorities.size(); i++)
+    {
+        index_queue.push(make_pair(i, priorities[i]));
+        pq.push(priorities[i]);
+    }
+
+    while (!index_queue.empty())
+    {
+        int index = index_queue.front().first;
+        int priority = index_queue.front().second;
+        index_queue.pop();
+
+        if (priority != pq.top())
+        {
+            index_queue.push(make_pair(index, priority));
+            continue;
+        }
+
+        pq.pop();
+        answer++;
+
+        if (index == location)
+            break;
+    }
+    
     return answer;
 }
 ```
