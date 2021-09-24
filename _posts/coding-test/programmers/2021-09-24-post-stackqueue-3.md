@@ -4,8 +4,8 @@ categories:
   - Programmers
 tags:
   - [programmers, queue]
-date: "2021-09-23 22:10"
-last_modified_at: 2021-09-23T23:00:00.540Zs
+date: "2021-09-24 18:00"
+last_modified_at: 2021-09-24T18:00:00.540Zs
 ---
 
 #### 문제
@@ -48,3 +48,59 @@ solution 함수의 매개변수로 다리에 올라갈 수 있는 트럭 수 bri
 [출처](http://icpckorea.org/2016/ONLINE/problem.pdf)
 
 ※ 공지 - 2020년 4월 06일 테스트케이스가 추가되었습니다.
+
+#### C++
+
+```c++
+#include <string>
+#include <vector>
+#include <queue>
+
+using namespace std;
+
+int solution(int bridge_length, int weight, vector<int> truck_weights)
+{
+    int answer = 0;
+    queue<int> trucks;
+    for (int truck : truck_weights)
+        trucks.push(truck);
+
+    queue<pair<int, int>> progress;
+    int current_weight = 0;
+    int second = 1;
+    while (true)
+    {
+        if (!progress.empty())
+        {
+            int start_second = progress.front().first;
+            int truck_weight = progress.front().second;
+            int distance = second - start_second;
+            if (bridge_length <= distance)
+            {
+                progress.pop();
+                current_weight -= truck_weight;
+            }
+        }
+
+        if (!trucks.empty() && current_weight + trucks.front() <= weight)
+        {
+            int truck_weight = trucks.front();
+            current_weight += truck_weight;
+            trucks.pop();
+            progress.push(make_pair(second, truck_weight));
+        }
+
+        if (progress.empty() && trucks.empty())
+            break;
+
+        second++;
+    }
+
+    answer = second;
+    return answer;
+}
+```
+
+#### 마치며
+
+내가 너무 어렵게 문제를 푸는거 같단 생각이 든다. 다른사람 풀이를 보면 참 간단히도 했는데...이번 문제 풀이는 큐로 처리해야겠단 생각을 가지고 시작부터 큐에 넣고 시작했는데 트럭에 거리를 구하여 처리하는 부분을 위로 두어야 해결이 되는건 알고있었지만 아래쪽에 두고 싶은 아집이 생겨서하다가 시간이 걸려서 그냥 올렸다. 재밌긴 한데 찜찜하다 다른 문제들을 부지런히 풀어봐야겠다.
