@@ -48,6 +48,8 @@ last_modified_at: 2021-09-23T22:00:00.540Zs
 
 #### C++
 
+* vector만 사용
+
 ```c++
 #include <string>
 #include <vector>
@@ -79,6 +81,41 @@ vector<int> solution(vector<int> progresses, vector<int> speeds) {
         if (0 < count)
             answer.push_back(count);
     }
+    return answer;
+}
+```
+
+* 큐를 사용
+
+```c++
+vector<int> solution(vector<int> progresses, vector<int> speeds)
+{
+    vector<int> answer;
+    queue<int> work_day;
+
+    for (size_t i = 0; i < progresses.size(); ++i)
+    {
+        int day = (99 - progresses[i]) / speeds[i] + 1;
+        work_day.push(day);
+    }
+
+    while (!work_day.empty())
+    {
+        int count = 0;
+        int stand_day = work_day.front();
+        work_day.pop();
+        count++;
+
+        while (!work_day.empty() && work_day.front() <= stand_day)
+        {
+            work_day.pop();
+            count++;
+        }
+
+        if (0 < count)
+            answer.push_back(count);
+    }
+
     return answer;
 }
 ```
