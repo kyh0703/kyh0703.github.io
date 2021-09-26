@@ -17,9 +17,6 @@ last_modified_at: 2021-09-25T17:00:00.540Zs
 #### C++
 
 ```c++
-#include <string>
-#include <vector>
-
 vector<int> solution(int money)
 {
     vector<int> answer;
@@ -71,4 +68,165 @@ int solution(int n, int m, int k, vector<int> array)
 }
 ```
 
-#### 
+### 숫자카드게임
+
+#### 문제
+
+숫자 카드 게임은 여러 개의 숫자 카드 중에서 가장 높은 숫자가 쓰인 카드 한 장을 뽑는 게임이다.
+
+단, 게임의 룰을 지키며 카드를 뽑아야 하고 룰은 다음과 같다.
+
+1. 숫자가 쓰인 카드들이 N * M 형태로 놓여있다. 이때 N은 행의 개수를 의미하며, M은 열의 개수를 의마한다.
+2. 먼저 뽑고자 하는 카드가 포함되어 있는 행을 선택한다.
+3. 그 다음 선택된 행에 포함된 카드들 중 가장 숫자가 낮은 카드를 뽑아야 한다.
+4. 따라서 처음에 카드를 골라낼 행을 선택할 때, 이후에 해당 행에서 가장 숫자가 낮은 카드를 뽑을 것을 고려하여 최정적으로 가장 높은 숫자의 카드를 뽑을수 있도록 전략을 세워야 한다.
+
+#### C++
+
+```c++
+int solution(vector<vector<int>> cards)
+{
+    int answer = -1;
+    for (size_t i = 0; i < cards.size(); i++)
+    {
+        int min = *min_element(cards[i].begin(), cards[i].end());
+        if (answer < min)
+            answer = min;
+    }
+    return answer;
+}
+
+int main(void)
+{
+    cout  << solution({
+        {7 ,3, 1, 9},
+        {3, 3, 3, 4},
+    }) << endl;
+}
+```
+
+### 1이 될 때까지
+
+#### 문제
+
+어떠한 수 N이 1이 될때까지 다음의 두 과정 중 하나를 반복적으로 선택하여 수행하려고 한다. 단, 두 번째 연산은 N이 K로 나누어떨어질 때만 선택할 수 있다.
+
+1. N에서 1을 뺀다.
+2. N을 K로 나눈다
+
+예를 들어 N이 17, K가 4라고 가정하자. 이때 1번의 과정을 한 번 수행하면 N은 16이 된다. 이후에 2번의 과정을 두 번 수행하면 N은 1이 된다. 결과적으로 이 경우 전체 과정을 실행한 횟수는 3이 된다. 이는 N을 1로 만드는 최소 횟수이다.
+
+N과 K가 주어질 때 N이 1이 될 때까지 1번 혹은 2번의 과정을 수행해야 하는 최소 횟수를 구하는 프로그램을 작성하시오.
+
+#### C++
+
+```c++
+int solution(int n, int k)
+{
+    int answer = 0;
+
+    while (n != 1)
+    {
+        if (n / k)
+            n /= k;
+        else
+            n -= 1;
+
+        answer++;
+    }
+
+    return answer;
+}
+```
+
+### 상하좌우
+
+#### 문제
+
+여행가 A는 N * N 크기의 정사각형 공간위에 서 있다. 이 공간은 1 * 1 크기의 정사각형으로 나누어져 있다. 가장 왼쪽 위 좌표는 (1,1)이며, 가장 오른쪽 아래 좌표는 (N,N)에 해당한다. 여행가 A는 상, 하, 좌, 우 방향으로 이동할 수 있으며, 시작 좌표는 항상(1,1)이다. 우리 앞에는 여행가 A가 이동할 계획이 적힌 계획서가 놓여있다.
+
+계획서에는 하나의 줄에 띄어쓰기를 기준으로 하여 L, R, U, D 중 하나의 문자가 반복적으로 적혀 있다. 각 문자의 의미는 다음과 같다.
+
+* L: 왼쪽으로 한 칸이동
+* R: 오른쪽으로 한 칸 이동
+* U: 위로 한 칸 이동
+* D: 아래로 한 칸 이동
+
+이때 여행가 A가 N*N 크기의 정사각형 공간을 벗어나는 움직임은 무시된다. 예를 들어 (1,1)의 위치에서 L 혹은 U를 만나면 무시된다. 
+
+#### C++
+
+```c++
+vector<int> solution(int n, vector<string> plans)
+{
+    int x = 1, y = 1;
+    vector<int> answer;
+    for (string plan : plans)
+    {
+        if (plan == "L")
+        {
+            if (1 < x)
+                x--;
+        }
+        else if (plan == "R")
+        {
+            if (x < n)
+                x++;
+        }
+        else if (plan == "U")
+        {
+            if (1 < y)
+                y--;
+        }
+        else if (plan == "D")
+        {
+            if (y < n)
+                y++;
+        }
+    }
+    answer.push_back(y);
+    answer.push_back(x);
+    return answer;
+}
+```
+
+### 시각
+
+#### 문제
+
+정수 N이 입력되면 00시 00분 00초부터 N시 59분 59초까지의 모든 시각 중에서 3이 하나라도 포함되는 모든 경우의 수를 구하는 프로그램을 작성하시오. 예를 들어 1을 입력했을 때 다음은 3이 하나라도 포함되어 있으므로 세어야 하는 시각이다.
+
+* 00시00분03초
+* 00시13분30초
+
+반면에 다음은 3이 하나도 포함되어 있지 않으므로 세면 안 되는 시각이다.
+
+* 00시 02분 55초
+* 01시 27분 45초
+
+#### C++
+
+```c++
+int solution(int n)
+{
+    int answer = 0;
+    char time[10] = {'\0', };
+
+    for (int h = 0; h < n  + 1; h++)
+    {
+        for (int m = 0; m < 60; m++)
+        {
+            for (int s = 0; s < 60; s++)
+            {
+                sprintf(time, "%02d%02d%02d", h, m, s);
+                string time_str = time;
+                if (time_str.find("3") != string::npos)
+                    answer++;
+            }
+        }
+    }
+
+    return answer;
+}
+```
+
