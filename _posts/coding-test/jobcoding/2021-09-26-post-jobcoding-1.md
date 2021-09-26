@@ -230,3 +230,41 @@ int solution(int n)
 }
 ```
 
+### 왕실의 나이트
+
+#### 문제
+
+행복 왕국의 왕실 정원은 체스판과 같은 8 * 8 좌표 평면이다. 왕실 정원의 특정한 한 칸에 나이트가 서 있다. 나이트는 매우 충성스러운 신하로서 매일 무술을 연마한다.
+
+나이트는 말을 타고 있기 때문에 이동을 할떄는 L자 형태로만 이동할 수 있으며 정원 밖으로는 나갈 수 없다. 나이트는 특정한 위치에서 다음과 같은 2가지 경우로 이동할 수 있다.
+
+1. 수평으로 두칸 이동한 뒤에 수직으로 한 칸 이동하기
+2. 수직으로 두칸 이동한 뒤에 수평으로 한 칸 이동하기
+
+이처럼  8 * 8 좌표 평면상에서 나이트의 위치가 주어졌을 때 나이트가 이동할 수 있는 경우의 수를 출력하는 프로그램을 작성하시오
+
+#### C++
+
+```c++
+int solution(vector<int> position)
+{
+    int answer = 0;
+    vector<pair<int, int>> steps = {
+        make_pair(-2, -1), make_pair(-1, -2), 
+        make_pair(2, -1), make_pair(1, -2), 
+        make_pair(-2, 1), make_pair(-1, 2), 
+        make_pair(1, 2), make_pair(2, 1)};
+
+    int col = position[0];
+    int row = position[1];
+    for (pair<int, int> step : steps)
+    {
+        int next_col = col + step.first;
+        int next_row = row + step.second;
+        if (1 <= next_row && next_row <= 8 && 1 <= next_col && next_col <= 8)
+            answer++;
+    }
+    return answer;
+}
+```
+
