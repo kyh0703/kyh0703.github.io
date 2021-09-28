@@ -6,7 +6,6 @@ tags:
   - [programmers, queue, c++]
 toc: true
 toc_sticky: true
-toc_label: "프린터"
 date: "2021-09-23 22:10"
 last_modified_at: 2021-09-23T23:00:00.540Zs
 ---

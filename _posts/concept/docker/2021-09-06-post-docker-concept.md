@@ -7,7 +7,6 @@ tags:
   - [docker, container]
 toc: true
 toc_sticky: true
-toc_label: "도커"
 date: "2021-09-06 23:00"
 last_modified_at: 2021-09-06T23:00:00.540Z
 ---

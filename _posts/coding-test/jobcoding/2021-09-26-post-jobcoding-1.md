@@ -6,7 +6,6 @@ tags:
   - [jobcoding, c++]
 toc: true
 toc_sticky: true
-toc_label: "그리디"
 date: "2021-09-26 17:00"
 last_modified_at: 2021-09-25T17:00:00.540Zs
 ---

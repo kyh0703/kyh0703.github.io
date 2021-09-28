@@ -6,7 +6,6 @@ tags:
   - [programmers, queue, c++]
 toc: true
 toc_sticky: true
-toc_label: "다리를 지나는 트럭"
 date: "2021-09-24 18:00"
 last_modified_at: 2021-09-24T18:00:00.540Zs
 ---

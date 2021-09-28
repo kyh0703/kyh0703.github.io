@@ -7,7 +7,6 @@ tags:
   - [docker, docker network]
 toc: true
 toc_sticky: true
-toc_label: "도커 컴포즈"
 date: "2021-09-15 19:00"
 last_modified_at: 2021-09-15T23:00:00.540Zs
 ---
