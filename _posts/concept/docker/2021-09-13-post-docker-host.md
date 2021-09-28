@@ -5,6 +5,9 @@ categories:
   - Docker
 tags:
   - [docker, docker network]
+toc: true
+toc_sticky: true
+toc_label: "도커 호스트"
 date: "2021-09-13 19:00"
 last_modified_at: 2021-09-13T23:00:00.540Zs
 ---
@@ -41,7 +44,7 @@ $ docker run --net=NETWORK_TYPE
 
 * host
 
-  host모드는 문자그대로 호스트와 네트워크를 공유합니다. 따라서 컨테이너 생성 시 포트를 따로 매핑 시킬 필요가 없습니다. **하지만 호스트네트워크 모드는 리눅스만 사용가능하다는 점 꼭 기억하세요.** 
+  host모드는 문자그대로 호스트와 네트워크를 공유합니다. 따라서 컨테이너 생성 시 포트를 따로 매핑 시킬 필요가 없습니다. **하지만 호스트네트워크 모드는 리눅스만 사용가능하다는 점 꼭 기억하세요.**
 
   ![image-20210913205727607](../../../assets/images/posts/2021-09-13-post-docker-network/image-20210913205727607.png)
 
@@ -79,4 +82,3 @@ $ docker run --net=NETWORK_TYPE
 ### 마치며
 
 제가 언급드린 내용은 최소한의 컨테이너를 이해하고  사용하기 위함입니다. 좀 더 자세히 확인하시기 위해서는 공식문서를 참고해주세요:)
-

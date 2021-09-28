@@ -4,6 +4,9 @@ categories:
   - Jobcoding
 tags:
   - [jobcoding, c++]
+toc: true
+toc_sticky: true
+toc_label: "그리디"
 date: "2021-09-26 17:00"
 last_modified_at: 2021-09-25T17:00:00.540Zs
 ---
@@ -152,7 +155,7 @@ int solution(int n, int k)
 * U: 위로 한 칸 이동
 * D: 아래로 한 칸 이동
 
-이때 여행가 A가 N*N 크기의 정사각형 공간을 벗어나는 움직임은 무시된다. 예를 들어 (1,1)의 위치에서 L 혹은 U를 만나면 무시된다. 
+이때 여행가 A가 N*N 크기의 정사각형 공간을 벗어나는 움직임은 무시된다. 예를 들어 (1,1)의 위치에서 L 혹은 U를 만나면 무시된다.
 
 #### C++
 
@@ -250,9 +253,9 @@ int solution(vector<int> position)
 {
     int answer = 0;
     vector<pair<int, int>> steps = {
-        make_pair(-2, -1), make_pair(-1, -2), 
-        make_pair(2, -1), make_pair(1, -2), 
-        make_pair(-2, 1), make_pair(-1, 2), 
+        make_pair(-2, -1), make_pair(-1, -2),
+        make_pair(2, -1), make_pair(1, -2),
+        make_pair(-2, 1), make_pair(-1, 2),
         make_pair(1, 2), make_pair(2, 1)};
 
     int col = position[0];
@@ -267,4 +270,3 @@ int solution(vector<int> position)
     return answer;
 }
 ```
-

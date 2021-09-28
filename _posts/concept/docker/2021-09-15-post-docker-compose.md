@@ -5,6 +5,9 @@ categories:
   - Docker
 tags:
   - [docker, docker network]
+toc: true
+toc_sticky: true
+toc_label: "도커 컴포즈"
 date: "2021-09-15 19:00"
 last_modified_at: 2021-09-15T23:00:00.540Zs
 ---
@@ -38,13 +41,13 @@ $ docker container run –d \
 	–p 3306:3306 \
 	-e MYSQL_ALLOW_EMPTY_PASWORD=true \
 	 mysql:5.7
-	 
+
 # postgresql
 $ docker container run -d \
 	--name postgresql \
 	-v my_dbdata:/var/lib/postgresql/data \
-	-p 54320:5432 postgres:11 
-	
+	-p 54320:5432 postgres:11
+
 # rabbitmq
 $ docker container run -d \
 	--name rabbitmq \
@@ -82,7 +85,7 @@ services:
       - "3306:3306"
      environment:
       - MYSQL_ALLOW_EMPTY_PASWORD=true
-      
+
   postgresql:
     image: postgres:11
     contianer_name: postgresql
@@ -145,7 +148,7 @@ sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 # -d: 백그라운드로 실행
 # -f: compose 파일지정
 # --build: build 태그가 있을경우 이미지를 빌드함
-$ docker-compose up 
+$ docker-compose up
 ```
 
 #### 컨테이너 종료
@@ -157,14 +160,13 @@ $ docker-compose down
 #### 컨테이너 로그
 
 ```bash
-$ docker-compose logs -f 
+$ docker-compose logs -f
 ```
 
 ### 마치며
 
-컨테이너를 생성 시마다 여러 옵션을 지정해주는건 참으로 번거로운 일입니다. 저의 경우에는 ``docker-compose`` 통해 개발 시 이미지 빌드 및 컨테이너를 실행할 때 사용하며, 또한 네트워크 구성이 필요한 개발 환경을 빠르게 만들 수 있어 유용하게 사용하고 있습니다. 
+컨테이너를 생성 시마다 여러 옵션을 지정해주는건 참으로 번거로운 일입니다. 저의 경우에는 ``docker-compose`` 통해 개발 시 이미지 빌드 및 컨테이너를 실행할 때 사용하며, 또한 네트워크 구성이 필요한 개발 환경을 빠르게 만들 수 있어 유용하게 사용하고 있습니다.
 
-도커에 관련된 내용은 여기까지로 구성하였습니다. 다음에는 오케스트레이션 도구인 쿠버네티스에 대해 기술할려고 합니다. 
+도커에 관련된 내용은 여기까지로 구성하였습니다. 다음에는 오케스트레이션 도구인 쿠버네티스에 대해 기술할려고 합니다.
 
 궁금하시거나 잘못된 점 있으면 댓글로 남겨주세요! 감사합니다(__)
-

@@ -4,6 +4,9 @@ categories:
   - Programmers
 tags:
   - [programmers, queue, c++]
+toc: true
+toc_sticky: true
+toc_label: "주식가격"
 date: "2021-09-25 14:00"
 last_modified_at: 2021-09-25T14:00:00.540Zs
 ---

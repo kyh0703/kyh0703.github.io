@@ -4,6 +4,9 @@ categories:
   - Programmers
 tags:
   - [programmers, queue, c++]
+toc: true
+toc_sticky: true
+toc_label: "기능개발"
 date: "2021-09-23 22:00"
 last_modified_at: 2021-09-23T22:00:00.540Zs
 ---
