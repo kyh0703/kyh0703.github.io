@@ -3,7 +3,7 @@ title: "프로그래머스 (스택/큐)4 - 주식가격"
 categories:
   - Programmers
 tags:
-  - [programmers, queue, c++]
+  - [programmers, queue, stack, c++]
 toc: true
 toc_sticky: true
 date: "2021-09-25 14:00"
