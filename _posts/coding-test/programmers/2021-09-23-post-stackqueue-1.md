@@ -1,5 +1,5 @@
 ---
-title: "프로그래머스 (스택/큐)1 - 기능개발"
+title: "프로그래머스 스택/큐 - 기능개발"
 categories:
   - Programmers
 tags:

@@ -1,5 +1,5 @@
 ---
-title: "프로그래머스 (스택/큐)4 - 주식가격"
+title: "프로그래머스 스택/큐 - 주식가격"
 categories:
   - Programmers
 tags:

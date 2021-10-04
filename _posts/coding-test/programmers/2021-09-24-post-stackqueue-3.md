@@ -1,5 +1,5 @@
 ---
-title: "프로그래머스 (스택/큐)3 - 다리를 지나는 트럭"
+title: "프로그래머스 스택/큐 - 다리를 지나는 트럭"
 categories:
   - Programmers
 tags:

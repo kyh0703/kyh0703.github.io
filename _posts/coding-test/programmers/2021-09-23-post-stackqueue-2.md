@@ -1,5 +1,5 @@
 ---
-title: "프로그래머스 (스택/큐)2 - 프린터"
+title: "프로그래머스 스택/큐 - 프린터"
 categories:
   - Programmers
 tags:
