@@ -46,13 +46,11 @@ int solution(vector<int> people, int limit)
     int answer = 0;
     sort(people.begin(), people.end(), greater<int>());
 
-    int max_index = 0;
     int min_index = people.size();
-    for (size_t max_index = 0; max_index < min_index;)
+    for (size_t max_index = 0; max_index < min_index; max_index++)
     {
-        int max = people[max_index++];
+        int max = people[max_index];
         answer++;
-
         if (max + people[min_index - 1] <= limit)
             min_index--;
         else if (max + people[max_index] <= limit)
