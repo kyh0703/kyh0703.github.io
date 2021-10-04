@@ -1,5 +1,5 @@
 ---
-title: "프로그래머스 (힙)2 - 디스크 컨트롤러"
+title: "프로그래머스 (그리디)1 - 체육복"
 categories:
   - Programmers
 tags:
