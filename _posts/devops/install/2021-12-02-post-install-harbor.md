@@ -19,15 +19,15 @@ date: "2021-12-02 12:30"
 
 1. harbor
 
-    ![Harbor를 이용한 Private Docker Registry 구축](image/harbor_logo-16384166626833.png)
+    ![image-20211206225804965](../../../assets/images/posts/2021-12-02-post-install-harbor/image-20211206225804965.png)
 
 2. nexsus
 
-    ![Sonatype Nexus Repository vs. GitLab | GitLab](image/sonatype-nexus-repo-logo.png)
+    ![image-20211206225813913](../../../assets/images/posts/2021-12-02-post-install-harbor/image-20211206225813913.png)
 
 3. docker-registry
 
-![Deploy Your Private Docker Registry as a Pod in Kubernetes | by Varun Kumar  G | The Startup | Medium](image/1w8GwB2lHibFKRD1CpO1P6g.png)
+![image-20211206225824410](../../../assets/images/posts/2021-12-02-post-install-harbor/image-20211206225824410.png)
 
 이 중 CNCF에서 인증된 Harbor를 설치하는 과정을 기술합니다.
 
@@ -39,7 +39,7 @@ date: "2021-12-02 12:30"
 
 #### 하드웨어
 
-![image-20211203130746523](image/image-20211203130746523.png)
+![image-20211206225831326](../../../assets/images/posts/2021-12-02-post-install-harbor/image-20211206225831326.png)
 
 #### 사전설치
 
@@ -190,13 +190,13 @@ private_key: /etc/docker/certs.d/100.100.103.167/100.100.103.167.key
 
 * window
 
-![image-20211203131732734](image/image-20211203131732734.png)
+![image-20211206225840910](../../../assets/images/posts/2021-12-02-post-install-harbor/image-20211206225840910.png)
 
-![image-20211203131746362](image/image-20211203131746362.png)
+![image-20211206225846831](../../../assets/images/posts/2021-12-02-post-install-harbor/image-20211206225846831.png)
 
-![image-20211203131754289](image/image-20211203131754289.png)
+![image-20211206225854295](../../../assets/images/posts/2021-12-02-post-install-harbor/image-20211206225854295.png)
 
-![image-20211203131759299](image/image-20211203131759299.png)
+![image-20211206225900640](../../../assets/images/posts/2021-12-02-post-install-harbor/image-20211206225900640.png)
 
 #### docker 재시작
 
@@ -212,7 +212,7 @@ Login Succeeded
 
 #### 로그인 후 PUSH
 
-![image-20211203131828307](image/image-20211203131828307.png)
+![image-20211206225906163](../../../assets/images/posts/2021-12-02-post-install-harbor/image-20211206225906163.png)
 
 ```bash
 >docker push 100.100.103.167/test/hello:1
