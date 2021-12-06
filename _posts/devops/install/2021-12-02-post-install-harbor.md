@@ -3,7 +3,7 @@ title: "harbor 설치 방법"
 categories:
   - DevOps
 tags:
-  - [devops, devops, k8s, kubernetes]
+  - [harbor, docker-registery, devops, k8s, kubernetes]
 toc: true
 toc_sticky: true
 date: "2021-12-02 12:30"
