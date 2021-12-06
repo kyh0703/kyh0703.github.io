@@ -92,7 +92,7 @@ EOF
 
 #### 인증키 생성
 
-```bas
+```bash
 openssl x509 -req -sha512 -days 3650 \
     -extfile v3.ext \
     -CA ca.crt -CAkey ca.key -CAcreateserial \
