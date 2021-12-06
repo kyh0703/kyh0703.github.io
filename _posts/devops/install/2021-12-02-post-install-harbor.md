@@ -17,15 +17,15 @@ date: "2021-12-02 12:30"
 
 먼저 설치에 앞서 이미지 등록 서버는 어떤게 많이 사용되는지 확인해볼수 있습니다. 도커 이미지 파일을 위한 저장소로는 크게 3가지가 제일 유명합니다.
 
-1. harbor
+* harbor
 
-    ![image-20211206225804965](../../../assets/images/posts/2021-12-02-post-install-harbor/image-20211206225804965.png)
+![image-20211206225804965](../../../assets/images/posts/2021-12-02-post-install-harbor/image-20211206225804965.png)
 
-2. nexsus
+* nexsus
 
-    ![image-20211206225813913](../../../assets/images/posts/2021-12-02-post-install-harbor/image-20211206225813913.png)
+![image-20211206225813913](../../../assets/images/posts/2021-12-02-post-install-harbor/image-20211206225813913.png)
 
-3. docker-registry
+* docker-registry
 
 ![image-20211206225824410](../../../assets/images/posts/2021-12-02-post-install-harbor/image-20211206225824410.png)
 
