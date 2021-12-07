@@ -1,5 +1,5 @@
 ---
-title: "DevOps"
+title: "기타"
 layout: archive
 permalink: categories/devops/tip
 author_profile: true

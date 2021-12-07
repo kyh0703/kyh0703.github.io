@@ -1,5 +1,5 @@
 ---
-title: "DevOps"
+title: "설치"
 layout: archive
 permalink: categories/devops
 author_profile: true
