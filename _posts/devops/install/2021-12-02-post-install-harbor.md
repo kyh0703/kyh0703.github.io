@@ -21,7 +21,7 @@ date: "2021-12-02 12:30"
 
 ![image-20211206225804965](../../../assets/images/posts/2021-12-02-post-install-harbor/image-20211206225804965.png)
 
-* nexsus
+* nexus
 
 ![image-20211206225813913](../../../assets/images/posts/2021-12-02-post-install-harbor/image-20211206225813913.png)
 
