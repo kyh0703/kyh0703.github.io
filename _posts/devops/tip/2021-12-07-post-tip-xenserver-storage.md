@@ -21,7 +21,7 @@ date: "2021-12-07 22:58"
 
 #### VM DISK Storage 증가
 
-![How to Extend the Virtual Disk Size of a XenVM](../../../assets/images/posts/2021-12-02-post-install-harbor%20(copy)/0EM60000000USDZ.png)
+![How to Extend the Virtual Disk Size of a XenVM](../../../assets/images/posts/2021-12-02-post-tip-xenserver-storage/0EM60000000USDZ.png)
 
 ``XenCenter``를 사용하여 ``Storage``를 증가시켜줍니다.
 
