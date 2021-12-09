@@ -1,27 +1,19 @@
 ---
-title: "xenserver 디스크 확장"
+title: "리눅스 /home삭제 /root용량 늘리기"
 categories:
   - DevOpsTip
 tags:
-  - [devops, xenserver]
+  - [devops, lvm, home, disk, storage]
 toc: true
 toc_sticky: true
-date: "2021-12-07 22:58"
+date: "2021-12-09 16:58"
 ---
-
-### XEN 서버 디스크 용량 확장
 
 ``VM``을 사용하다 보면 디스크를 파티션을 재 할당하거나 디스크를 확장해야되는 경우가 있습니다. 저는 많이 해맸었던 기억이 납니다😂
 
 그래서 제가 정리했던 내용을 공유할려고 합니다!
 
-#### VM종료
-
-먼저 VM을 작업하기 위해서 VM을 종료시켜줍니다.
-
 #### VM DISK Storage 증가
-
-![How to Extend the Virtual Disk Size of a XenVM](../../../assets/images/posts/2021-12-02-post-tip-xenserver-storage/0EM60000000USDZ.png)
 
 ``XenCenter``를 사용하여 ``Storage``를 증가시켜줍니다.
 
@@ -29,12 +21,12 @@ date: "2021-12-07 22:58"
 
 ```bash
 # VM UUID는 XenCenter에서 확인가능
-$> xe vm-disk-list vm {VM UUID}
+xe vm-disk-list vm {VM UUID}
 
 # Storage UUID는 vm-disk-list를 통해 확인 가능
 # 1GB=1073741824
 # 1073741824 * GB
-$> xe vdi-resize uuid={VM Storage UUID} disk-size={size}
+xe vdi-resize uuid={VM Storage UUID} disk-size={size}
 ```
 
 #### 스토리지 부여
@@ -42,7 +34,10 @@ $> xe vdi-resize uuid={VM Storage UUID} disk-size={size}
 1. LVS (논리볼륨 확인)
 
 ```bash
-$> lvs
+# 명령어
+lvs
+
+# 결과
 VG   #PV #LV #SN Attr   VSize   VFree
 rhel   1   2   0 wz--n- <49.52g    0 
 ```
@@ -52,7 +47,10 @@ rhel   1   2   0 wz--n- <49.52g    0
 2. PVS(물리볼륨 확인)
 
 ```bash
-$> pvs
+# 명령어
+pvs
+
+# 결과
 PV         VG   Fmt  Attr PSize   PFree
 /dev/xvda2 rhel lvm2 a--  <10.07g    0  
 ```
@@ -62,7 +60,7 @@ PV         VG   Fmt  Attr PSize   PFree
 3. parted(파티션)
 
 ```bash
-$> parted /dev/xvda
+parted /dev/xvda
 GNU Parted 3.1
 Using /dev/xvda
 Welcome to GNU Parted! Type 'help' to view a list of commands.
@@ -101,7 +99,9 @@ Number  Start   End     Size    Type     File system  Flags
 4. PVS 재 확인
 
 ```bash
-$> pvs
+pvs
+
+# 결과
 PV         VG   Fmt  Attr PSize   PFree
 /dev/xvda2 rhel lvm2 a--  <9.00g    20.00g 
 ```
@@ -111,7 +111,7 @@ PV         VG   Fmt  Attr PSize   PFree
 5. LVM 확장
 
 ```bash
-$> lvextend -l +100%FREE -r /dev/rhel/root
+lvextend -l +100%FREE -r /dev/rhel/root
 ```
 
 ``lvextend``명령어를 통해 남은 사이즈 전체를 논리 볼륨에 할당 합니다.
@@ -123,7 +123,7 @@ $> lvextend -l +100%FREE -r /dev/rhel/root
 6. 디스크 확장 확인
 
 ```bash
-$> df -h
+df -h
 ```
 
 ### 마치며
