@@ -21,22 +21,22 @@ last_modified_at: 2021-11-14T18:00:00.540Z
 // 나중에 들어온 값이 제일 먼저 나감
 int main() {
     stack<int> pages;
-    
+
 	// | 1 |
     pages.push(1);
-    
+
   	// | 1 | 2 |
     pages.push(2);
-    
+
 	// | 1 | 2 | 3 |
     pages.push(3);
-    
-	pages.pop();
+
+	  pages.pop();
     // | 1 | 2 |
-    
+
     pages.pop();
     // | 1 |
-    
+
     pages.pop();
     // empty
 }
@@ -51,22 +51,22 @@ int main() {
 // 먼저 들어온 값이 제일 먼저 나감
 int main() {
     queue<int> buffer;
-    
-	// | 1 |
+
+	  // | 1 |
     buffer.push(1);
-    
+
   	// | 1 | 2 |
     buffer.push(2);
-    
-	// | 1 | 2 | 3 |
+
+	  // | 1 | 2 | 3 |
     buffer.push(3);
-    
+
     buffer.pop();
-    // | 2 | 3 |     
-    
+    // | 2 | 3 |
+
     buffer.pop();
-    // | 2 | 
-    
+    // | 2 |
+
     buffer.pop();
     // empty
 }
