@@ -71,7 +71,7 @@ openssl req -x509 -new -nodes -sha512 -days 3650 \
 #### Server Certificates 생성
 
 ```bash
-# Server의 비밀키 생성 
+# Server의 비밀키 생성
 openssl genrsa -out yourdomain.com.key 4096
 
 # Server의 CSR 파일 생성
@@ -138,7 +138,7 @@ wget https://github.com/goharbor/harbor/releases/download/v2.3.1/harbor-offline-
 #### tar 해제
 
 ```bash
-tar xvf harbor-offline-installer-v2.3.1.tgz 
+tar xvf harbor-offline-installer-v2.3.1.tgz
 ```
 
 #### yaml 파일 복사
