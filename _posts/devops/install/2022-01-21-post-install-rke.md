@@ -31,7 +31,7 @@ date: "2022-01-21 10:30"
 
 #### k3s (Lightweight Kubernetes)
 
-![image-20220121104358130](../../assets/images/posts/2022-01-21-post-install-rke/image-20220121104358130.png)
+![image-20220121104358130](../../../assets/images/posts/2022-01-21-post-install-rke/image-20220121104358130.png)
 
 * k8s 경량화 버전
 * containerd를 사용
@@ -40,7 +40,7 @@ date: "2022-01-21 10:30"
 
 #### RKE(Rancher Kubernetes Engine)
 
-![image-20220121104420119](../../assets/images/posts/2022-01-21-post-install-rke/image-20220121104420119.png)
+![image-20220121104420119](../../../assets/images/posts/2022-01-21-post-install-rke/image-20220121104420119.png)
 
 * Rnacher Kubernetes로 Rancher에서 직접 지원
 * docker version: 19.03 종속
@@ -82,7 +82,7 @@ $ docker run -d --restart=unless-stopped -p 80:80 -p 443:443 --privileged -v ran
 
 ### 설치 형상
 
-![image-20220121104837072](../../assets/images/posts/2022-01-21-post-install-rke/image-20220121104837072.png)
+![image-20220121104837072](../../../assets/images/posts/2022-01-21-post-install-rke/image-20220121104837072.png)
 
 공식 문서를 살펴 보시면, 대시보드를 앞단에서 접근할 수 있게 로드밸런서가 설치가 되어야 됩니다. 
 
@@ -298,7 +298,7 @@ mv ./kubectl ~/.local/bin/kubectl
 
 ### Rancher 사용유저 생성
 
-![image-20220121111621773](../../assets/images/posts/2022-01-21-post-install-rke/image-20220121111621773.png)
+![image-20220121111621773](../../../assets/images/posts/2022-01-21-post-install-rke/image-20220121111621773.png)
 
 도커로 설치하면 알아서 클러스터에 설정을 해주지만 RKE로 설치시에는 위와 같은 형상으로 설치하게 됩니다.
 
@@ -497,7 +497,7 @@ chmod 700 get_helm.sh
 
 ### 인증서 확인
 
-![image-20220121133650660](../../assets/images/posts/2022-01-21-post-install-rke/image-20220121133650660.png)
+![image-20220121133650660](../../../assets/images/posts/2022-01-21-post-install-rke/image-20220121133650660.png)
 
 ### SSL configuration 설정
 
