@@ -1,9 +1,9 @@
 ---
 title: "golang - chan chan"
 categories:
-  - Go
+  - GoLang
 tags:
-  - [go, chan chan, chan]
+  - [golang, chan chan, chan]
 toc: true
 toc_sticky: true
 date: "2022-01-23 16:00"

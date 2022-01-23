@@ -17,6 +17,11 @@
         <li><a href="/categories/docker" class=""> 도커 ({{category[1].size}})</a></li>
         {% endif %}
         {% endfor %}
+        {% for category in site.categories %}
+        {% if category[0] == "Go" %}
+        <li><a href="/categories/go" class=""> GoLang ({{category[1].size}})</a></li>
+        {% endif %}
+        {% endfor %}
       </ul>
       <ul>
         {% for category in site.categories %}
