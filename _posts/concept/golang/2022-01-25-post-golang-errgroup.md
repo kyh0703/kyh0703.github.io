@@ -160,4 +160,4 @@ func main() {
 
 ### 마치며
 
-제가 생각했던 `errgroup`에 기능을 구현하기 위해서는 `errgroup` 생성시에 `context`를 넘겨주어야 가능한 것을 확인 할 수 있었습니다:hugs:
+제가 생각했던 `errgroup`에 기능을 구현하기 위해서는 `errgroup` 생성시에 반환된 `context`를 넘겨주어야 가능한 것을 확인 할 수 있었습니다:hugs:
