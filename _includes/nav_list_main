@@ -12,11 +12,15 @@
     <li>
       <span class="nav__sub-title">개념</span>
       <ul>
+        <!-- docker -->
         {% for category in site.categories %}
         {% if category[0] == "Docker" %}
         <li><a href="/categories/docker" class=""> 도커 ({{category[1].size}})</a></li>
         {% endif %}
         {% endfor %}
+      </ul>
+      <ul>
+        <!-- golang -->
         {% for category in site.categories %}
         {% if category[0] == "GoLang" %}
         <li><a href="/categories/golang" class=""> 고언어 ({{category[1].size}})</a></li>
@@ -24,6 +28,7 @@
         {% endfor %}
       </ul>
       <ul>
+        <!-- algorithm -->
         {% for category in site.categories %}
         {% if category[0] == "Algorithm" %}
         <li><a href="/categories/algorithm" class=""> 알고리즘 ({{category[1].size}})</a></li>
@@ -34,6 +39,7 @@
     <li>
       <span class="nav__sub-title">코딩테스트</span>
       <ul>
+        <!-- coding-test programmers -->
         {% for category in site.categories %}
         {% if category[0] == "Programmers" %}
         <li><a href="/categories/programmers" class=""> 프로그래머스 ({{category[1].size}})</a></li>
@@ -41,6 +47,7 @@
         {% endfor%}
       </ul>
       <ul>
+        <!-- coding-test book -->
         {% for category in site.categories %}
         {% if category[0] == "Jobcoding" %}
         <li><a href="/categories/jobcoding" class=""> 이것이 취업을 위한 코딩테스트다 ({{category[1].size}})</a></li>
@@ -51,6 +58,7 @@
     <li>
       <span class="nav__sub-title">DevOps</span>
       <ul>
+        <!-- devops -->
         {% for category in site.categories %}
         {% if category[0] == "DevOps" %}
         <li><a href="/categories/devops" class=""> 설치 ({{category[1].size}})</a></li>
@@ -58,6 +66,7 @@
         {% endfor %}
       </ul>
       <ul>
+        <!-- devops tip -->
         {% for category in site.categories %}
         {% if category[0] == "DevOpsTip" %}
         <li><a href="/categories/devops/tip" class=""> 기타 ({{category[1].size}})</a></li>
@@ -68,6 +77,7 @@
     <li>
       <span class="nav__sub-title">기타</span>
       <ul>
+        <!-- blog -->
         {% for category in site.categories %}
         {% if category[0] == "Blog" %}
         <li><a href="/categories/blog" class=""> 블로그 ({{category[1].size}})</a></li>
