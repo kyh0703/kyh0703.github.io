@@ -19,7 +19,7 @@
         {% endfor %}
         {% for category in site.categories %}
         {% if category[0] == "GoLang" %}
-        <li><a href="/categories/golang" class=""> GoLang ({{category[1].size}})</a></li>
+        <li><a href="/categories/golang" class=""> 고언어 ({{category[1].size}})</a></li>
         {% endif %}
         {% endfor %}
       </ul>
