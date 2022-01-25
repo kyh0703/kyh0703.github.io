@@ -13,8 +13,6 @@ date: "2022-01-25 16:00"
 
 goroutine을 제어하기 위해 `sync.WaitGroup`으로 제어 하던 도중 `errgroup`에 대해 내용을 정리해봅니다.
 
-### 차이점
-
 #### waitGroup
 
 ```go
@@ -32,6 +30,8 @@ wg.Wait() // 종료를 기다림
 #### errgroup
 
 제가 `errgroup`을 사용하면서 기대했던 이벤트는 여러 goroutine을 생성하여 사용 중 하나가 error가 되면 전체 goroutine을 종료시킵니다.
+
+#### 차이점
 
 * `waitGroup`에 사용되는 `Add, Del`로 조정할 필요가 없음
 * `error` 발생 시 확인 가능
@@ -156,7 +156,7 @@ func main() {
 }
 ```
 
-* `errgroup` 생성 시 `context`를 가지고 전달하면 에러시 종료되는가? **예**
+* `errgroup` 생성 시 만들어진 `context`를 가지고 전달하면 에러시 종료되는가? **예**
 
 ### 마치며
 
