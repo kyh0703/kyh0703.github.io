@@ -1,7 +1,7 @@
 ---
 title: "Golang"
 layout: archive
-permalink: categories/gp
+permalink: categories/golang
 author_profile: true
 sidebar_main: true
 ---
