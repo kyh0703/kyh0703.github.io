@@ -6,7 +6,7 @@ tags:
   - [golang, generic]
 toc: true
 toc_sticky: true
-date: "2022-02-21 16:00"
+date: "2022-02-22 12:00"
 ---
 
 ### generic
