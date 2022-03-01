@@ -1,9 +1,9 @@
 ---
-title: "Ranecher 운영환경 설치방법 (RKE)"
+title: "Rancher 운영환경 설치방법 (RKE)"
 categories:
   - DevOps
 tags:
-  - [devops, rancher, rke, k8s, kubernetes]
+  - [devops, rancher, rke, k8s, kubernates]
 toc: true
 toc_sticky: true
 date: "2022-01-21 10:30"
@@ -11,15 +11,15 @@ date: "2022-01-21 10:30"
 
 ## Rancher:cow:
 
-``Rancher`` 에 대해서 블로그나 다른 문서들을 보면 검색해보시면 간단하게 ``docker-image``에 ``rancher-dashboard``를 띄워서 클러스터를 구성하는 모습을 볼 수 있습니다. 하지만 실제 상용서비스에서는 위의 방식으로는 ``rancher``를 구성하면 안됩니다:sweat: 
+`Rancher` 에 대해서 블로그나 다른 문서들을 보면 검색해보시면 간단하게 `docker-image`에 `rancher-dashboard`를 띄워서 클러스터를 구성하는 모습을 볼 수 있습니다. 하지만 실제 상용서비스에서는 위의 방식으로는 `rancher`를 구성하면 안됩니다:sweat:
 
-``rancher-dashboard`` 는 위와 같이 구성시에는 대시보드서버가 하나로 구성되기에 대시보드 서버가 죽을 시 kubernetes를 제어 할 수 없습니다. 그렇기에 공식문서에서도 ``docker-image``를 통해 설치하는 방식은 개발용으로 밖에 권장되지 않습니다.
+`rancher-dashboard` 는 위와 같이 구성시에는 대시보드서버가 하나로 구성되기에 대시보드 서버가 죽을 시 kubernetes를 제어 할 수 없습니다. 그렇기에 공식문서에서도 `docker-image`를 통해 설치하는 방식은 개발용으로 밖에 권장되지 않습니다.
 
->### Docker Install
+> ### Docker Install
 >
->For test and demonstration purposes, Rancher can be installed with Docker on a single node.
+> For test and demonstration purposes, Rancher can be installed with Docker on a single node.
 >
->The Rancher backup operator can be used to migrate Rancher from the single Docker container install to an installation on a high-availability Kubernetes cluster. For details, refer to the documentation on [migrating Rancher to a new cluster.](https://rancher.com/docs/rancher/v2.5/en/backups/migrating-rancher)
+> The Rancher backup operator can be used to migrate Rancher from the single Docker container install to an installation on a high-availability Kubernetes cluster. For details, refer to the documentation on [migrating Rancher to a new cluster.](https://rancher.com/docs/rancher/v2.5/en/backups/migrating-rancher)
 
 우리는 Rancher를 사용해서 어떻게 운영 클러스터를 구성할 수 있을까요?!:slightly_smiling_face:
 
@@ -27,37 +27,37 @@ date: "2022-01-21 10:30"
 
 ### 설치대상 확인:memo:
 
-먼저 ``rancher``는 여러가지의 ``k8s``를 지원합니다. 먼저 어떤 종류의 쿠버네티스를 설치할 지 그리고 어떤 조건이 필요한지에 대해서 알아봐야 됩니다!
+먼저 `rancher`는 여러가지의 `k8s`를 지원합니다. 먼저 어떤 종류의 쿠버네티스를 설치할 지 그리고 어떤 조건이 필요한지에 대해서 알아봐야 됩니다!
 
 #### k3s (Lightweight Kubernetes)
 
 ![image-20220121104358130](../../../assets/images/posts/2022-01-21-post-install-rke/image-20220121104358130.png)
 
-* k8s 경량화 버전
-* containerd를 사용
-* etcd가 없으며, sqllite로 대체
-* binary 100mb
+- k8s 경량화 버전
+- containerd를 사용
+- etcd가 없으며, sqllite로 대체
+- binary 100mb
 
 #### RKE(Rancher Kubernetes Engine)
 
 ![image-20220121104420119](../../../assets/images/posts/2022-01-21-post-install-rke/image-20220121104420119.png)
 
-* Rnacher Kubernetes로 Rancher에서 직접 지원
-* docker version: 19.03 종속
-* 최소 노드: 3
+- Rnacher Kubernetes로 Rancher에서 직접 지원
+- docker version: 19.03 종속
+- 최소 노드: 3
 
 #### RKE2
 
-* 보안에 집중
-* 미국연방정부 보안이슈 해결을 위해 만든 쿠버네티스
+- 보안에 집중
+- 미국연방정부 보안이슈 해결을 위해 만든 쿠버네티스
 
 #### RanderD
 
-* 실험적인 성격이 강한 쿠버네티스
+- 실험적인 성격이 강한 쿠버네티스
 
 #### docker-image
 
-* 테스트용도로 설치함
+- 테스트용도로 설치함
 
 ```bash
 # 1. docker 버전은 Rancher를 지원하는 버전이여야 합니다.
@@ -84,27 +84,27 @@ $ docker run -d --restart=unless-stopped -p 80:80 -p 443:443 --privileged -v ran
 
 ![image-20220121104837072](../../../assets/images/posts/2022-01-21-post-install-rke/image-20220121104837072.png)
 
-공식 문서를 살펴 보시면, 대시보드를 앞단에서 접근할 수 있게 로드밸런서가 설치가 되어야 됩니다. 
+공식 문서를 살펴 보시면, 대시보드를 앞단에서 접근할 수 있게 로드밸런서가 설치가 되어야 됩니다.
 
-저는 ``ngnix``를 사용하여 구성하였습니다.
+저는 `ngnix`를 사용하여 구성하였습니다.
 
 ## 사전설치:computer:
 
 ### OS 사전 설치 사항
 
-* lock 파일 제거
+- lock 파일 제거
 
 ```bash
 rm -rf /etc/*.lock
 ```
 
-* hostname 변경
+- hostname 변경
 
 ```bash
 hostnamectl set-hostname ${hostname}
 ```
 
-* swap off 설정
+- swap off 설정
 
 ```bash
 swapoff -a
@@ -113,23 +113,23 @@ swapoff -a
 sed -i '/swap/s/^/#/g' /etc/fstab
 ```
 
-* 방화벽 해제
+- 방화벽 해제
 
 ```bash
 systemctl stop firewalld
 systemctl disable firewalld
 ```
 
-* SELINUX 해제
+- SELINUX 해제
 
 ```bash
 setenforce 0
 
-# /etc/selinux/config 파일에서 SELINUX 값을 permissive 로 변경 
+# /etc/selinux/config 파일에서 SELINUX 값을 permissive 로 변경
 sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 ```
 
-* bridge 설정
+- bridge 설정
 
 ```bash
 cat <<EOF | tee /etc/sysctl.d/k8s.conf
@@ -141,7 +141,7 @@ EOF
 sysctl --system
 ```
 
-* ntp 설정
+- ntp 설정
 
 ```bash
 yum install -y ntp
@@ -152,31 +152,31 @@ ntpq -p
 
 ### Docker 설치
 
-* 설치 패키지 업데이트
+- 설치 패키지 업데이트
 
 ```bash
 yum -y update
 ```
 
-* 의존성 패키지 및 네트워크 도구 설치
+- 의존성 패키지 및 네트워크 도구 설치
 
 ```bash
 yum -y install conntrack socat net-tools
 ```
 
-* 유틸 설치
+- 유틸 설치
 
 ```bash
 yum -y install yum-utils device-mapper-persistent-data lvm2
 ```
 
-* docker 저장소 추가
+- docker 저장소 추가
 
 ```bash
 yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 ```
 
-* docker 필요 패키지 설치
+- docker 필요 패키지 설치
 
 ```bash
 echo "\
@@ -189,19 +189,19 @@ gpgcheck=0
 " >> /etc/yum.repos.d/docker-ce.repo
 ```
 
-* docker 의존성 패키지 설치
+- docker 의존성 패키지 설치
 
 ```bash
 yum -y install slirp4netns fuse-overlayfs container-selinux
 ```
 
-* docker 19.03 설치
+- docker 19.03 설치
 
 ```bash
 curl https://releases.rancher.com/install-docker/19.03.sh | sh
 ```
 
-* 설치 완료 후 서비스 등록
+- 설치 완료 후 서비스 등록
 
 ```bash
 # 서비스 등록
@@ -214,7 +214,7 @@ systemctl status docker
 systemctl enable docker
 ```
 
-* iptables 변경
+- iptables 변경
 
 ```bash
 # 현재 iptables 리스트 확인
@@ -227,7 +227,7 @@ iptables -P FORWARD ACCEPT
 iptables -L
 ```
 
-* 방화벽 docker0 인터페이스 추가
+- 방화벽 docker0 인터페이스 추가
 
 ```bash
 firewall-cmd --permanent --zone=trusted --change-interface=docker0
@@ -238,13 +238,13 @@ firewall-cmd --reload
 
 ### RKE 설치
 
-* wget 설치
+- wget 설치
 
 ```bash
 yum install -y wget
 ```
 
-* RKE 다운로드
+- RKE 다운로드
 
 ```bash
 # (2021-07-27기준 v1.2.9) https://github.com/rancher/rke
@@ -262,32 +262,32 @@ mv rke /usr/bin/rke
 
 ### Kubectl 설치
 
-* Kubectl 다운로드
+- Kubectl 다운로드
 
 ```bash
 curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl"
 ```
 
-* 바이너리 검증
+- 바이너리 검증
 
 ```bash
 curl -LO "https://dl.k8s.io/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl.sha256"
 ```
 
-* 체크섬
+- 체크섬
 
 ```bash
 echo "$(<kubectl.sha256) kubectl" | sha256sum --check
 # kubectl: OK
 ```
 
-* 설치
+- 설치
 
 ```bash
 sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 ```
 
-``사용 계정이 루트 계정이 아닌경우에 아래 내용 추가``
+`사용 계정이 루트 계정이 아닌경우에 아래 내용 추가`
 
 ```bash
 chmod +x kubectl
@@ -306,7 +306,7 @@ mv ./kubectl ~/.local/bin/kubectl
 
 저는 RKE계정을 생성후에 위의 그림에 나오는 과정을 진행하였습니다.
 
-* user 생성
+- user 생성
 
 ```bash
 # root에서 실행
@@ -316,19 +316,19 @@ useradd -m -G docker rke
 echo '패스워드' | passwd --stdin rke
 ```
 
-* 계정 변경
+- 계정 변경
 
 ```bash
 su - rke
 ```
 
-* .ssh 디렉토리 생성
+- .ssh 디렉토리 생성
 
 ```bash
 mkdir $HOME/.ssh
 ```
 
-* 권한 부여(중요)
+- 권한 부여(중요)
 
 ```bash
 # 권한부여가 안되면 로그인시 패스워드를 물어보기에 설치시 오류발생
@@ -341,7 +341,7 @@ touch $HOME/.ssh/authorized_keys
 docker version
 ```
 
-* ssh 키 생성
+- ssh 키 생성
 
 ```bash
 ssh-keygen
@@ -360,7 +360,7 @@ The key fingerprint is:
 
 `$HOME/.ssh/id_rsa.pub` (SSH public key)
 
-* 공개키 전달
+- 공개키 전달
 
 ```bash
 # 공개키 전달
@@ -374,7 +374,7 @@ chmod 600 ~/.ssh/authorized_keys
 ssh -i $HOME/.ssh/id_rsa rke@hostname docker version
 ```
 
-* rke config 생성
+- rke config 생성
 
 ```bash
 rke config
@@ -385,66 +385,66 @@ rke config
 # CNI: Canal
 
 # 실행 결과
-[+] Cluster Level SSH Private Key Path [~/.ssh/id_rsa]: 
+[+] Cluster Level SSH Private Key Path [~/.ssh/id_rsa]:
 [+] Number of Hosts [1]: 3
 [+] SSH Address of host (1) [none]: 100.100.103.158
-[+] SSH Port of host (1) [22]: 
-[+] SSH Private Key Path of host (100.100.103.158) [none]: 
+[+] SSH Port of host (1) [22]:
+[+] SSH Private Key Path of host (100.100.103.158) [none]:
 [-] You have entered empty SSH key path, trying fetch from SSH key parameter
-[+] SSH Private Key of host (100.100.103.158) [none]: 
+[+] SSH Private Key of host (100.100.103.158) [none]:
 [-] You have entered empty SSH key, defaulting to cluster level SSH key: ~/.ssh/id_rsa
 [+] SSH User of host (100.100.103.158) [ubuntu]: rke
 [+] Is host (100.100.103.158) a Control Plane host (y/n)? [y]: y
 [+] Is host (100.100.103.158) a Worker host (y/n)? [n]: y
 [+] Is host (100.100.103.158) an etcd host (y/n)? [n]: y
-[+] Override Hostname of host (100.100.103.158) [none]: 
-[+] Internal IP of host (100.100.103.158) [none]: 
-[+] Docker socket path on host (100.100.103.158) [/var/run/docker.sock]: 
+[+] Override Hostname of host (100.100.103.158) [none]:
+[+] Internal IP of host (100.100.103.158) [none]:
+[+] Docker socket path on host (100.100.103.158) [/var/run/docker.sock]:
 [+] SSH Address of host (2) [none]: 100.100.103.159
-[+] SSH Port of host (2) [22]: 
-[+] SSH Private Key Path of host (100.100.103.159) [none]: 
+[+] SSH Port of host (2) [22]:
+[+] SSH Private Key Path of host (100.100.103.159) [none]:
 [-] You have entered empty SSH key path, trying fetch from SSH key parameter
-[+] SSH Private Key of host (100.100.103.159) [none]: 
+[+] SSH Private Key of host (100.100.103.159) [none]:
 [-] You have entered empty SSH key, defaulting to cluster level SSH key: ~/.ssh/id_rsa
 [+] SSH User of host (100.100.103.159) [ubuntu]: rke
 [+] Is host (100.100.103.159) a Control Plane host (y/n)? [y]: y
 [+] Is host (100.100.103.159) a Worker host (y/n)? [n]: y
 [+] Is host (100.100.103.159) an etcd host (y/n)? [n]: y
-[+] Override Hostname of host (100.100.103.159) [none]: 
-[+] Internal IP of host (100.100.103.159) [none]: 
-[+] Docker socket path on host (100.100.103.159) [/var/run/docker.sock]: 
+[+] Override Hostname of host (100.100.103.159) [none]:
+[+] Internal IP of host (100.100.103.159) [none]:
+[+] Docker socket path on host (100.100.103.159) [/var/run/docker.sock]:
 [+] SSH Address of host (3) [none]: 100.100.103.160
-[+] SSH Port of host (3) [22]: 
-[+] SSH Private Key Path of host (100.100.103.160) [none]: 
+[+] SSH Port of host (3) [22]:
+[+] SSH Private Key Path of host (100.100.103.160) [none]:
 [-] You have entered empty SSH key path, trying fetch from SSH key parameter
-[+] SSH Private Key of host (100.100.103.160) [none]: 
+[+] SSH Private Key of host (100.100.103.160) [none]:
 [-] You have entered empty SSH key, defaulting to cluster level SSH key: ~/.ssh/id_rsa
 [+] SSH User of host (100.100.103.160) [ubuntu]: rke
-[+] Is host (100.100.103.160) a Control Plane host (y/n)? [y]: 
+[+] Is host (100.100.103.160) a Control Plane host (y/n)? [y]:
 [+] Is host (100.100.103.160) a Worker host (y/n)? [n]: y
 [+] Is host (100.100.103.160) an etcd host (y/n)? [n]: y
-[+] Override Hostname of host (100.100.103.160) [none]: 
-[+] Internal IP of host (100.100.103.160) [none]: 
-[+] Docker socket path on host (100.100.103.160) [/var/run/docker.sock]: 
-[+] Network Plugin Type (flannel, calico, weave, canal, aci) [canal]: 
-[+] Authentication Strategy [x509]: 
-[+] Authorization Mode (rbac, none) [rbac]: 
-[+] Kubernetes Docker image [rancher/hyperkube:v1.20.8-rancher1]: 
-[+] Cluster domain [cluster.local]: 
-[+] Service Cluster IP Range [10.43.0.0/16]: 
-[+] Enable PodSecurityPolicy [n]: 
-[+] Cluster Network CIDR [10.42.0.0/16]: 
-[+] Cluster DNS Service IP [10.43.0.10]: 
-[+] Add addon manifest URLs or YAML files [no]: 
+[+] Override Hostname of host (100.100.103.160) [none]:
+[+] Internal IP of host (100.100.103.160) [none]:
+[+] Docker socket path on host (100.100.103.160) [/var/run/docker.sock]:
+[+] Network Plugin Type (flannel, calico, weave, canal, aci) [canal]:
+[+] Authentication Strategy [x509]:
+[+] Authorization Mode (rbac, none) [rbac]:
+[+] Kubernetes Docker image [rancher/hyperkube:v1.20.8-rancher1]:
+[+] Cluster domain [cluster.local]:
+[+] Service Cluster IP Range [10.43.0.0/16]:
+[+] Enable PodSecurityPolicy [n]:
+[+] Cluster Network CIDR [10.42.0.0/16]:
+[+] Cluster DNS Service IP [10.43.0.10]:
+[+] Add addon manifest URLs or YAML files [no]:
 ```
 
-* rke 실행
+- rke 실행
 
 ```bash
 rke up
 ```
 
-* 설치 확인
+- 설치 확인
 
 ```bash
 kubectl --kubeconfig kube_config_cluster.yml get nodes
@@ -452,7 +452,7 @@ kubectl --kubeconfig kube_config_cluster.yml get nodes
 
 ### Kubectl설정
 
-* alias 설정
+- alias 설정
 
 ```bash
 # yum 설치
@@ -469,7 +469,7 @@ echo 'complete -F __start_kubectl k' >>~/.bashrc
 source ~/.bashrc
 ```
 
-* 복사
+- 복사
 
 ```bash
 # 폴더생성
@@ -481,9 +481,9 @@ cp kube_config_cluster.yml ~/.kube/config
 
 ### 보관되어야 될 파일(중요)
 
-* ``cluster.yaml``은 노드 삭제 및 수정 시에 사용 (rke config)
-* ``kube_config_cluster.yml``은 서버에서 kubectl로 접근시 필요(rke up)
-* ``rancher-cluster.rkestate`` 은 클러스터 상태를 저장 (rke config)
+- `cluster.yaml`은 노드 삭제 및 수정 시에 사용 (rke config)
+- `kube_config_cluster.yml`은 서버에서 kubectl로 접근시 필요(rke up)
+- `rancher-cluster.rkestate` 은 클러스터 상태를 저장 (rke config)
 
 ## Rancher UI(HA)
 
@@ -503,7 +503,7 @@ chmod 700 get_helm.sh
 
 인증서의 경우 아래와 같이 3가지 방식이 있습니다. 각자 환경에 따라 공식 문서를 참조하시기 바랍니다.
 
-이 문서에서는 ``Rancher로 생성``하는 방식으로 진행합니다:walking:
+이 문서에서는 `Rancher로 생성`하는 방식으로 진행합니다:walking:
 
 1. Rancher로 생성
 2. Let's Encrypt로 인증서 생성
@@ -543,7 +543,7 @@ helm install \
 
 #### Rancher 설치
 
-* 설치
+- 설치
 
 ```bash
 # 설치에서는 stable버전을 사용하기로 한다.
@@ -559,12 +559,12 @@ helm install rancher rancher-stable/rancher \
   --set hostname=rancher.ipron.com \
   --set replicas=3 \
   --set ingress.tls.source=rancher
-  
+
 # rollout tail
 kubectl -n cattle-system rollout status deploy/rancher
 ```
 
-* ingress 설정
+- ingress 설정
 
 ```bash
 # public domain이 없을 경우 Ingress 설정 변경 필요
@@ -588,9 +588,9 @@ spec:
 
 ### NGINX 로드 밸런서
 
-위의 설명드린 형상을 통해 Rancher앞단에 ``nginx``를 통해 구성하였습니다.
+위의 설명드린 형상을 통해 Rancher앞단에 `nginx`를 통해 구성하였습니다.
 
-* nginx repo 추가
+- nginx repo 추가
 
 ```bash
 echo "\
@@ -603,13 +603,13 @@ enabled=1
 " >> /etc/yum.repos.d/nginx.repo
 ```
 
-* ngnix 설치
+- ngnix 설치
 
 ```bash
 yum -y install nginx
 ```
 
-* ngnix 실행
+- ngnix 실행
 
 ```bash
 systemctl start nginx
@@ -617,7 +617,7 @@ systemctl status nginx
 systemctl enable nginx
 ```
 
-* ngnix 설정
+- ngnix 설정
 
 ```bash
 $ vi /etc/ngnix/nginx.conf
@@ -655,7 +655,7 @@ stream {
 }
 ```
 
-* nginx 재시작
+- nginx 재시작
 
 ```bash
 nginx -s reload
@@ -665,7 +665,7 @@ nginx -s reload
 
 #### k8s 재 설치 시 주의사항
 
-* docker 리소스 삭제
+- docker 리소스 삭제
 
 ```bash
 docker rm -f $(docker ps -qa)
@@ -673,14 +673,14 @@ docker rmi -f $(docker images -q)
 docker volume rm $(docker volume ls -q)
 ```
 
-* unmount
+- unmount
 
 ```bash
 # mount가 해제가 안될 경우 직접 입력하여 unmount 실행
 for mount in $(mount | grep tmpfs | grep '/var/lib/kubelet' | awk '{ print $3 }') /var/lib/kubelet /var/lib/rancher; do umount $mount; done
 ```
 
-* 설정 삭제
+- 설정 삭제
 
 ```bash
 rm -rf /etc/ceph \
@@ -702,7 +702,7 @@ rm -rf /etc/ceph \
        /var/run/calico
 ```
 
-* docker 서비스 종류
+- docker 서비스 종류
 
 ```bash
 systemctl stop docker
@@ -711,7 +711,7 @@ systemctl stop docker
 systemctl stop docker.socket
 ```
 
-* ip link 삭제
+- ip link 삭제
 
 ```bash
 ip a
@@ -719,13 +719,13 @@ ip a
 # flannel.1
 # cni0
 # tunl0
-# caliXXXXXXXXXXX 
-# vethXXXXXXXX 
+# caliXXXXXXXXXXX
+# vethXXXXXXXX
 
 ip link delete interface_name
 ```
 
-* iptables 확인
+- iptables 확인
 
 ```bash
 iptables -L -t nat
@@ -733,7 +733,7 @@ iptables -L -t mangle
 iptables -L
 ```
 
-* 재시작
+- 재시작
 
 ```bash
 reboot
@@ -741,7 +741,7 @@ reboot
 
 ### 마치며
 
-축하합니다:tada: 
+축하합니다:tada:
 
 운영환경에 RKE 설치를 완료했습니다!
 
@@ -749,4 +749,4 @@ reboot
 
 해당 자료는 제가 공식문서를 보며 설치하며 경험했던 내용들을 찾아 수정하면서 설치했던 소중한 자료입니다.
 
-다른 분들께 도움이 되기위해 공유드리오니  무단으로 퍼가지 말아주세요:cry:
+다른 분들께 도움이 되기위해 공유드리오니 무단으로 퍼가지 말아주세요:cry:
