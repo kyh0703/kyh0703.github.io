@@ -1,5 +1,5 @@
 ---
-title: "Rancher 운영환경 설치방법 (RKE)"
+title: "Rancher 운영환경 설치 방법(완벽정리)"
 categories:
   - DevOps
 tags:
@@ -8,8 +8,6 @@ toc: true
 toc_sticky: true
 date: "2022-01-21 10:30"
 ---
-
-## Rancher:cow:
 
 `Rancher` 에 대해서 블로그나 다른 문서들을 보면 검색해보시면 간단하게 `docker-image`에 `rancher-dashboard`를 띄워서 클러스터를 구성하는 모습을 볼 수 있습니다. 하지만 실제 상용서비스에서는 위의 방식으로는 `rancher`를 구성하면 안됩니다:sweat:
 
