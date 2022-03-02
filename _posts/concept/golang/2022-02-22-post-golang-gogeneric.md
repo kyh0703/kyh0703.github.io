@@ -153,7 +153,7 @@ type Signed interface {
 // 아래와 같이 형이 지정된 interface도 가능
 type Test interface {
 	~int | ~int8 | ~int16 | ~int32 | ~int64
-    Test() string
+	Test() string
 }
 
 func testPrint[T Test](a T) {
