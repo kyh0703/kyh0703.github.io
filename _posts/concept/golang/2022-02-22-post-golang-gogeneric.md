@@ -52,7 +52,7 @@ package main
 func sumTest(a, b interface) {
     switch a.(type) {
     case int:
-    case int:...
+    case int16:...
     }
 }
 
