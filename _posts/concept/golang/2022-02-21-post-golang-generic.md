@@ -124,6 +124,43 @@ func sumText[T constraints.Ordered](a, b T) T {
 
 > https://pkg.go.dev/golang.org/x/exp/constraints
 
+#### 추가내용
+
+```go
+// https://pkg.go.dev/golang.org/x/exp/constraints
+
+type Signed interface {
+	~int | ~int8 | ~int16 | ~int32 | ~int64
+}
+```
+
+타입들을 모아둔 constraints패키지를 보면 `~` 기호를 통해 정의 한 것을 확인 할 수 있습니다.
+
+저건 뭘까요? 문서를 보면 1.18버전에 추가된 것을 확인 할 수 있는데요.
+
+> - The new token `~` has been added to the set of [operators and punctuation](https://tip.golang.org/ref/spec#Operators_and_punctuation).
+
+내용을 보니 golang의 경우 type을 재지정하여 사용하는 경우가 있는데 재지정한 타입까지 포함하여 사용할 수 있게 새롭게 추가된 토큰이라고 합니다.  타입을 재정의 할 경우 타입은 같으나 정의가 다를경우 에러가 발생하는데 앞으로는 `~` 을 사용하여 지정하면 같은 타입이면 상관없이 사용 할 수 있게 변경되었습니다.
+
+```go
+type JoinType int
+
+// Join Type도 지정가능
+type Signed interface {
+	~int | ~int8 | ~int16 | ~int32 | ~int64
+}
+
+// 아래와 같이 형이 지정된 interface도 가능
+type Test interface {
+	~int | ~int8 | ~int16 | ~int32 | ~int64
+    Test() string
+}
+
+func testPrint[T Test](a T) {
+    a.Test()
+}
+```
+
 ### 마치며
 
-복잡해보이지만 역시나 키워드가 적기에 좋습니다. 공용라이브러리나 좀 더 진화된 코드를 짤 수 있게 변하여 좋네요:hugs:
+1.18버전부터 go는 다양하게 변경될 것을 확인할 수 있었습니다. go언어 개발진에서도 goper들에게 많은 피드백을 원하며, 실제로 반영되는게 보기 좋습니다. 공용라이브러리나 좀 더 진화된 코드를 짤 수 있게 변하여 좋네요:hugs:
