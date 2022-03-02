@@ -6,7 +6,7 @@ tags:
   - [golang, generic]
 toc: true
 toc_sticky: true
-date: "2022-02-21 16:00"
+date: "2022-02-22 12:00"
 ---
 
 ### generic
@@ -30,7 +30,7 @@ func printTest(a int) {
 
 func main() {
     var a int = 10
-    printTest(a) // 성공  
+    printTest(a) // 성공
     var ab int16 = 20
     printTest(a) // 실패
     var a string = "20"
@@ -40,7 +40,7 @@ func main() {
 
 위에 코드에서 문제점이 보이시나요? `printTest`는 인트형으로 되어있기에 int밖에 넣어주지 못합니다. 물론! int()로 형변환해서 넣어줄수도 있지요!
 
-하지만 string이라면 가능할까요? 따라서 각 형과 관련된 func들을 직접 하나하나 만들어 줄 수 밖에 없었습니다. 
+하지만 string이라면 가능할까요? 따라서 각 형과 관련된 func들을 직접 하나하나 만들어 줄 수 밖에 없었습니다.
 
 #### interface{} 로 해결하면 되지않을까?
 
@@ -63,14 +63,14 @@ func main() {
 }
 ```
 
-음... 딱 봐도 많이 불편하네요... 
+음... 딱 봐도 많이 불편하네요...
 
 #### 사용법
 
 ```go
 package main
 
-func sumTest[T any](a, b T) T { 
+func sumTest[T any](a, b T) T {
     if a < b {
         return a
     }
@@ -90,19 +90,19 @@ func main() {
 package main
 
 // 1번 방법 hard coding
-func sumTest[T int|int16|int32|int64](a, b T) T { 
+func sumTest[T int|int16|int32|int64](a, b T) T {
     if a < b {
         return a
     }
     return b
 }
 
-// 2번 방법 interface 
+// 2번 방법 interface
 type Integer interface {
 	int|int16|int32|int64
 }
 
-func sumTest[T Interger](a, b T) T { 
+func sumTest[T Interger](a, b T) T {
     if a < b {
         return a
     }
