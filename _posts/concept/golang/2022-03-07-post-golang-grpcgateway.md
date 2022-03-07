@@ -9,8 +9,6 @@ toc_sticky: true
 date: "2022-03-07 10:00"
 ---
 
-#### grpc-gateway
-
 ![image-20220307091405883](../../../assets/images/posts/2022-03-07-post-golang-grpc-gateway/image-20220307091405883.png)
 
 grpc-gateway는 간략하게 grpc와 http를 같이 사용하기 위한 플러그인입니다. 위의 형상대로 구성되어 있으며, production 환경에서 사용할 경우에 빌드환경을 하나의 도커 이미지로 만들어서 빌드환경을 통일합니다. 현재 문서에서는 공식 가이드대로 설치 과정을 기술하였습니다.:happy:
