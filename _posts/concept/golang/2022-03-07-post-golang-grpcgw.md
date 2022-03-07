@@ -92,7 +92,7 @@ message HelloReply {
 `-I`옵션으로 git clone으로 받은 프로젝트를 `import`하는 것을 확인 하실 수 있습니다.
 
 ```bash
-protoc -I ./googleapis-I ./proto --go_out ./proto --go_opt paths=source_relative --go-grpc_out ./proto --go-grpc_opt paths=source_relative --grpc-gateway_out ./proto --grpc-gateway_opt paths=source_relative ./proto/helloworld/hello_world.proto
+protoc -I ./googleapis -I ./proto --go_out ./proto --go_opt paths=source_relative --go-grpc_out ./proto --go-grpc_opt paths=source_relative --grpc-gateway_out ./proto --grpc-gateway_opt paths=source_relative ./proto/helloworld/hello_world.proto
 ```
 
 #### 사용법
