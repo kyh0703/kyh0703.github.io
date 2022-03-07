@@ -97,7 +97,7 @@ protoc -I ./googleapis -I ./proto --go_out ./proto --go_opt paths=source_relativ
 
 #### 사용법
 
-* grpc-gateway 포트와 다른 포트를 사용 할 경우
+* grpc port와 gateway port 가 다른 경우
 
 ```go
 package main
@@ -174,22 +174,20 @@ func main() {
 }
 ```
 
-* grpc-gateway 포트와 같은 포트를 사용 할 경우 
+* grpc port와 gateway port 가 같을 경우
 
 ```go
 package main
 
 import (
 	"context"
+	"log"
+	"net"
 	"net/http"
-	"strings"
 
 	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
-
-	"golang.org/x/net/http2"
-	"golang.org/x/net/http2/h2c"
 	"google.golang.org/grpc"
-	"google.golang.org/protobuf/encoding/protojson"
+	"google.golang.org/grpc/credentials/insecure"
 
 	helloworldpb "github.com/myuser/myrepo/proto/helloworld"
 )
@@ -207,51 +205,188 @@ func (s *server) SayHello(ctx context.Context, in *helloworldpb.HelloRequest) (*
 	return &helloworldpb.HelloReply{Message: in.Name + " world"}, nil
 }
 
-func allHandler(grpcServer *grpc.Server, httpHandler http.Handler) http.Handler {
-	return h2c.NewHandler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.ProtoMajor == 2 && strings.Contains(r.Header.Get("Content-Type"), "application/grpc") {
-			grpcServer.ServeHTTP(w, r)
-		} else {
-			httpHandler.ServeHTTP(w, r)
-		}
-	}), &http2.Server{})
-}
-
 func main() {
-	// create context
-	ctx := context.Background()
-	ctx, cancel := context.WithCancel(ctx)
-	defer cancel()
+	// Create a listener on TCP port
+	lis, err := net.Listen("tcp", ":8080")
+	if err != nil {
+		log.Fatalln("Failed to listen:", err)
+	}
 
-	// create grpc server
-	grpcServer := grpc.NewServer()
-	// register pb
-	helloworldpb.RegisterGreeterServer(grpcServer, &server{})
+	// Create a gRPC server object
+	s := grpc.NewServer()
+	// Attach the Greeter service to the server
+	helloworldpb.RegisterGreeterServer(s, &server{})
+	// Serve gRPC server
+	log.Println("Serving gRPC on 0.0.0.0:8080")
+	go func() {
+		log.Fatalln(s.Serve(lis))
+	}()
 
-	mux := runtime.NewServeMux(
-		runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.HTTPBodyMarshaler{
-			Marshaler: &runtime.JSONPb{
-				MarshalOptions: protojson.MarshalOptions{
-					UseProtoNames:   true,
-					EmitUnpopulated: true,
-				},
-				UnmarshalOptions: protojson.UnmarshalOptions{
-					DiscardUnknown: true,
-				},
-			},
-		}),
+	// Create a client connection to the gRPC server we just started
+	// This is where the gRPC-Gateway proxies the requests
+	conn, err := grpc.DialContext(
+		context.Background(),
+		"0.0.0.0:8080",
+		grpc.WithBlock(),
+		grpc.WithTransportCredentials(insecure.NewCredentials()),
 	)
-	addr := ":8080"
-	opts := []grpc.DialOption{grpc.WithInsecure()}
-	if err := helloworldpb.RegisterGreeterHandlerFromEndpoint(ctx, mux, addr, opts); err != nil {
-		panic(err)
+	if err != nil {
+		log.Fatalln("Failed to dial server:", err)
 	}
-	if err := http.ListenAndServe(addr, allHandler(grpcServer, mux)); err != nil {
-		panic(err)
-	}
-}
 
+	gwmux := runtime.NewServeMux()
+	// Register Greeter
+	err = helloworldpb.RegisterGreeterHandler(context.Background(), gwmux, conn)
+	if err != nil {
+		log.Fatalln("Failed to register gateway:", err)
+	}
+
+	gwServer := &http.Server{
+		Addr:    ":8090",
+		Handler: gwmux,
+	}
+
+	log.Println("Serving gRPC-Gateway on http://0.0.0.0:8090")
+	log.Fatalln(gwServer.ListenAndServe())
+}
 ```
+
+* package main
+    
+    
+    import (
+    
+    	"context"
+    
+    	"net/http"
+    
+    	"strings"
+    
+    
+    	"github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+    
+    
+    	"golang.org/x/net/http2"
+    
+    	"golang.org/x/net/http2/h2c"
+    
+    	"google.golang.org/grpc"
+    
+    	"google.golang.org/protobuf/encoding/protojson"
+    
+    
+    	helloworldpb "github.com/myuser/myrepo/proto/helloworld"
+    
+    )
+    
+    
+    // implement grpc method
+    
+    type server struct {
+    
+    	helloworldpb.UnimplementedGreeterServer
+    
+    }
+    
+    
+    func NewServer() *server {
+    
+    	return &server{}
+    
+    }
+    
+    
+    func (s *server) SayHello(ctx context.Context, in *helloworldpb.HelloRequest) (*helloworldpb.HelloReply, error) {
+    
+    	return &helloworldpb.HelloReply{Message: in.Name + " world"}, nil
+    
+    }
+    
+    
+    func allHandler(grpcServer *grpc.Server, httpHandler http.Handler) http.Handler {
+    
+    	return h2c.NewHandler(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+    
+    		if r.ProtoMajor == 2 && strings.Contains(r.Header.Get("Content-Type"), "application/grpc") {
+    
+    			grpcServer.ServeHTTP(w, r)
+    
+    		} else {
+    
+    			httpHandler.ServeHTTP(w, r)
+    
+    		}
+    
+    	}), &http2.Server{})
+    
+    }
+    
+    
+    func main() {
+    
+    	// create context
+    
+    	ctx := context.Background()
+    
+    	ctx, cancel := context.WithCancel(ctx)
+    
+    	defer cancel()
+    
+    
+    	// create grpc server
+    
+    	grpcServer := grpc.NewServer()
+    
+    	// register pb
+    
+    	helloworldpb.RegisterGreeterServer(grpcServer, &server{})
+    
+    
+    	mux := runtime.NewServeMux(
+    
+    		runtime.WithMarshalerOption(runtime.MIMEWildcard, &runtime.HTTPBodyMarshaler{
+    
+    			Marshaler: &runtime.JSONPb{
+    
+    				MarshalOptions: protojson.MarshalOptions{
+    
+    					UseProtoNames:   true,
+    
+    					EmitUnpopulated: true,
+    
+    				},
+    
+    				UnmarshalOptions: protojson.UnmarshalOptions{
+    
+    					DiscardUnknown: true,
+    
+    				},
+    
+    			},
+    
+    		}),
+    
+    	)
+    
+    	addr := ":8080"
+    
+    	opts := []grpc.DialOption{grpc.WithInsecure()}
+    
+    	if err := helloworldpb.RegisterGreeterHandlerFromEndpoint(ctx, mux, addr, opts); err != nil {
+    
+    		panic(err)
+    
+    	}
+    
+    	if err := http.ListenAndServe(addr, allHandler(grpcServer, mux)); err != nil {
+    
+    		panic(err)
+    
+    	}
+    
+    }
+    
+    
 
 ### 마치며
 
