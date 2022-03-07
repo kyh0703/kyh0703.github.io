@@ -3,10 +3,10 @@ title: "golang - grpc-gateway"
 categories:
   - GoLang
 tags:
-  - [golang, grpc, grpc-gateway]
+  - [golang, grpc, grpc-gateway, http]
 toc: true
 toc_sticky: true
-date: "2022-03-07 10:00"
+date: "2022-03-07 12:00"
 ---
 
 ![image-20220307091405883](../../../assets/images/posts/2022-03-07-post-golang-grpc-gateway/image-20220307091405883.png)
