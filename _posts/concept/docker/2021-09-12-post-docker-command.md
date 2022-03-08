@@ -1,4 +1,5 @@
 ---
+published: true
 title: "도커(3) - Command"
 excerpt: 도커 명령어 친숙해지기
 categories:

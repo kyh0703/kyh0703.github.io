@@ -1,4 +1,5 @@
 ---
+published: true
 title: "도커(2) - Dockerfile"
 excerpt: 이미지를 만드는 도커파일
 categories:

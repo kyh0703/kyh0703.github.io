@@ -1,4 +1,5 @@
 ---
+published: true
 title: "golang - chan chan"
 categories:
   - GoLang
@@ -110,7 +111,7 @@ func (am *Manager) Close() error {
 	errc := make(chan error)
 	am.quit <- errc
 	return <-errc
-    
+
 }
 
 .
@@ -130,4 +131,3 @@ func (w *wallet) Close() error {
 ### 마치며
 
 이더리움 소스를 보며 늘 많이 배워갑니다:grinning:
-

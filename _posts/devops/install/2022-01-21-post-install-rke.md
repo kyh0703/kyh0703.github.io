@@ -1,4 +1,5 @@
 ---
+published: true
 title: "Rancher 운영환경 설치 방법(완벽정리)"
 categories:
   - DevOps

@@ -1,4 +1,5 @@
 ---
+published: true
 title: "k8s 'cannot allocate memory' 이슈"
 categories:
   - DevOpsTip
@@ -15,7 +16,7 @@ k8s를 centOS7버전을 사용하여 배포하던 도중 아래와 같은 에러
 
 #### 에러
 
-`mkdir /sys/fs/cgroup/memory/docker/fe4159ed6f4ec16af63ba0c2af53ec9c6b0c0c2ac42ff96f6816d5e28a821b4e: cannot allocate memory\` 
+`mkdir /sys/fs/cgroup/memory/docker/fe4159ed6f4ec16af63ba0c2af53ec9c6b0c0c2ac42ff96f6816d5e28a821b4e: cannot allocate memory\`
 
 #### 원인
 

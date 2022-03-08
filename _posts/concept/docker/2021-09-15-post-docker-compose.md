@@ -1,4 +1,5 @@
 ---
+published: true
 title: "도커(5) - docker-compose"
 excerpt: 도커 마술사
 categories:

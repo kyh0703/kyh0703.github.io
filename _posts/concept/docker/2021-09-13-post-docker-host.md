@@ -1,4 +1,5 @@
 ---
+published: true
 title: "도커(4) - Host"
 excerpt: 도커 호스트와 연결고리
 categories:

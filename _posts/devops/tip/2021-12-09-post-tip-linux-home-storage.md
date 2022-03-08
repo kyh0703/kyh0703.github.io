@@ -1,4 +1,5 @@
 ---
+published: true
 title: "리눅스 /home삭제 /root용량 늘리기"
 categories:
   - DevOpsTip

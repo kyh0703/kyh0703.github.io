@@ -1,4 +1,5 @@
 ---
+published: true
 title: "xenserver 디스크 확장"
 categories:
   - DevOpsTip
@@ -44,7 +45,7 @@ $> xe vdi-resize uuid={VM Storage UUID} disk-size={size}
 ```bash
 $> lvs
 VG   #PV #LV #SN Attr   VSize   VFree
-rhel   1   2   0 wz--n- <49.52g    0 
+rhel   1   2   0 wz--n- <49.52g    0
 ```
 
 ``lvs``명령어를 통해 논리볼륨을 확인합니다. 현재 장비는 PV를 하나만 사용하고 있는 것을 알 수 있습니다.
@@ -54,7 +55,7 @@ rhel   1   2   0 wz--n- <49.52g    0
 ```bash
 $> pvs
 PV         VG   Fmt  Attr PSize   PFree
-/dev/xvda2 rhel lvm2 a--  <10.07g    0  
+/dev/xvda2 rhel lvm2 a--  <10.07g    0
 ```
 
 ``pvs`` 명령어를 통해 물리볼륨을 확인합니다. 현재 장비는 PV하나만 있으면서 기존 디스크를 할당 한 것을 확인 할 수 있습니다.
@@ -68,7 +69,7 @@ Using /dev/xvda
 Welcome to GNU Parted! Type 'help' to view a list of commands.
 
 # command (p) == print
-(parted) p           
+(parted) p
 Model: Xen Virtual Block Device (xvd)
 Disk /dev/xvda: 32.2GB
 Sector size (logical/physical): 512B/512B
@@ -79,9 +80,9 @@ Disk Flags:
 Number  Start   End     Size    Type     File system  Flags
  1      1049kB  1000MB  999MB   primary  xfs          boot
  2      1000MB  10.7GB  10.2GB  primary               lvm
- 
+
 # resizepart NUMBER END 명령어를 통해 partion 디스크 할당
-(parted) resizepart 2                                                     
+(parted) resizepart 2
 End?  [10.7GB]? 100%
 
 # 할당 후 재 확인
@@ -103,7 +104,7 @@ Number  Start   End     Size    Type     File system  Flags
 ```bash
 $> pvs
 PV         VG   Fmt  Attr PSize   PFree
-/dev/xvda2 rhel lvm2 a--  <9.00g    20.00g 
+/dev/xvda2 rhel lvm2 a--  <9.00g    20.00g
 ```
 
 결과를 보면 추가 한 사이즈만큼 ``PFree``에 남아있는 것을 확인 할 수 있습니다.

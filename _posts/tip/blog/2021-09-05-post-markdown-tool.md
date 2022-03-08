@@ -1,4 +1,5 @@
 ---
+published: true
 title:  "마크다운 어떻게 하면 편하게 사용할 수 있을까?"
 excerpt: Github Pages의 Typora 적용
 categories:

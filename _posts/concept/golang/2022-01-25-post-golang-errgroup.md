@@ -1,4 +1,5 @@
 ---
+published: true
 title: "golang - errgroup"
 categories:
   - GoLang

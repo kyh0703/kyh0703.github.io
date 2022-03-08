@@ -1,4 +1,5 @@
 ---
+published: true
 title: "도커(1) - Docker"
 excerpt: docker 개념 쉽게 이해해보기
 categories:
