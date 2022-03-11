@@ -4,13 +4,13 @@ title: "윈도우10 kubernates 환경 구성하기(rancher-desktop)"
 categories:
   - DevOps
 tags:
-  - [devops, rancher, rke, k8s, kubernates, k3s, rancher-desktop, docker-desktop]
+  - [devops, rancher, rke, kubernates, k3s, rancher-desktop]
 toc: true
 toc_sticky: true
 date: "2022-03-11 10:30"
 ---
 
- 저는 윈도우에 도커를 `docker-desktop`을 활용하여 구성하여 사용하고 있었습니다. 근데 갑자기 동료가 `docker-desktop`이 기업에서 유료로 전환이 된다고 하더군요. :sweat: 
+저는 윈도우에 도커를 `docker-desktop`을 활용하여 구성하여 사용하고 있었습니다. 근데 갑자기 동료가 `docker-desktop`이 기업에서 유료로 전환이 된다고 하더군요. :sweat:
 
 그래서 오늘은 `docker-desktop`을 대체 할 수 있는 `rancher-desktop`에 대해서 기술합니다.
 
@@ -53,8 +53,8 @@ date: "2022-03-11 10:30"
 
 ### 사전설치:computer:
 
-* window 10
-* wsl2
+- window 10
+- wsl2
 
 ### 설치:coffee:
 
@@ -80,8 +80,8 @@ Unable to connect to the server: x509: certificate signed by unknown authority
 
 위에 `kubectl`을 입력하였을때 `x509`에러가 나오면 `config`파일을 확인 할 필요가 있습니다. `rancher-desktop`은 `~/.kube/config`에 구성되어 있습니다.
 
-* vi ~/.kube/config
-* docker-desktop 키워드 전체 삭제
+- vi ~/.kube/config
+- docker-desktop 키워드 전체 삭제
 
 ### 마치며
 
@@ -91,7 +91,7 @@ Unable to connect to the server: x509: certificate signed by unknown authority
 
 더 필요하신 내용들은 공식문서 및 slack에서 더 상세한 내용을 보실 수 있습니다!
 
-docker에서 영리를 취하니 저도 containerd 명령어에 익숙해질 필요가 있겠네요. 
+docker에서 영리를 취하니 저도 containerd 명령어에 익숙해질 필요가 있겠네요.
 
 해당 자료는 제가 공식문서를 보며 설치하며 경험했던 내용들을 찾아 수정하면서 설치했던 소중한 자료입니다.
 
