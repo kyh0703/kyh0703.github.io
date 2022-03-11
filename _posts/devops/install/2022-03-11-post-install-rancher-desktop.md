@@ -80,8 +80,11 @@ Unable to connect to the server: x509: certificate signed by unknown authority
 
 위에 `kubectl`을 입력하였을때 `x509`에러가 나오면 `config`파일을 확인 할 필요가 있습니다. `rancher-desktop`은 `~/.kube/config`에 구성되어 있습니다.
 
-- vi ~/.kube/config
-- docker-desktop 키워드 전체 삭제
+```bash
+$ vi ~/.kube/config
+# 변경
+current-context: rancher-desktop 
+```
 
 ### 마치며
 
