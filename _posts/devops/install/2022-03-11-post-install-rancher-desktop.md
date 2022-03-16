@@ -4,7 +4,7 @@ title: "윈도우10 kubernates 환경 구성하기(rancher-desktop)"
 categories:
   - DevOps
 tags:
-  - [devops, rancher, rke, kubernates, k3s, rancher-desktop]
+  - [devops, rancher, kubernates, k3s, rancher-desktop]
 toc: true
 toc_sticky: true
 date: "2022-03-11 10:30"
