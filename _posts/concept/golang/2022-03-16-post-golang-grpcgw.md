@@ -30,17 +30,17 @@ pakcage main
 package main
 
 import (
-	"encoding/json"
-	"log"
-	"net/http"
-	"sort"
-	"strconv"
+    "encoding/json"
+    "log"
+    "net/http"
+    "sort"
+    "strconv"
 
     "gitlab.com/cloud/test"
 )
 
 func main() {
-	mux := test.Tester()
+    mux := test.Tester()
     ...
 }
 ```
@@ -69,13 +69,13 @@ module github.com/kyh0703/tester
 go 1.17
 
 replace (
-	clog => /clog
+    clog => /clog
     test => /clog/test
 )
 
 require (
-	clog v0.0.0-00010101000000-000000000000
-  	test v0.0.0-00010101000000-000000000000
+    clog v0.0.0-00010101000000-000000000000
+    test v0.0.0-00010101000000-000000000000
 )
 ```
 
@@ -85,7 +85,7 @@ require (
 package main
 
 import (
-	"clog"
+    "clog"
 )
 
 func main() {
@@ -102,8 +102,10 @@ func main() {
 ```bash
 ├── clog
 │   ├── test
+│       ├── test.go
 │       ├── go.mod
 │   └── log.go
+│   └── go.mod
 ├── go.mod
 ├── go.sum
 ├── main.go
@@ -117,13 +119,13 @@ module github.com/kyh0703/tester
 go 1.17
 
 replace (
-	github.com/kyh0703/tester/clog => /clog
+    github.com/kyh0703/tester/clog => /clog
     github.com/kyh0703/tester/test => /clog/test
 )
 
 require (
-	clog v0.0.0-00010101000000-000000000000
-  	test v0.0.0-00010101000000-000000000000
+    clog v0.0.0-00010101000000-000000000000
+    test v0.0.0-00010101000000-000000000000
 )
 ```
 
@@ -133,7 +135,7 @@ require (
 package main
 
 import (
-	"github.com/kyh0703/tester/clog"
+    "github.com/kyh0703/tester/clog"
 )
 
 func main() {
