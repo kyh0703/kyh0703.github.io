@@ -42,7 +42,7 @@ CTRL + 4 : H4
 
 \`\`\`문자뒤에 사용할 언어를 입력하면 다음과 같이 표기됩니다
 
-![image-20210905230005400](../../../assets/images/posts/2021-09-05-post-markdown-tool/image-20210905230005400.png)
+![image-20210905230005400](../../assets/images/posts/2021-09-05-post-markdown-tool/image-20210905230005400.png)
 
 #### 3. 표
 
@@ -66,7 +66,7 @@ CTRL + T
 
 * 문서 경로 지정하기
 
-![image-20210905230113785](../../../assets/images/posts/2021-09-05-post-markdown-tool/image-20210905230113785.png)
+![image-20210905230113785](../../assets/images/posts/2021-09-05-post-markdown-tool/image-20210905230113785.png)
 
 >  저는 집에서만 블로그 작성 목적으로 사용하기에 특정경로를 고정으로 지정하였습니다.
 >
@@ -96,7 +96,7 @@ sequenceDiagram
     Bob-->>John: Jolly good!
 ```
 
-![image-20210906224251733](../../../assets/images/posts/2021-09-05-post-markdown-tool/image-20210906224251733.png)
+![image-20210906224251733](../../assets/images/posts/2021-09-05-post-markdown-tool/image-20210906224251733.png)
 
 
 
