@@ -4,46 +4,63 @@ title:  "dracula pro 구매 후기"
 categories:
   - Tip
 tags:
-  - [tip, dracula, dracula pro]
+  - [tip, vscode, dracula, dracula pro, theme]
 toc: true
 toc_sticky: true
 date: "2022-04-07 18:00"
 ---
 
+저 자신을 잘 몰랐었는데 알고보니 좀 쉽게 질려하는 스타일이였습니다. 그래서 매번 `vscode`테마를 이리 바꿔보고 저리 바꿔보고 아주 하루에도 한번씩은 꼭 바꿔서 사용했습니다. 사실 회사에 모니터가 별로 안 좋아서 집에서 작업하는 모니터와 괴리감이 있습니다. 그래서 그런지 집에서 쓰는 테마는 꼭 회사에 가면 못 쓰겠더라구요..😒
 
+#### VScode 테마
 
-저는 매일 매일 잔디를 심어야겠다까지는 아니지만 최선을 다해서 `github`에 잔디를 심고 있습니다. 어느 날 갑자기 제가 심은 잔디가 보이지 않는 현상을 발견했습니다😫
+자주 사용했던 테마들을 살펴보면 다음과 같습니다.
 
-![image-20220321204557821](../../assets/images/posts/2022-03-21-post-github-zandi/image-20220321204557821.png)
+* Community Material
+* Night owl
 
-제 잔디는 어디갔을까요..?😑 잃어버린 잔디를 확인하기 위해서는 2가지를 확인하셔야 됩니다!
+> 사실 개인적으로 Night owl은 개발자가 밤에 일하는 느낌이 강해서 테마는 마음에 안 들었는데 겉멋으로 자꾸 사용하게 되더라구요😑
 
-### 1. Private Repository
+* Dracula office
 
-많이들 아시겠지만 따로 설정해주지 않으면 `private repositiory`는 github 배너에서 확인할 때 보이지 않습니다.
+#### Dracula Pro
 
-![image-20220321204717255](../../assets/images/posts/2022-03-21-post-github-zandi/image-20220321204717255.png)
+회사모니터와 집에 모니터와 제일 괴리감이 없었던 테마는 `dracula office` 테마였습니다. 그러던 중에 유료로 판매하고 있는 `dracula pro`를 발견하였구요! 먼저 소감을 말씀드리면 이제 테마를 안 바꾸고 잘 쓰고 있습니다. 역시 돈일까요? 테마 구입하기 전에 많이 망설였는데 구매 후에는 아깝단 생각을 하지 않습니다. 너무 만족하고 있네요🤤
 
-다음과 같이 `Private contribution`항목이 체크되어 있는지 확인해주세요!
+* dracula pro
 
-### 2. Default Branch
+![image-20220407232925676](../../assets/images/posts/2022-04-07-post-dracula-pro/image-20220407232925676.png)
 
-위에 설정 및 내 브랜치는 `public`인데 주말에 작업한 내역이 보이지 않는다! 이럴땐 `default branch`를 확인하셔야됩니다.
+* dracula pro(blade)
 
-![image-20220321204918253](../../assets/images/posts/2022-03-21-post-github-zandi/image-20220321204918253.png)
+![image-20220407232958515](../../assets/images/posts/2022-04-07-post-dracula-pro/image-20220407232958515.png)
 
-이 때 `default branch`를 제가 작업한 브랜치로 바꾸어주면 잔디가 심어져있는 것을 확인 할 수 있습니다.
+* dracula pro(buffy)
 
-하지만 언젠가 `main`브랜치로 `merge`하면 우리의 비어져있던 잔디도 채워질 수 있습니다.
+![image-20220407233024467](../../assets/images/posts/2022-04-07-post-dracula-pro/image-20220407233024467.png)
 
-### wakatime
+* dracula pro(Lincoln)
 
-github으로 내가 작업한 성과들을 확인할 수 있지만 정말 내가 어떤 언어를 사용하여 개발하고, 얼마나 많은 시간을 투자하는지 확인하기 위해서는 `wakatime`만큼 좋은게 없다고 생각합니다. 그래서 공유드립니다!
+![image-20220407233107145](../../assets/images/posts/2022-04-07-post-dracula-pro/image-20220407233107145.png)
 
-![image-20220321210338883](../../assets/images/posts/2022-03-21-post-github-zandi/image-20220321210338883.png)
+* dracula pro(mobius)
 
-![image-20220321205623645](../../assets/images/posts/2022-03-21-post-github-zandi/image-20220321205623645.png)
+![image-20220407233135277](../../assets/images/posts/2022-04-07-post-dracula-pro/image-20220407233135277.png)
+
+* dracula pro(van helsing)
+
+![image-20220407233210590](../../assets/images/posts/2022-04-07-post-dracula-pro/image-20220407233210590.png)
+
+#### 팁
+
+사실 `dracula pro`테마는 비쌉니다😂😂😂
+
+얼마나 비싸면 70$가 넘어가요.. 테마 하나 사는데 7, 8만원이라 생각하니 선뜻 구입할 수 없었습니다. 물론 공식 홈페이지 접속을 하면 한국 discount 가격으로 60$까지 할인 해주더라구요. 그래도 비싸다 생각했습니다. 그래서 discount code를 찾아봤었는데요. 꼭 사용하셔서 $29달러에 테마를 가져오시기 바랍니다. 드라큘라 테마 사이트에서는 나라별 할인코드가 적용이 되어 아래 코드는 사용이 안되고 아래 사이트로 접속하셔서 구입하세요.
+
+> https://draculatheme.gumroad.com/l/dracula-pro
+
+![image-20220407233707991](../../assets/images/posts/2022-04-07-post-dracula-pro/image-20220407233707991.png)
 
 ### 마치며
 
-기업에서 `github`에 잔디를 보면서 많은 분들이 잔디를 열심히 심고 계십니다. 저는 개인적으로 `wakatime`에 랭커들을 보면서 많은 동기부여를 얻고 그로인해 좀 더 잔디 심을때 의욕이 생기더라구요! 일이 즐거움이 될 수 있게 화이팅해봅니다 아자아자👍👍👍
+전 정말 테마를 많이 바꿨습니다. 그래도 `dracula office`를 제일 오래 사용했었는데요. 저처럼 테마에 정착 못하시는 분들은 꼭 구입하셔서 만족감을 느끼시기 바랍니다. 전 사실 검은색 반헬싱이 제일 이쁘다 생각하고 구매했는데 역시 기본이 제일 났더군요. 드라큘라 테마의 장점은 어느곳에서든 같은 테마로 구성할 수 있는거겠죠? 🧛‍♂️🧛‍♀️💕
