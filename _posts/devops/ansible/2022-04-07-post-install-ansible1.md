@@ -4,10 +4,10 @@ title: "Ansible로 서버 관리하기"
 categories:
   - DevOps
 tags:
-  - [devops, harbor, docker-registery, k8s, kubernetes]
+  - [devops, Ansible]
 toc: true
 toc_sticky: true
-date: "2021-12-02 12:30"
+date: "2022-04-07 19:30"
 ---
 
 요새는 `DevOps`와 관련하여 내용을 찾아보고 공부하는게 재미있네요. 😁
