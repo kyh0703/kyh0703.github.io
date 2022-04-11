@@ -1,6 +1,6 @@
 ---
 published: true
-title: "CKA 자격증 따기 - prologue"
+title: "CKA 자격증 따기 - day1"
 categories:
   - DevOps
 tags:
