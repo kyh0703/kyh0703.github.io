@@ -4,7 +4,7 @@ title: "윈도우10 kubernates 환경 구성하기(rancher-desktop)"
 categories:
   - DevOps
 tags:
-  - [devops, rancher, kubernates, k3s, rancher-desktop]
+  - [devops, rancher, kubernetes, k3s, rancher-desktop]
 toc: true
 toc_sticky: true
 date: "2022-03-11 10:30"
@@ -26,7 +26,7 @@ date: "2022-03-11 10:30"
 
 우리는 지난 rancher에 대해 알아 보던 중 `k3s, rke, rke2`등에 대해서 간략하게나마 알아봤었습니다.
 
-그 중 `k3s`는 경량화에 초점을 둔 `kubernates`인데요. 라즈베리파이 환경에서 돌아가며, 계산대 포스에서 사용한다고 알고 있었습니다.
+그 중 `k3s`는 경량화에 초점을 둔 `kubernetes`인데요. 라즈베리파이 환경에서 돌아가며, 계산대 포스에서 사용한다고 알고 있었습니다.
 
 `rancher`에서 `k3s`를 가지고 쉽게 개발 환경을 구축할 수 있게 `rancher-desktop`을 새로 발표했네요:smiley:
 
@@ -90,7 +90,7 @@ current-context: rancher-desktop
 
 축하합니다:tada:
 
-윈도우에 kubernates 설치를 완료했습니다!
+윈도우에 kubernetes 설치를 완료했습니다!
 
 더 필요하신 내용들은 공식문서 및 slack에서 더 상세한 내용을 보실 수 있습니다!
 

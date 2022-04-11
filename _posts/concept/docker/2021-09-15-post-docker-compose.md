@@ -5,7 +5,7 @@ excerpt: 도커 마술사
 categories:
   - Docker
 tags:
-  - [docker, docker network]
+  - [docker, docker-compose]
 toc: true
 toc_sticky: true
 date: "2021-09-15 19:00"
