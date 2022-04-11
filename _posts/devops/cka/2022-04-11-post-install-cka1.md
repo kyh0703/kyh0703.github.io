@@ -34,10 +34,6 @@ date: "2022-04-11 19:30"
 
   * CKS(Certified Kubernetes Security Speciallist): 보안 전문가용
 
-* 점수는 100점만점에 66점
-
-* 시험감독관 참관
-
 * 감독관에 따라 듀얼모니터가 가능하나 가능한 큰 모니터를 가진 노트북을 가지고 시험
 
 * killer.sh 주말마다 공부
@@ -46,7 +42,24 @@ date: "2022-04-11 19:30"
 
   Udemy(15점) < 시험(50점) < Killer.sh(90점)
 
-#### 관련사이트
+#### 시험
+
+* 375달러이며, 통과하지 못할 경우 12개월 이내 1회 무료 재응시 가능
+* 점수는 100점만점에 66점
+* 온라인 감독관
+* 핸드북
+* 3시간
+* 공식문서 참조 가능
+
+#### 참조링크
+
+[CKA](https://www.cncf.io/certification/cka/)
+
+[커리큘럼](https://github.com/cncf/curriculum)
+
+[핸드북](https://www.cncf.io/certification/candidate-handbook)
+
+[팁](https://www.cncf.io/certification/candidate-handbook)
 
 [시험신청](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/)
 
