@@ -46,13 +46,15 @@ date: "2022-04-11 19:30"
 
   Udemy(15점) < 시험(50점) < Killer.sh(90점)
 
-#### 시험 신청
+#### 관련사이트
 
 [시험신청](https://training.linuxfoundation.org/certification/certified-kubernetes-administrator-cka/)
 
 [시험쿠폰](https://couponcause.com/stores/linux-foundation/)
 
 [Udemy](https://www.udemy.com/course/certified-kubernetes-administrator-with-practice-tests/)
+
+[조훈님Github](https://github.com/kyh0703/_Lecture_k8s_learning.kit)
 
 ### 마치며
 
