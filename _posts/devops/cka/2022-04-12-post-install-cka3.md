@@ -35,5 +35,99 @@ sepc: 사양
       image: nginx
 ```
 
+```bash
+k create -f {}.yaml
+k run nginx --image nginx
+k describe po {pod}
+```
 
+#### Replicaset
+
+* 단일포드의 여러인스턴스는 고가용성을 제공
+
+* 로드밸런싱 & 스캐일링
+* 단일 파드여도 자동 회복 기능을 제공
+
+* 서로 다른 노드의 여러 pod간 부하를 분산하고 애플리케이션을 확장
+* Replicas <= 100
+
+| Repication Controller | Replica Set     |
+| --------------------- | --------------- |
+| 오래 됨               | 새로운 권장방법 |
+| Selector X            | Selector O      |
+
+**Replication Controller**
+
+```yaml
+apiVersion: v1
+kind: RelicationController
+metadata:
+  name: myapp-rc
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  teplate:
+    # 아래부분은 파드에 metadata부분과 동일하다
+    metadata:
+    name: mypod-pod
+    lables:
+      app: myapp
+      type: front-end
+    spec:
+      continaers:
+      - name: nginx-controller
+        image: nginx
+replicas: 100
+```
+
+**Replicat Set**
+
+```yaml
+apiVersion: apps/v1
+kind: RelicationSet
+metadata:
+  name: myapp-rc
+  labels:
+    app: myapp
+    type: front-end
+spec:
+  teplate:
+    # 아래부분은 파드에 metadata부분과 동일하다
+    metadata:
+    name: mypod-pod
+    lables:
+      app: myapp
+      type: front-end
+    spec:
+      continaers:
+      - name: nginx-controller
+        image: nginx
+replicas: 3
+selector:
+  matchLabels:
+    type: front-end
+```
+
+#### Label Selector
+
+파드가 많아지면 식별하기 어렵고 `replicaset`에 `selector`를 지정하여 모니터링할 부분을 알고 있게 만들어 쉽게 관리할 수 있음.
+
+**sacle 조정 명령어**
+
+복제본 세트 업데이트
+
+```bash
+kubectl replace -f replicaset-definition.yml
+```
+
+복제 매개 변수 사용
+
+```bash
+kubectl scale --replicas=6 -f replicaset-definition.yml
+```
+
+```bash
+kubectl scale --replicas=6 replicaset myapp-replicaset
+```
 
