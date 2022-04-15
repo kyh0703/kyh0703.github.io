@@ -65,3 +65,29 @@ k create ns dev
 k config set-context $(kubectl config current-context) --namespace=dev
 ```
 
+모든 네임스페이스
+
+```bash
+$ k get po --all-namespaces
+$ k get po -A
+```
+
+**네임스페이스 할당량 조정**
+
+* quota파일로 조정
+
+```yaml
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: computer-quota
+  namespace: dev
+spec:
+  hard:
+    pods: "10"
+    requests.cpu: "4"
+    requests.memory: 5Gi
+    limits.cpu: "10"
+    limits.memory: 10Gi
+```
+
