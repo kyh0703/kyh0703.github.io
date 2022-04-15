@@ -85,28 +85,26 @@ replicas: 100
 
 ```yaml
 apiVersion: apps/v1
-kind: RelicationSet
+kind: ReplicaSet
 metadata:
-  name: myapp-rc
+  name: frontend
   labels:
-    app: myapp
-    type: front-end
+    app: guestbook
+    tier: frontend
 spec:
-  teplate:
-    # 아래부분은 파드에 metadata부분과 동일하다
+  # 케이스에 따라 레플리카를 수정한다.
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
     metadata:
-    name: mypod-pod
-    lables:
-      app: myapp
-      type: front-end
+      labels:
+        tier: frontend
     spec:
-      continaers:
-      - name: nginx-controller
-        image: nginx
-replicas: 3
-selector:
-  matchLabels:
-    type: front-end
+      containers:
+      - name: php-redis
+        image: gcr.io/google_samples/gb-frontend:v3
 ```
 
 #### Label Selector
@@ -129,5 +127,68 @@ kubectl scale --replicas=6 -f replicaset-definition.yml
 
 ```bash
 kubectl scale --replicas=6 replicaset myapp-replicaset
+```
+
+**alias**
+
+```bash
+k scale --replicas=6 rs myapp-repicaset
+```
+
+#### Deployment
+
+* deployment > replicaset > pod
+
+> deployment 안에 replicaset이 있으며 그 안에 pod가 있다.
+
+* 인스턴스를 여러개 구성
+* 인스턴스를 업그레이드 가능
+* 롤링 업데이트, 변경사항 실행 취소, 일시중지 및 재개
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  labels:
+    app: guestbook
+    tier: frontend
+spec:
+  # 케이스에 따라 레플리카를 수정한다.
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        tier: frontend
+    spec:
+      containers:
+      - name: php-redis
+        image: gcr.io/google_samples/gb-frontend:v3
+```
+
+**alias**
+
+```bash
+# k get all로 보면 앞에 alias를 확인 할 수 있다.
+k get deploy
+```
+
+#### TIP
+
+파일을 생성하여 만들기는 시험떄 어려울 수 있기에 다음과 같이  `run` 명령어를 사용하여 `yaml`파일을 가져올 수 있다.
+
+* pod
+
+```bash
+k run nginx --image=nginx --dry-run=client -o yaml > pod.yaml
+```
+
+* deployment
+
+```bash
+k create depoly --image=nginx --dry-run=client --replicas-o yaml > deploy_sample.yaml
 ```
 
