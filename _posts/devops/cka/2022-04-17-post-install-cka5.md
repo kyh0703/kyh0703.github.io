@@ -285,5 +285,121 @@ K8s 메모리에 저장됨
 }
 ```
 
+#### 스케쥴링
 
+* 스케줄러가 없으면 노드에 pod들의 관리를 직접해야한다
+* k8s는 스케쥴러 없이 메뉴얼로 스케쥴링하는 기능을 제공
+  * `nodeName`이라는 `yaml`에 설정 값이 있는데 스케쥴러가 없으면 직접 지정하여야 한다.
+  * `biding` 객체를 생성 후  `pod bindng API`로요청을 보내야 됌
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx
+spec:
+  nodeName: node01
+  containers:
+  - image: nginx
+    name: nginx
+```
+
+#### Label & Selector
+
+항목을 그룹화 하고 기반으로 필터링 하는 기능
+
+시간이 지남에 따라 수많은 pod들이 생성됨에 따라 필터링기능이 필요함
+
+**Label**
+
+* 각 항목에 부착된 라벨 또는 속성
+* 필터링 할때 사용
+* key, value를 자유롭게 설정 가능
+* k8s내 라벨은 유니크한 값이여야함
+
+**selector**
+
+* 존재하는 라벨을 선택하는 용도
+* 라벨링된 오브젝트들을 선택하는 용도이다
+
+> 래플리카셋에서 파드의 레이블을 `type: back-end`라고 했으면 래플리카의 라벨을 설정하고, 파드 스펙안에서 셀렉터는 파드를 바라보게 해야 한다. 해당 래플리카 셋에 서비스를 설정할려고 하면 서비스의 `selector`에 `type: back-end` 로 지정하기만 하면 된다.
+
+**annotation**
+
+* 주석은 세부사항을 기록하기 위해 사용된다
+
+> 이름, 버전, 빌드 빌드 정보, 연락처, 전화번호, 이메일, 통합목적으로 사용되는 id...
+
+#### Taints And Tolerations
+
+`Tanints` 노드에 `Toleration`이 적용된 파드만 배포될 수 있게 하는 옵션
+
+* 노드에 모기기피제를 뿌린 상황이고 파드들은 모기다.
+
+마스터노드는 자동으로 `taint`설정이 되어있어 파드가 생성되지 않는다.
+
+```bash
+$ k describe node kubemaster | grep Taint
+Taints: node-role.kubernetes.io/master:NoSchedule
+```
+
+![image-20220417212709018](../../../assets/images/posts/2022-04-17-post-install-cka5/image-20220417212709018.png)
+
+**사용법**
+
+노드 뿐아니라 pod에서도 이중으로 설정해줘야됌
+
+```bash
+# 추가
+$ k taint no node-name key=value:taint-effect
+# 삭제
+$ k taint no node-name key=value:taint-effect-
+```
+
+**taint-effect**
+
+* NoSchedule
+  * 스케쥴이 없는 것(배포안함)
+* PreferNoSchedule
+  * 가급적 배포를 안하지만 배포를 할 수도 있다.
+* NoExecute
+  * 배포가 되지 못하게 함은 물론이고, 이미 노드에 배포되어있으면 제거 시킴
+
+> taint와 Tolerations 옵션을 준다고 taint 노드로만 배포될 수 있는게 아니다. 
+>
+> * `node affinity` 옵션으로 해당 노드로만 지정가능
+
+**예제**
+
+```bash
+k taint no node1 app=blue:NoSchedule
+```
+
+```yaml
+apiVersion:
+kind: Pod
+metadata:
+  name: myapp-pod
+spec:
+  containers:
+  - name: nginx-continaer
+    image: nginx
+  tolerations:
+  - key: "app"
+    operator: "Equal"
+    value: "blue"
+    effect: "NoSchedule"
+```
+
+#### 시험 팁
+
+```bash
+$ k explain po --recursive | grep -A5 tolerations
+  tolerations <[]object>
+    effect <string>
+    key <string>
+    operator <string>
+    tolerationSeconds <integer>
+    value <string>
+```
 
