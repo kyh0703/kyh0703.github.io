@@ -81,3 +81,99 @@ Planned
 | Type 2 | Preferred(없으면 노드selector 무시하고 배포)   | Ignored                                 |
 | Type 3 | Required                                       | Required(포드는 추출되거나 죽음)        |
 
+#### Node Affinity VS Taints and Tolerations
+
+`Node Affnity`와 `Taints`를 같이 사용하면, 특정 노드에 특정 파드만 배치 시킬 수 있다.
+
+* `Taints`를 설정한 노드에 `Tolerations` 할 수 있는 파드는 다른 노드에도 배치가 가능하다.
+* `Node Affinity`는 해당 노드에 특정 파드가 지정 노드에 배포되게 해줌
+* 그러나 다른 파드가 그 파드에 배포되지 않을 거라는 보장은 없다
+* 결론은 같이 쓰면 특정 노드에 특정파드만 배치가 가능하다
+
+#### Resource Requirements And Limits
+
+* k8s 스케쥴러는 테트리스처럼 특정 파드가 노드에 배포 될떄 적절한 노드에 배치 시킨다.
+* CPU, Memory, DISK를 계산하여 배치시킴
+* `Pod`, `Deployment`에 리소스 사용량을 배정할 수 있다.
+
+* 스케줄러는 노드에 배치할때 리소스 요청을 보고 충분한 노드를 식별한다.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      ports:
+        - containerPort: 8080
+      resource:
+        requests:
+          memory: "1Gi"
+          cpu: 1
+```
+
+**cpu1은 무엇을 뜻할까?**
+
+* 노드의 CPU 자원은 0.1, 100M(Meely)과 같이 표현할 수 있다.
+* 100m의 경우 밀리를 의미하며 이는 0.1CPU와 동일한 의미를 갖는다.
+* 1M까지 설정 가능하며 그 이하는 불가능하다
+* 1 CPU의 의미는 1 vCPU와 같은 의미를 갖는다.
+* 퍼블릭 클라우드에서는 1 GCP Core, 1 Hyperthread, 1Azure Core, 1AWS vCPU를 의미.
+
+**memory**
+
+1 G(Gigabyte) = 1,000,000,000 bytes
+
+1 M(Megabyte) = 1,000,000 bytes
+
+1 K(kilobyte) = 1,000 byte
+
+----
+
+1Gi(Gibibyte) = 1,073,741,824 bytes
+
+1 Mi(Mebibyte) = 1,048,576 bytes
+
+1 Ki(kibibyte) = 1,024 bytes
+
+**Resource Limit**
+
+* 노드에 리소스 제한이 없으면 특정 파드가 노드의 모든 자원을 사용하여 이슈 발생
+* 쿠버네티스 기본 메모리 제한은 512 Mi이다
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      ports:
+        - containerPort: 8080
+      resource:
+        requests:
+          memory: "1Gi"
+          cpu: 1
+        limits:
+          memory: "2Gi"
+          cpu: 2
+```
+
+**리소스를 초과하면**
+
+* 파드가 제한된 `cpu`자원을 넘어서려고 할 경우 `Throttle`이 발생하여 압축 조정
+* 컨테이너는 제한보다 많은 CPU리소스를 사용할 수 없다.
+* 메모리 자원을 한계치를 넘어서면 `OOM(Out of Memory)` 발생하며 pod가 죽게 됌.
+* 메모리의 경우 노드 자원 부족 시 퇴거대상이 된다.
+
+![image-20220418212315497](../../../assets/images/posts/2022-04-18-post-install-cka6/image-20220418212315497.png)
+
+> [resources의 limit과 request의 의미와 파드 우선순위](https://devpouch.tistory.com/135)
+>
+> * 운영이 아닌 환경에서 하드웨어를 최적으로 활용하고 싶다 → Best-effort와 Burtable을 주로 활용
+> *  운영 환경이 안정적으로 예측 가능하길 원한다 → Guaranteed 컨테이너에 약간의 Burstable을 섞어서 사용
