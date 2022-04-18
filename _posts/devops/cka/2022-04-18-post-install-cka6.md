@@ -118,10 +118,22 @@ spec:
 **cpu1은 무엇을 뜻할까?**
 
 * 노드의 CPU 자원은 0.1, 100M(Meely)과 같이 표현할 수 있다.
+
 * 100m의 경우 밀리를 의미하며 이는 0.1CPU와 동일한 의미를 갖는다.
+
 * 1M까지 설정 가능하며 그 이하는 불가능하다
+
 * 1 CPU의 의미는 1 vCPU와 같은 의미를 갖는다.
+
 * 퍼블릭 클라우드에서는 1 GCP Core, 1 Hyperthread, 1Azure Core, 1AWS vCPU를 의미.
+
+  > Pod가 생성되면 컨테이너에 `requests` 에 기본으로 `Cpu: 0.5`와 `Memory: 256Mi`가 할당된다고 말했으나, 기본값이 선택할려면 Namespace에 LimitRange를 생성하여 요청 및 제한에 대한 기본값으로 설정해야 함
+  >
+  > ![image-20220418213547035](../../../assets/images/posts/2022-04-18-post-install-cka6/image-20220418213547035.png)
+  >
+  > ![image-20220418213607018](../../../assets/images/posts/2022-04-18-post-install-cka6/image-20220418213607018.png)
+  >
+  > 
 
 **memory**
 
@@ -177,3 +189,67 @@ spec:
 >
 > * 운영이 아닌 환경에서 하드웨어를 최적으로 활용하고 싶다 → Best-effort와 Burtable을 주로 활용
 > *  운영 환경이 안정적으로 예측 가능하길 원한다 → Guaranteed 컨테이너에 약간의 Burstable을 섞어서 사용
+
+#### 시험팁
+
+실행중인 파드는 다음과 같은 부분은 `edit`으로 편집이 안된다
+
+- spec.containers[*].image
+- spec.initContainers[*].image
+- spec.activeDeadlineSeconds
+- spec.tolerations
+
+위에 부분을 변경할려고 저장하면 `tmp`에 저장되며 삭제 후 재 기동할 수 있다.
+
+```bash
+# 1. 변경 후 저장하여 tmp/kubectl-edit-vvvrq.yaml이 생성된 후
+$ k delete po webapp
+$ k create -f /tmp/kubectl-edit-ccvrq.yaml
+
+# 2. yaml로 저장후 삭제 한 후 다시 재생성
+$ k get po webapp -o yaml > my-new-pod.yaml
+$ vi my-new-pod.yaml
+$ k delete po webapp
+$ k create -f my-new-pod.yaml
+```
+
+#### DemonSet
+
+* 데몬셋은 래플리카셋과 마찬가지로 노드에 배치된다
+* 새 노드가 클러스터에 추가될 때마다 포드의 복제본이 해당 노드에 자동으로 추가 됌
+* 노드가 제거되면 pod도 자동으로 제거
+* 노드 종속적
+* 모니터링 에이전트 or 로그수집기 `fluentd`, `kube-proxy`, `networking`
+* `nodeName`을 사용해서 배치함
+
+```yaml
+apiVersion: apps/v1
+kind: DemonSet
+metadata:
+  name: monitoring-daemon
+sepc:
+  selector:
+    matchLabels:
+      app: monitoring-agent
+    template:
+      meatadata:
+        lables:
+          app: monitoring-agent
+      spec:
+        containers:
+        - name: monitoring-agent
+          image: monitoring-agent  
+```
+
+**명령어**
+
+```bash
+k get ds
+```
+
+#### Static Pod
+
+`kubelet`은 `node`를 독립적으로 관리 할 수 있다.
+
+`kubelet`이 `kube-apiserver`와 `etcd`가 없으면 자신에 파드에 노드를 배치하기 위해서 `static pod`를 사용할 수 있다, 즉 `kube-apiserver`의 도움 없이 파드를 생성하면 그것이 `static-pod`이다.
+
