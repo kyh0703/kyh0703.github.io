@@ -57,7 +57,7 @@ spec:
         nodeSelectorTerms:
           - matchExpressions:
               - key: size
-                operator: In # In, NotIn, Exist(values 없음)
+                operator: In # In, NotIn, Exists(values 없음)
                 # Large Or Mediaum 
                 values:
                   - Large
