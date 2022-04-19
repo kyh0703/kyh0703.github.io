@@ -60,5 +60,5 @@ k logs -f event-simulator-pod event-simulator
 ```
 
 ```bash
-k logs webapp-2 -c + TAB동작
+k logs webapp-2 TAB동작
 ```
