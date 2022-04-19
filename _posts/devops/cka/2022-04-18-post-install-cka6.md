@@ -253,3 +253,83 @@ k get ds
 
 `kubelet`이 `kube-apiserver`와 `etcd`가 없으면 자신에 파드에 노드를 배치하기 위해서 `static pod`를 사용할 수 있다, 즉 `kube-apiserver`의 도움 없이 파드를 생성하면 그것이 `static-pod`이다.
 
+`kube-api-server`가 배포되어도 `static-pod`를 볼 수 있지만 편집은 직접가서 해야된다.
+
+**어떻게 배포 할 수 있는가?**
+
+* 지정된 서버의 디렉토리에 `pod.yaml`파일을 읽도록 `kubelet`을 구성 가능
+* `kubelet`은 주기적으로 이 디렉토리에서 파일을 확인하고 호스트에 pod를 배포함
+* 변경하면 변경사항이 제거하면 자동으로 제거 동작함
+* 당연히 kubelet만 있고, Controller-Manager와 ETCD가 없으므로 레플리카도, 디플로이먼트, 서비스를 생성할 수 없다.
+* `kubelet`은 pod수준에서 작동함
+
+> /etc/kubernetes/manifests
+
+**static-pod는 어떻게 알아보는가**
+
+`control-pannel`이 적혀있다.
+
+**디렉토리는 변경 가능한가**
+
+1. `kubelet.service`를 배포 할 때 `--pod-manifest-path={경로}`로 지정한다
+2. `--config=kubeconfig.yaml`옵션으로 파일을 지정하여`kubeconfig.yaml`파일에 있는 `staticPodPath: {path}`를 명시 할 수 있음
+
+**패스는 어떻게 확인하는가**
+
+`kube-api-server`가 없기에 `kubectl`도 사용할 수 없다. 그렇기에 `docker`명령어로 찾음
+
+```bash
+$ docker ps
+$ ps -ef | grep kubelet | grep config
+--config=path
+$ cat path
+$ look static-pod-path
+```
+
+**마스터노드를 만들기**
+
+`static-pod`를 통해서 `controller-manager.yaml`, `apiserver.yaml`, `etcd.yaml`을 통해 마스터 노드를 만들 수 있다.
+
+#### **static-pod와 demonset의 차이**
+
+- DeamonSet은 모든 노드의 애플리케이션을 ensure하기 위해 각 노드에 배치된다.
+- 이 DeamonSet은 kube-apiserver를 통해 DeamonSet Controller에 의해 컨트롤된다.
+- Static Pod는 kubelet에 의해 생성되며 다른 어떤 k8s 오브젝트들의 개입 없이 Control Plane Component를 배포한다.
+- 둘의 공통점은 이 두 종류의 파드들 모두 kube-scheduler를 무시한다.
+
+#### Mutiple Schedulers
+
+* k8s 스케쥴러는 확장가능한 구조이다.
+* 검증하거나 특별한 요구사항이 있다면, 새로운 스케줄러를 만들수있따.
+* 파드에 스케줄러의 이름을 추가하면 사용할수있다.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-custom-scheduler
+  namespace: kube-system
+spec:
+  containers:
+  - command:
+    - kube-scheduler
+    - --address=127.0.0.1
+    - --kubeconfig=/etc/kubernetes/scheduler.conf
+    - --leader-elect=true
+    - --scheduler-name=my-custom-scheduler
+    image: k8s.grc.io/kube-scheduler-amd64.v1.11.3
+    name: kube-scheduler
+```
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myapp
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+ schedulerName: my-custom-scheduler
+```
+
