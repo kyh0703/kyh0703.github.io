@@ -34,7 +34,6 @@ k rollout history deploy myapp-deployment
 ```bash
 # 배치 정의 파일이 다른 구성을 갖게 됨
 k set image deploy myapp-deployment nginx=nginx:1.91
-
 # apply 권장
 k apply -f myapp-deployment.yaml
 ```
