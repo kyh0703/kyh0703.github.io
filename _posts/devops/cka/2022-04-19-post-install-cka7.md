@@ -7,7 +7,7 @@ tags:
   - [devops, CKA]
 toc: true
 toc_sticky: true
-date: "2022-04-18 12:00"
+date: "2022-04-19 12:00"
 ---
 
 #### Monitor Cluster Components
