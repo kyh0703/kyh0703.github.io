@@ -243,3 +243,12 @@ echo -n 'mysql' | base64
 echo -n 'bXlzcWw=' | base64 --decode
 ```
 
+#### Multi-Container
+
+* 파드가 실행될 때 단 한번 실행되는 컨테이너가 있을 수 있다.
+* 사이드카 패턴으로써 `로깅`, `Istio Proxy`등이 있을 수 있다.
+* 패턴은 3가지로 분류된다
+  * SIDECAR
+  * ADAPTER
+  * AMBASSADOR
+
