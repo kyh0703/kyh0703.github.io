@@ -495,7 +495,6 @@
   font-family: $sans-serif-narrow;
   font-size: $type-size-6;
   font-weight: bold;
-  text-transform: uppercase;
   border-bottom: 1px solid $border-color;
 }
 
@@ -568,6 +567,6 @@
   }
 
   li ul li ul li ul li ul li ul > li a {
-    padding-left: 3.25rem
+    padding-left: 3.25rem;
   }
 }

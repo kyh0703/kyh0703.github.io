@@ -2,7 +2,7 @@
 published: true
 title: "CentOS8 Yum Repository 설정하기(Kakao, Disk)"
 categories:
-  - DevOpsTip
+  - TroubleShooting
 tags:
   - [devops, centos8, repository, kakao, disk]
 toc: true
@@ -38,7 +38,7 @@ gpgkey=http://mirror.kakao.com/centos/RPM-GPG-KEY-CentOS-Official
 EOF
 ```
 
-* yum repository 확인
+- yum repository 확인
 
 ```bash
 $ yum clean all
@@ -49,9 +49,9 @@ InstallMedia-AppStream                                                          
 
 # 에러가 나온다면, 다른 repository가 문제가 있을 수 있으니 yum.repos.d디렉토리안에 repository를 이동
 $ yum grouplist
-CentOS-8 - AppStream                            3.4 MB/s |  20 MB     00:05    
-CentOS-8 - Base                                 435 kB/s | 3.9 kB     00:00    
-CentOS-8 - Extras                               266 kB/s | 3.0 kB     00:00 
+CentOS-8 - AppStream                            3.4 MB/s |  20 MB     00:05
+CentOS-8 - Base                                 435 kB/s | 3.9 kB     00:00
+CentOS-8 - Extras                               266 kB/s | 3.0 kB     00:00
 ```
 
 ### Local Disk
@@ -60,19 +60,19 @@ Disk image를 통해 Repostiry를 설정하는 방법입니다. 아래 링크를
 
 > https://servermon.tistory.com/170
 
-* base repository 따로 보관
+- base repository 따로 보관
 
 ```bash
 sudo bzip2 /etc/yum.repos.d/CentOS-*.repo
 ```
 
-* 디렉토리생성
+- 디렉토리생성
 
 ```bash
 mkdir /localrepo
 ```
 
-* iso 삽입 위치 확인
+- iso 삽입 위치 확인
 
 ```bash
 # df -h or mount를 통해 위치를 확인한다.
@@ -100,25 +100,25 @@ gvfsd-fuse on /run/user/1000/gvfs type fuse.gvfsd-fuse (rw,nosuid,nodev,relatime
 /dev/sr0 on /localrepo type iso9660 (ro,relatime,nojoliet,check=s,map=n,blocksize=2048,uid=1000,gid=1000,dmode=500,fmode=400)
 ```
 
-* 마운트 하기
+- 마운트 하기
 
 ```bash
 mount /dev/sr0 /localrepo
 ```
 
-* 복사하기
+- 복사하기
 
 ```bash
 cp /localrepo/media.repo /etc/yum.repos.d/local.repo
 ```
 
-* 권한주기
+- 권한주기
 
 ```bash
 chmod 644 /etc/yum.repos.d/local.repo
 ```
 
-* `local.repo` 수정
+- `local.repo` 수정
 
 ```bash
 cat <<EOF > /etc/yum.repos.d/local.repo
@@ -140,7 +140,7 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-centosofficial
 EOF
 ```
 
-* yum repo 확인
+- yum repo 확인
 
 ```bash
 $ yum clean all
@@ -151,7 +151,7 @@ InstallMedia-AppStream                                                          
 
 # 에러가 나온다면, 다른 repository가 문제가 있을 수 있으니 yum.repos.d디렉토리안에 repository를 이동
 $ yum grouplist
-CentOS Linux 8 - BaseOS                          85 MB/s | 2.2 MB     00:00    
+CentOS Linux 8 - BaseOS                          85 MB/s | 2.2 MB     00:00
 CentOS Linux 8 - AppStream                      106 MB/s | 5.7 MB     00:00
 ```
 

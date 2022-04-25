@@ -4,7 +4,7 @@ title: "CKA 자격증 따기 - day5"
 categories:
   - DevOps
 tags:
-  - [devops, CKA]
+  - [devops, cka]
 toc: true
 toc_sticky: true
 date: "2022-04-18 12:00"
@@ -12,7 +12,7 @@ date: "2022-04-18 12:00"
 
 #### Node Selector
 
-* 크기가 큰 파드를 특정 노드에 배치시키고 싶을 떄 사용
+- 크기가 큰 파드를 특정 노드에 배치시키고 싶을 떄 사용
 
 ```yaml
 apiVersion: v1
@@ -28,15 +28,15 @@ spec:
     size: Large
 ```
 
-* 노드에 레이블 정하기
+- 노드에 레이블 정하기
 
 ```bash
 k lable no node-1 size=Large
 ```
 
-* 요구사항이 복잡하면 `Node affinity`를 사용해야 한다
-    * Medium Or Large
-    * Not Small
+- 요구사항이 복잡하면 `Node affinity`를 사용해야 한다
+  - Medium Or Large
+  - Not Small
 
 #### Node Affinity
 
@@ -58,7 +58,7 @@ spec:
           - matchExpressions:
               - key: size
                 operator: In # In, NotIn, Exists(values 없음)
-                # Large Or Mediaum 
+                # Large Or Mediaum
                 values:
                   - Large
                   - Medium
@@ -68,12 +68,12 @@ spec:
 
 Avaliable
 
-* requireDuringSechedulingIgnoredDuringExecution(Type1)
-* preferredDuringSechedulingIgnoredDuringExecution(Type2)
+- requireDuringSechedulingIgnoredDuringExecution(Type1)
+- preferredDuringSechedulingIgnoredDuringExecution(Type2)
 
 Planned
 
-* requireDuringSechedulingRequiredDuringExecution(Type3)
+- requireDuringSechedulingRequiredDuringExecution(Type3)
 
 |        | DuringScheduling(파드가 존재하지않고 생성될때) | DuringExecution(파드가 실행되어있을 떄) |
 | ------ | ---------------------------------------------- | --------------------------------------- |
@@ -85,18 +85,18 @@ Planned
 
 `Node Affnity`와 `Taints`를 같이 사용하면, 특정 노드에 특정 파드만 배치 시킬 수 있다.
 
-* `Taints`를 설정한 노드에 `Tolerations` 할 수 있는 파드는 다른 노드에도 배치가 가능하다.
-* `Node Affinity`는 해당 노드에 특정 파드가 지정 노드에 배포되게 해줌
-* 그러나 다른 파드가 그 파드에 배포되지 않을 거라는 보장은 없다
-* 결론은 같이 쓰면 특정 노드에 특정파드만 배치가 가능하다
+- `Taints`를 설정한 노드에 `Tolerations` 할 수 있는 파드는 다른 노드에도 배치가 가능하다.
+- `Node Affinity`는 해당 노드에 특정 파드가 지정 노드에 배포되게 해줌
+- 그러나 다른 파드가 그 파드에 배포되지 않을 거라는 보장은 없다
+- 결론은 같이 쓰면 특정 노드에 특정파드만 배치가 가능하다
 
 #### Resource Requirements And Limits
 
-* k8s 스케쥴러는 테트리스처럼 특정 파드가 노드에 배포 될떄 적절한 노드에 배치 시킨다.
-* CPU, Memory, DISK를 계산하여 배치시킴
-* `Pod`, `Deployment`에 리소스 사용량을 배정할 수 있다.
+- k8s 스케쥴러는 테트리스처럼 특정 파드가 노드에 배포 될떄 적절한 노드에 배치 시킨다.
+- CPU, Memory, DISK를 계산하여 배치시킴
+- `Pod`, `Deployment`에 리소스 사용량을 배정할 수 있다.
 
-* 스케줄러는 노드에 배치할때 리소스 요청을 보고 충분한 노드를 식별한다.
+- 스케줄러는 노드에 배치할때 리소스 요청을 보고 충분한 노드를 식별한다.
 
 ```yaml
 apiVersion: v1
@@ -117,23 +117,21 @@ spec:
 
 **cpu1은 무엇을 뜻할까?**
 
-* 노드의 CPU 자원은 0.1, 100M(Meely)과 같이 표현할 수 있다.
+- 노드의 CPU 자원은 0.1, 100M(Meely)과 같이 표현할 수 있다.
 
-* 100m의 경우 밀리를 의미하며 이는 0.1CPU와 동일한 의미를 갖는다.
+- 100m의 경우 밀리를 의미하며 이는 0.1CPU와 동일한 의미를 갖는다.
 
-* 1M까지 설정 가능하며 그 이하는 불가능하다
+- 1M까지 설정 가능하며 그 이하는 불가능하다
 
-* 1 CPU의 의미는 1 vCPU와 같은 의미를 갖는다.
+- 1 CPU의 의미는 1 vCPU와 같은 의미를 갖는다.
 
-* 퍼블릭 클라우드에서는 1 GCP Core, 1 Hyperthread, 1Azure Core, 1AWS vCPU를 의미.
+- 퍼블릭 클라우드에서는 1 GCP Core, 1 Hyperthread, 1Azure Core, 1AWS vCPU를 의미.
 
   > Pod가 생성되면 컨테이너에 `requests` 에 기본으로 `Cpu: 0.5`와 `Memory: 256Mi`가 할당된다고 말했으나, 기본값이 선택할려면 Namespace에 LimitRange를 생성하여 요청 및 제한에 대한 기본값으로 설정해야 함
   >
   > ![image-20220418213547035](../../../assets/images/posts/2022-04-18-post-install-cka6/image-20220418213547035.png)
   >
   > ![image-20220418213607018](../../../assets/images/posts/2022-04-18-post-install-cka6/image-20220418213607018.png)
-  >
-  > 
 
 **memory**
 
@@ -143,7 +141,7 @@ spec:
 
 1 K(kilobyte) = 1,000 byte
 
-----
+---
 
 1Gi(Gibibyte) = 1,073,741,824 bytes
 
@@ -153,8 +151,8 @@ spec:
 
 **Resource Limit**
 
-* 노드에 리소스 제한이 없으면 특정 파드가 노드의 모든 자원을 사용하여 이슈 발생
-* 쿠버네티스 기본 메모리 제한은 512 Mi이다
+- 노드에 리소스 제한이 없으면 특정 파드가 노드의 모든 자원을 사용하여 이슈 발생
+- 쿠버네티스 기본 메모리 제한은 512 Mi이다
 
 ```yaml
 apiVersion: v1
@@ -178,17 +176,17 @@ spec:
 
 **리소스를 초과하면**
 
-* 파드가 제한된 `cpu`자원을 넘어서려고 할 경우 `Throttle`이 발생하여 압축 조정
-* 컨테이너는 제한보다 많은 CPU리소스를 사용할 수 없다.
-* 메모리 자원을 한계치를 넘어서면 `OOM(Out of Memory)` 발생하며 pod가 죽게 됌.
-* 메모리의 경우 노드 자원 부족 시 퇴거대상이 된다.
+- 파드가 제한된 `cpu`자원을 넘어서려고 할 경우 `Throttle`이 발생하여 압축 조정
+- 컨테이너는 제한보다 많은 CPU리소스를 사용할 수 없다.
+- 메모리 자원을 한계치를 넘어서면 `OOM(Out of Memory)` 발생하며 pod가 죽게 됌.
+- 메모리의 경우 노드 자원 부족 시 퇴거대상이 된다.
 
 ![image-20220418212315497](../../../assets/images/posts/2022-04-18-post-install-cka6/image-20220418212315497.png)
 
 > [resources의 limit과 request의 의미와 파드 우선순위](https://devpouch.tistory.com/135)
 >
-> * 운영이 아닌 환경에서 하드웨어를 최적으로 활용하고 싶다 → Best-effort와 Burtable을 주로 활용
-> *  운영 환경이 안정적으로 예측 가능하길 원한다 → Guaranteed 컨테이너에 약간의 Burstable을 섞어서 사용
+> - 운영이 아닌 환경에서 하드웨어를 최적으로 활용하고 싶다 → Best-effort와 Burtable을 주로 활용
+> - 운영 환경이 안정적으로 예측 가능하길 원한다 → Guaranteed 컨테이너에 약간의 Burstable을 섞어서 사용
 
 #### 시험팁
 
@@ -215,12 +213,12 @@ $ k create -f my-new-pod.yaml
 
 #### DemonSet
 
-* 데몬셋은 래플리카셋과 마찬가지로 노드에 배치된다
-* 새 노드가 클러스터에 추가될 때마다 포드의 복제본이 해당 노드에 자동으로 추가 됌
-* 노드가 제거되면 pod도 자동으로 제거
-* 노드 종속적
-* 모니터링 에이전트 or 로그수집기 `fluentd`, `kube-proxy`, `networking`
-* `nodeName`을 사용해서 배치함
+- 데몬셋은 래플리카셋과 마찬가지로 노드에 배치된다
+- 새 노드가 클러스터에 추가될 때마다 포드의 복제본이 해당 노드에 자동으로 추가 됌
+- 노드가 제거되면 pod도 자동으로 제거
+- 노드 종속적
+- 모니터링 에이전트 or 로그수집기 `fluentd`, `kube-proxy`, `networking`
+- `nodeName`을 사용해서 배치함
 
 ```yaml
 apiVersion: apps/v1
@@ -237,8 +235,8 @@ sepc:
           app: monitoring-agent
       spec:
         containers:
-        - name: monitoring-agent
-          image: monitoring-agent  
+          - name: monitoring-agent
+            image: monitoring-agent
 ```
 
 **명령어**
@@ -257,11 +255,11 @@ k get ds
 
 **어떻게 배포 할 수 있는가?**
 
-* 지정된 서버의 디렉토리에 `pod.yaml`파일을 읽도록 `kubelet`을 구성 가능
-* `kubelet`은 주기적으로 이 디렉토리에서 파일을 확인하고 호스트에 pod를 배포함
-* 변경하면 변경사항이 제거하면 자동으로 제거 동작함
-* 당연히 kubelet만 있고, Controller-Manager와 ETCD가 없으므로 레플리카도, 디플로이먼트, 서비스를 생성할 수 없다.
-* `kubelet`은 pod수준에서 작동함
+- 지정된 서버의 디렉토리에 `pod.yaml`파일을 읽도록 `kubelet`을 구성 가능
+- `kubelet`은 주기적으로 이 디렉토리에서 파일을 확인하고 호스트에 pod를 배포함
+- 변경하면 변경사항이 제거하면 자동으로 제거 동작함
+- 당연히 kubelet만 있고, Controller-Manager와 ETCD가 없으므로 레플리카도, 디플로이먼트, 서비스를 생성할 수 없다.
+- `kubelet`은 pod수준에서 작동함
 
 > /etc/kubernetes/manifests
 
@@ -299,9 +297,9 @@ $ look static-pod-path
 
 #### Mutiple Schedulers
 
-* k8s 스케쥴러는 확장가능한 구조이다.
-* 검증하거나 특별한 요구사항이 있다면, 새로운 스케줄러를 만들수있따.
-* 파드에 스케줄러의 이름을 추가하면 사용할수있다.
+- k8s 스케쥴러는 확장가능한 구조이다.
+- 검증하거나 특별한 요구사항이 있다면, 새로운 스케줄러를 만들수있따.
+- 파드에 스케줄러의 이름을 추가하면 사용할수있다.
 
 ```yaml
 apiVersion: v1
@@ -311,14 +309,14 @@ metadata:
   namespace: kube-system
 spec:
   containers:
-  - command:
-    - kube-scheduler
-    - --address=127.0.0.1
-    - --kubeconfig=/etc/kubernetes/scheduler.conf
-    - --leader-elect=true
-    - --scheduler-name=my-custom-scheduler
-    image: k8s.grc.io/kube-scheduler-amd64.v1.11.3
-    name: kube-scheduler
+    - command:
+        - kube-scheduler
+        - --address=127.0.0.1
+        - --kubeconfig=/etc/kubernetes/scheduler.conf
+        - --leader-elect=true
+        - --scheduler-name=my-custom-scheduler
+      image: k8s.grc.io/kube-scheduler-amd64.v1.11.3
+      name: kube-scheduler
 ```
 
 ```yaml
@@ -332,4 +330,3 @@ spec:
       image: nginx
  schedulerName: my-custom-scheduler
 ```
-

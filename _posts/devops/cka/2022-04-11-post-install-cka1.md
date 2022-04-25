@@ -2,9 +2,9 @@
 published: true
 title: "CKA 자격증 따기 - prologue"
 categories:
-  - DevOps
+  - CKA
 tags:
-  - [devops, CKA]
+  - [devops, cka]
 toc: true
 toc_sticky: true
 date: "2022-04-11 19:30"
@@ -22,34 +22,34 @@ date: "2022-04-11 19:30"
 
 회사에서 1강만 들었는데요. 요약하자면 다음과 같습니다.
 
-* 시험난이도는 CKA < CKAD < CKAS 순입니다.
+- 시험난이도는 CKA < CKAD < CKAS 순입니다.
 
-  * CKA(Certified Kubernetes Administrator): 관리자용
+  - CKA(Certified Kubernetes Administrator): 관리자용
 
   > CKA는 트러블 슈팅이나, 클러스터 설치, 설정, 워크로드 스케쥴링 등과 같이 쿠버네티스 `운영`에 필요한 지식을 주로 다룸
 
-  * CKAD(Certified Kubernetes Application Developer): 개발자용
+  - CKAD(Certified Kubernetes Application Developer): 개발자용
 
   > CKAD는 개발자용으로 멀티 파드 구성이나 포트를 구성하는 방법에 대해서 확인 할 수 있지만 시간이 부족하여 난이도가 어려움.
 
-  * CKS(Certified Kubernetes Security Speciallist): 보안 전문가용
+  - CKS(Certified Kubernetes Security Speciallist): 보안 전문가용
 
-* 감독관에 따라 듀얼모니터가 가능하나 가능한 큰 모니터를 가진 노트북을 가지고 시험
+- 감독관에 따라 듀얼모니터가 가능하나 가능한 큰 모니터를 가진 노트북을 가지고 시험
 
-* killer.sh 주말마다 공부
+- killer.sh 주말마다 공부
 
-* Udemy는 추천하지 않음. 그냥 killer.sh를 열심히 하세요.
+- Udemy는 추천하지 않음. 그냥 killer.sh를 열심히 하세요.
 
   Udemy(15점) < 시험(50점) < Killer.sh(90점)
 
 #### 시험
 
-* 375달러이며, 통과하지 못할 경우 12개월 이내 1회 무료 재응시 가능
-* 점수는 100점만점에 66점
-* 온라인 감독관
-* 핸드북
-* 3시간
-* 공식문서 참조 가능
+- 375달러이며, 통과하지 못할 경우 12개월 이내 1회 무료 재응시 가능
+- 점수는 100점만점에 66점
+- 온라인 감독관
+- 핸드북
+- 3시간
+- 공식문서 참조 가능
 
 #### 참조링크
 

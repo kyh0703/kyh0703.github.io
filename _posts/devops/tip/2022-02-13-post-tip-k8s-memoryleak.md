@@ -2,7 +2,7 @@
 published: true
 title: "k8s 'cannot allocate memory' 이슈"
 categories:
-  - DevOpsTip
+  - TroubleShooting
 tags:
   - [devops, k8s, docker]
 toc: true
@@ -20,7 +20,7 @@ k8s를 centOS7버전을 사용하여 배포하던 도중 아래와 같은 에러
 
 #### 원인
 
-Redhat 7에서 최근에 발견 된 리눅스 커널 공식적인 이슈번호를 확인하여 보니  `cgroup`이 제대로 동작하지 않는 버그였습니다.
+Redhat 7에서 최근에 발견 된 리눅스 커널 공식적인 이슈번호를 확인하여 보니 `cgroup`이 제대로 동작하지 않는 버그였습니다.
 
 > [이슈 확인]
 >
@@ -30,26 +30,26 @@ Redhat 7에서 최근에 발견 된 리눅스 커널 공식적인 이슈번호�
 
 **Linux 3.10이상의 커널 버전이 필요(RHEL7)**
 
-* yum update
+- yum update
 
 ```bash
 yum update
 reboot
 ```
 
-* kernal boot option 추가
+- kernal boot option 추가
 
 ```bash
 sudo /sbin/grubby --update-kernel=ALL --args='cgroup_enable=memory cgroup.memory=nokmem swapaccount=1'
 ```
 
-* over 커널 모드 활성화
+- over 커널 모드 활성화
 
 ```bash
 echo "overlay" | sudo tee -a /etc/modules-load.d/overlay.conf
 ```
 
-* grup 구성
+- grup 구성
 
 ```bash
 sudo grub2-set-default 0
@@ -58,7 +58,7 @@ sudo grub2-mkconfig -o /etc/grub2.cfg
 
 **RHEL8 이슈 해결**
 
-* centos8 이슈 수정 완료
+- centos8 이슈 수정 완료
 
 ### 마치며
 

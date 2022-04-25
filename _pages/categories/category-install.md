@@ -1,10 +1,10 @@
 ---
-title: "기타"
+title: "설치"
 layout: archive
-permalink: categories/devops/tip
+permalink: categories/install
 author_profile: true
 sidebar_main: true
 ---
 
-{% assign posts = site.categories.DevOpsTip %}
+{% assign posts = site.categories.Install %}
 {% for post in posts %} {% include archive-single2.html type=page.entries_layout %} {% endfor %}

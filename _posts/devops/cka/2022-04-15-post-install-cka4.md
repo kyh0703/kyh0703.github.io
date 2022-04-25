@@ -2,9 +2,9 @@
 published: true
 title: "CKA 자격증 따기 - day3"
 categories:
-  - DevOps
+  - CKA
 tags:
-  - [devops, CKA]
+  - [devops, cka]
 toc: true
 toc_sticky: true
 date: "2022-04-15 12:00"
@@ -12,21 +12,21 @@ date: "2022-04-15 12:00"
 
 #### Namespace
 
-* k8s를 설치하면 kube-system, kube-public, default이란 namespace를 생성한다
+- k8s를 설치하면 kube-system, kube-public, default이란 namespace를 생성한다
 
-* 개발환경, 상용환경을 따로 구성
+- 개발환경, 상용환경을 따로 구성
 
-* 고유한 정책
+- 고유한 정책
 
-* 리소스 할당량 설정 가능
+- 리소스 할당량 설정 가능
 
-* 다른네임스페이스의 서비스에도 연결 할 수 있다.
+- 다른네임스페이스의 서비스에도 연결 할 수 있다.
 
-    > servicename.namespace.svc.cluster.local 형식을 사용
-    >
-    > {cluster.local}: k8s 클러스터의 기본 도메인 이름
-    >
-    > {svc}: 서브 도메인
+  > servicename.namespace.svc.cluster.local 형식을 사용
+  >
+  > {cluster.local}: k8s 클러스터의 기본 도메인 이름
+  >
+  > {svc}: 서브 도메인
 
 **명령어**
 
@@ -74,7 +74,7 @@ $ k get po -A
 
 **네임스페이스 할당량 조정**
 
-* quota파일로 조정
+- quota파일로 조정
 
 ```yaml
 apiVersion: v1
@@ -90,4 +90,3 @@ spec:
     limits.cpu: "10"
     limits.memory: 10Gi
 ```
-

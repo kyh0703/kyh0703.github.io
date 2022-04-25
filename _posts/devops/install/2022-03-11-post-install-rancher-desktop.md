@@ -1,10 +1,10 @@
 ---
 published: true
-title: "윈도우10 kubernates 환경 구성하기(rancher-desktop)"
+title: "윈도우10 kubernetes 환경 구성하기(rancher-desktop)"
 categories:
-  - DevOps
+  - Install
 tags:
-  - [devops, rancher, kubernetes, k3s, rancher-desktop]
+  - [rancher, kubernetes, k3s, rancher-desktop]
 toc: true
 toc_sticky: true
 date: "2022-03-11 10:30"
@@ -83,7 +83,7 @@ Unable to connect to the server: x509: certificate signed by unknown authority
 ```bash
 $ vi ~/.kube/config
 # 변경
-current-context: rancher-desktop 
+current-context: rancher-desktop
 ```
 
 ### 마치며
