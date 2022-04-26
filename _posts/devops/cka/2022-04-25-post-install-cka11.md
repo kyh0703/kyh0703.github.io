@@ -233,3 +233,50 @@ users:
 
 **Server Certificates for Server 실습**
 
+* etcd
+
+```bash
+cat etcd.yaml
+--key-file=
+--cert-file
+--peer-cert-file=
+--peer-client-cert=
+--peer-key-file=
+--peer-trusted-ca-file=
+--trusted-ca-file=
+```
+
+* kube-apiserver
+
+```bash
+# 개인 키 생성 (Generate Keys)
+$ openssl genrsa -out admin.key 2048
+> admin.key
+
+# 인증서 생성 (Certificate Signing Request)
+# O=매개변수를 사용하여 그룹 세부정보를 추가함
+$ openssl req -new -key ad,om.key -subj "/CN=kube-admin/O=system:masters" -out admin.csr
+> admin.csr
+
+$ vi openssl.cnf
+[alt_names]
+DNS.1 = kubernetes
+DNS.2 = kubernetes.default
+DNS.3 = kubernetes.default.svc
+DNS.4 = kubernetes.default.svc.cluster.local
+IP.1 = 10.96.0.1
+IP.2 = 172.17.0.87
+```
+
+#### View Certificated Details
+
+* `kubeadm`을 사용하면 손쉽게 클러스터 설치와 설정이 가능하다.
+* `kubeadm`을 사용해 설치하면 각종 CA가 설정값에 잡혀있는것을 볼 수 있다.
+* `/etc/kubernetes/manifests/kube-apiserver.yaml`을 보면 `CA`파일 위츠를 알 수 있다.
+
+**인증서 내용 보기**
+
+```bash
+$> openssl x509 -in /etc/kuber/netes/pki/apiserver.crt -text -noout
+```
+
