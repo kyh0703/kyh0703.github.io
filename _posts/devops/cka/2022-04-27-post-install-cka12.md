@@ -93,3 +93,81 @@ spec:
     - --cluster-signing-key-file
 ```
 
+#### KubeConfig
+
+* kube-apiserver에 TLS요청을 위해선 `.crt, .key`파일이 필요하다.
+* 매번 지정하기 어렵기에 `$HOME/.kube/config`에 `key`, `crt`파일 경로를 지정하여 요청마다 반복적으로 옵션을 주지 않게 할 수 있다.
+
+```bash
+# TLS 인증파일을 지정한다면
+$ k get po
+  --server my-kube-playground:6443
+  --client-key admin.key
+  --client-certificate admin.crt
+  --certificate-authority ca.crt
+```
+
+```yaml
+# $HOME/.kube/config
+apiVersion: v1
+kind: Config
+
+# default
+current-context: dev-user@google
+
+clusters:
+- name: my-kube-playground
+  cluster:
+    certificate-authority: ca.crt # 인증서 경로를 적어주거나
+    certificate-authority-data: MIIC... # 직접 데이터를 넣어줄수 있다. base64
+    server: https://my-kube-playgroud:6443
+      
+contexts:
+- name: my-kube-admin@my-kube-playground
+  context:
+    cluster: my-kube-playgroud
+    user: my-kube-admin
+    namespcae: finance # namespace를 지정할 수도 있다.
+    
+users:
+- name: my-kube-admin
+  user:
+    client-certificate: admin.crt
+    client-key: admin.key
+```
+
+`kube config`파일은 3가지 영역으로 구분된다.
+
+* 클러스터
+  * 연결할 클러스터 환경
+  * 개발, 상품, 구글
+* 컨텍스트
+  * 클러스터와 유저를 연결 시킴
+  * ex) Admin@Production: 매핑시킨 클러스터로 연결
+* 유저
+  * 관리자
+  * 개발유저
+  * 사용자
+
+**kubectl은 어떻게 아는가**
+
+* `kubeconfig`파일에 `current-context` 필드를 추가하여 기본 컨텍스트 지정 가능
+
+**명령어**
+
+* 컨피그 구성 확인
+
+```bash
+# 기본 
+$ kubectl config view
+
+# 지정
+$ kubectl config --kubeconfig=my-custom-config
+```
+
+* 컨택스트 변경
+
+```bash
+k config user-context prod-user@production
+```
+
