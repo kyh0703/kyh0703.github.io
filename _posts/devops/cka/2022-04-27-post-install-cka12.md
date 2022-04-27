@@ -47,13 +47,13 @@ cat jane.csr | base64 > encoding.text
 
 # 관리자는 k8s객체 생성
 $ cat jane-csr.yaml
-apiVersion: certificates.k8s.io/veta1
+apiVersion: certificates.k8s.io/v1
 kind: CertificateSigningRequest
 metadata:
   name: jane
 spec:
   groups:
-  - system: authenticated
+  - system:authenticated
   usages:
   - digital signature
   - key encipherment
