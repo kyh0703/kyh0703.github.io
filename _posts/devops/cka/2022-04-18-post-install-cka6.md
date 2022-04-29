@@ -2,7 +2,7 @@
 published: true
 title: "CKA 자격증 따기 - day5"
 categories:
-  - DevOps
+  - CKA
 tags:
   - [devops, cka]
 toc: true
