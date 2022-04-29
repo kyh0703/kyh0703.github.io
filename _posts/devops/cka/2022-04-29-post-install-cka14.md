@@ -9,3 +9,114 @@ toc: true
 toc_sticky: true
 date: "2022-04-29 12:00"
 ---
+
+#### Service Account
+
+* 쿠버네티스에는 사용자계정과 서비스계정으로 분류된다
+* 사용자계정은 사람이 사용한다
+  * 관리작업을 수행하기 위해 클러스터에 엑세스하는 관리자
+  * 개발자
+* 서비스계정은 기계가 사용한다
+  * 모니터링 애플리케이션
+  * 빌드 도구
+  * 서비스 계정이 생성되면 서비스 계정 토큰도 자동으로 생성됨
+  * 토큰은 secret으로 저장된다.
+  * 외부 애플리케이션은 토큰으로  인증
+* 네임스페이스를 만들면 `default`계정이 있으며 `default`라는 암호에서 볼륨이 자동으로 생성됨
+
+```bash
+$ k exec -it my-kubernetes-dashboard ls /var/run/secrets/kubernetes.io/serviceaccount
+> ca.crt namespace token #k8s 엑세스 접근 토큰
+```
+
+* 기본 서비스 계정은 기본 공통 API쿼리를 실행할 수 있는 권한만 가지고 있다.
+* 기존 서비스 계정은 편집할 수 없기에 재시작 필요
+
+**명령어**
+
+* 생성
+
+```bash
+k creaete serviceaccount dashboard-sa
+```
+
+* 부여하기
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-k8s-dashboard
+spec:
+  containers:
+    - name: my-kubernetes-dashboard
+      image: my-kubernetes-dashboard
+  serviceAccountName: dashboard-sa
+```
+
+
+
+**타사애플리케이션이 접근할경우**
+
+* 서비스 계정 토큰을 내보내고 타사를 구성하는 프로세스가 서비스토큰 시크릿을 볼륨으로 자동 마운트하여 사용애플리리케이션을 구성
+* 파드 내부에서 타사 애플리케이션을 호스팅
+
+#### Image Security
+
+**보안된 저장소에서 이미지를 가져오는법**
+
+* 이미지는 기본적으로 도커 허브에서 가져오며, `docker.io`에서 가져온다
+* 구글은 `gcr.io`와 같이 구글저장소 명을 제공 및 타 벤더사들도 도커 허브를 제공한다.
+* `private`를 구축할 경우 `docker login {private repository}`를 이용하여 로그인 시킨다.
+* 이미지 명은 `private저장소/유저, 저장소이름/이미지이름`으로 구성되어있다.
+
+**인증**
+
+1. 인증을 위해서는 `secret`오브젝트를 만들고 도커저장소에 관련된 서버 명과 유저이름/비밀번호 정보를 만든다
+2. 그 후 `imagePullSecret`섹션에서 해당 `secret`을 지정한다.
+
+```bash
+k create secret docker-registry recred \
+  --docker-server=100.100.103.167\
+  --docker-username=test \
+  --docker-password=1234 \
+  --docker-email=harbor@org.com
+```
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+spec:
+  containers:
+  - name: nginx
+    image: private-registry.io/apps/internal-app
+  imagePullsecrets:
+  - name: regcred
+```
+
+#### Security Context
+
+* `pod`레벨에서 `pod`에 `securityContext`를 정의하고 `runAsUser`에 UserID를 명시할 수 있다.
+* 이를 `containers`아래에 명시하면 컨테이너 레벨에서 `securityContext`를 지정할 수 있다.
+
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-k8s-dashboard
+spec:
+  # 여기 위치에 두면 전체 적용
+  securityContext:
+    runAsUser: 1000
+  containers:
+    - name: my-kubernetes-dashboard
+      image: my-kubernetes-dashboard
+      # 여기 위치에 두면 해당 컨테이너만
+      securityContext:
+        runAsUser: 1000
+        capabilities:
+          add: ["MAC_ADMIN"]
+```
+
