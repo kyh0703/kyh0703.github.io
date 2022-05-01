@@ -148,13 +148,35 @@ spec:
       role: db
   policyTypes:
   - Ingress
+  - Egress
   ingress:
   - from:
     - podSelector:
         matchlables:
           name: api-pod
+      # 지정 네임스페이스에 접근만 허용하기 위해서
+      namespaceSelector: #여기에 - 를 붙이면 별도에 지정 옵션이 됨으로 모든 접근이 허용되게 되버림 OR
+        matchlables:
+          name: prod
+    - ipBlock:
+        cidr: 192.168.5.10/32
     ports:
     - protocol: TCP
       port: 3306
+ egress:
+ - to:
+   - ipBlock:
+     cidr: 192.168.5.10./32
+   ports:
+   - protocol: TCP
+     port: 80
 ```
 
+**more**
+
+* 특정 파드로부터 트래픽을 막기 위해 k8s 내부에서 네트워크 정책을 수립할 수 있다.
+* 기본적으로 모든 트래픽을 허용할 수 있다.
+* 디비서버에 3306으로 들어오는 `ingress`를 설정하였을때 들어오는 트래픽을 허용하면 해당 트래픽에 대한 응답은 자동으로 허용된다.
+* 따라서 규칙을 만들 때 방향만 고려하면 된다. 응답은 신경쓰지 않아도 됨
+* `namespaceSelecto`가 존재하면 지정 `namespace`만 접근이 가능하다.
+* `ipblock`과 `cidr`을 지정하여 `acl`을 동작 시킬 수 있따.
