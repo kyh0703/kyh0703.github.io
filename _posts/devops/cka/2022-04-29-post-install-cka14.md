@@ -120,3 +120,41 @@ spec:
           add: ["MAC_ADMIN"]
 ```
 
+#### Network Policy
+
+* 네트워크 트래픽에는 `ingress`와 `egress`가 있다.
+* `ingress`는 들어오는 트래픽이다.
+* `egress`는 바깥으로 나가는  트래픽이다.
+* 웹 서버의 경우 사용자한테 들어오는 트래픽(80포트로)은 `ingress`이며, 웹서버에서 API요청으로 나가는 트래픽은 `egress`트래픽이다.
+
+**Network security**
+
+* `pod`들은 경로와 추가 설정 없이도 다른 `pod`들과 통신할 수 있으며 `Virtual Private Network`위에서 서로 통신이 가능하다.
+
+* k8s는 기본적으로 모든 `pod`에서 다른 `pod`로의 트래픽은 `All Allow`트래픽 정책을 가진다.
+* 만약 디비 서버에는 API에서만 접근이 가능하여야 한다면 `NetworkPolicy`라는 오브젝틀를 생성하여 접근 제어 할 수 있다.
+* 네트워크 정책은 k8s클러스터에 구현된 네트워크 솔루션에 의해 시행된다. 지원하지 않는 네트워크 솔루션도 있다는 것을 잊으면 안된다.
+  * 지원: `kube-router, Calico, Romana, Weave-net`...
+  * 미지원: `Flannel`
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: db-policy
+spec:
+  podSelector:
+    matchLabels:
+      role: db
+  policyTypes:
+  - Ingress
+  ingress:
+  - from:
+    - podSelector:
+        matchlables:
+          name: api-pod
+    ports:
+    - protocol: TCP
+      port: 3306
+```
+
