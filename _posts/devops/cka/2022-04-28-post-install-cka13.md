@@ -84,3 +84,115 @@ date: "2022-04-28 12:00"
 * 여러 모드를 구성한 경우 `,`로 구분함
 * 여러개 일 경우 거부할 때마다 다음 요청으로 이동
 * 승인될 경우 사용자에게 권한 부여
+
+#### RBAC
+
+* 롤을 만들기 위해서는 롤 객체를 생성하여야 한다.
+* 롤은 크게 `apiGroups, resources, verbs`로 나누어진다.
+* 추가적으로 `resourcesNames`에 특정 리소스에 대한 접근 권한을 부여하는 것도 가능하다
+* 네임스페이스 기준
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: developer
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["list", "get", "create", "update", "delete"]
+  
+# 단일 역할에 대해 여러 규칙을 추가 할 수 있음
+- apiGroups: [""]
+  resources: ["ConfigMap"]
+  verbs: ["create"]
+  resourceNames: ["blue", "orange"] # 파란색 및 주황색 파드에 대한 엑세스만 제한할수 있음
+```
+
+```bash
+k create -f developer-role.yaml
+```
+
+```bash
+k get roles
+```
+
+#### Role Binding
+
+사용자와 역할을 연결하기 위해서는 `RoleBinding`이라는 객체를 만들어야 함
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: devuser-developer-binding
+# 사용자 세부 정보를 제공
+subjects:
+- kind: User
+  name: dev-user
+  apiGroup: rbac.authorization.k8s.io
+# 역할 바인딩
+roleRef:
+  kind: Role
+  name: developer
+  apiGroup: rbac.authorization.k8s.io
+```
+
+```bash
+k get rolebindings
+```
+
+**사용자가 클러스터 특정 리소스에 대한 권한이 있는지 알기위해서는**
+
+```bash
+$ k auth can-i create deployments
+yes
+
+$ k auth can-i delete nodes
+no
+
+$ k auth can-i create deployments --as -dev-user -n test
+no
+```
+
+#### Cluster Roles And Cluster Role Binding
+
+* 네임 스페이스를 사용하면 파드, 서비스, 디플로이먼트와 같은 오브젝트들을 분류할 수 있다.
+* 노드는 네임스페이스를 사용해서 분류할 수 없다.
+* 노드는 클러스터 단위의 자원이므로 구분해 낼 수 없고 특정 네임스페이스에 연결이 불가능함
+* `nodes, PV, clusterroles, clusterrolebindings, certificatesigningrequests, namespaces`는 `cluster Scoped`로 관리된다.
+
+```bash
+k api-resources --namespaced=false
+```
+
+**Clusterroles**
+
+```yaml
+apiVersion: rbac.authrization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: cluster-administrator
+rules:
+- apiGroups: [""]
+  resources: ["nodes"]
+  verbs: ["list", "get", "create", "delete"]
+```
+
+**cluster role binding**
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: cluster-admin-role-binding
+subjects:
+- kind: User
+  name: cluster-amdin
+  apiGroup: rbac.authorization.k8s.io
+roleRef:
+  kind: ClusterRole
+  name: cluster-administrator
+  apiGroup: rbac.authorization.k8s.io
+```
+
