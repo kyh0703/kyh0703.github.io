@@ -29,3 +29,16 @@ kubectl apply -f -f "https://cloud.weave.works/k8s/net?k8s-version=$(kubectl ver
 ```
 
 * `weave peers`라고 하는 데몬셋 배포
+
+#### IPAM(IP Address Managerment)
+
+* k8s는 IP주소 관리를 CNI가 담당한다.
+* CNI Plugin의 책임 중 파드에 대한 IP 주소를 관리해야만 하는 책임이 있다.
+* 각각의 노드는 `IP List`를 가지고 있으며 중복되지 않게 관리한다.
+* `IP List`는 CNI 플로그인 중 `DHCP`, `host-local`로 관리
+
+```bash
+$ cat /etc/cni/net.d/net-script.conf
+> "ipam" : subnet 확인
+```
+
