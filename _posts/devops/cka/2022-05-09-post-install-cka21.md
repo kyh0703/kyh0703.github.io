@@ -344,3 +344,66 @@ spec:
     * `External ETCD Topology`라 부름
   * `kube-apiserver`옵션의 `etcd`의 호스트를 지정가능
   * `etcd`는 분산 시스템이며 `kube-apiserver`와 다른 오브젝트 모두 `etcd`에 접근할 수 있다.
+
+#### ETCD In HA
+
+* `etcd`는 분산되고 신뢰할 수 있는 간단하고, 보안에 강하며 빠른 `key-value`저장소이다.
+* 분산 저장을 위해 `etcd` 같은 정보를 가진 복제본을 만든다
+* 두개의 다른 `write`요청이 올 경우 3개의 노드가 있다 가정하에 `leader`를 선출한다. `leader`는 다른 노드들에게 복제본을 복사한다
+* `writer`요청이 `follower`에게 들어오면 `follower`는 `leader`에게 전달 후 `leader`는 해당 내용을 `follower`에게 재 전달한다.
+
+**리더 선출 알고리즘 - RAFT**
+
+* RAFT알고르즘은 랜덤한 타이머를 정해놓고 서로 다른 노드에게 투표를 하는데 그중 가장 많은 표를 가진 노드가 리더가 된다.
+* 만약 선출된 리더의 요청을 못 받는 경우(down, network error) 두 노드가 다시 투표하여 리더를 선출한다. 이과정을 `RE-Election`이라고 부름
+* 클러스터내 반드시 동작하고 있어야 하는 노드를 `Quorum`이라고 부름
+
+```bash
+# 최소 3개의 노드가 필요하다는 것을 알 수 있다.
+Quorum = N/2 + 1
+```
+
+**ETCDCTL**
+
+* `kubectl`과 마찬가지로 `etcdctl`명령어가 있다.
+* key value를 저장할 수 있음
+* `v2`와 `v3`가 있으며 기본은 `v2`이다.
+* `export ETCDCTL_API=3`
+
+저장
+
+```bash
+etcdctl put name harry
+```
+
+조회
+
+```bash
+$ etcdctl get namne
+$ etcdctl get / --prefix --keys-only
+```
+
+**최소 노드 수**
+
+3이 좋은 수지만 더 높은 수준의 완전한 허용치를 선호하면 5가 좋으나 그 이상은 불필요함
+
+#### Kubeadm 설치
+
+* `kubeadm`은 `k8s`를 설치하기 위한 도구
+
+*  프로비저닝 된 가상 머신이나 다수의 호스트를 보유
+* 3개의 노드라면 하나는 마스터, 두개는 워커
+* 모든 노드에 `docker`, `kubeadm`설치
+* 마스터 노드 초기화
+* 노드간 통신을 위해 `POD network`라는 특별한 네트워킹 솔루션을 사용
+* 완료후 워커노드를 마스터에 조인
+
+```bash
+master        worker
+1 docker      docker
+2 kubeadm     kubeadm
+3 initialize  
+4 pod network pod network
+5             join
+```
+
