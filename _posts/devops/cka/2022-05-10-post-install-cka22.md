@@ -29,3 +29,12 @@ date: "2022-05-10 12:00"
 - `service kube-proxy status`
 - 로그를 명령어로 불러서 해당 Control Plane 컴포넌트의 로깅을 확인해볼 수도 있다.
 - `kubectl logs kube-apiserver-master -n kube-system`
+
+#### Worker Node Failure
+
+- 노드 장애시의 Trobule Shooting을 배워보자
+- 노드가 만약 `NotReady` 상태라면, `describe` 명령어를 사용해 노드의 상태를 보자.
+- `top`, `df -h` 명령어를 사용해 노드의 CPU, 메모리와 디스크를 확인해보자
+- `service kubelet status`를 사용해 쿠버렛의 상태를 확인하자
+- `sudo journalctl -u kubelet`을 사용해 쿠버렛에 이상이 있는지 확인하자
+- 이상을 수정했다면 `systemctl daemon-restart` `systemctl restart kubelet`
