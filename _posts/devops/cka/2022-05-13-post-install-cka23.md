@@ -199,3 +199,6 @@ k get no -ocustom-columns=NODE:.metadata.name , CPU:.status.capacity.cpu
 k get no --sort-by=.metadat.name
 ```
 
+#### 마치며
+
+이로써 `udemy`강의를 끝냈습니다. 시험 신청 후 `killer.sh` 2일정도 할애한 후 자격증 시험에 도전할려합니다. 아자아자!
