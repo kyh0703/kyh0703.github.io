@@ -289,6 +289,13 @@ spec:
 status: {}
 ```
 
+#### SA Can-i
+
+```bash
+➜ k -n project-hamster auth can-i create secret \
+  --as system:serviceaccount:project-hamster:processor
+```
+
 #### Find out cluster Infomation
 
 ```yaml
@@ -308,5 +315,15 @@ status: {}
 
 # Which suffix will static pods have that run on cluster1-worker1?
 5: -cluster1-worker1
+```
+
+#### expire
+
+```bash
+openssl x509  -noout -text -in /etc/kubernetes/pki/apiserver.crt | grep Validity -A2
+```
+
+```bash
+kubeadm cert expire | grep apiserver
 ```
 
