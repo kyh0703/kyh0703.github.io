@@ -19,7 +19,7 @@ date: "2022-05-02 12:00"
 * 스위치로 A와 B시스템이 연결되면 `ip addr`명령어를 사용하여 고유 IP주소를 부여할 수 있다. 
 * 각자 고유의 IP까지 생성되고 스위치에 연결되있으면 스위치를 통해 상호 통신이 가능
 
-![image-20220502124542894](../../assets/images/posts/2022-05-02-post-install-cka16/image-20220502124542894.png)
+![image-20220502124542894](../../../assets/images/posts/2022-05-02-post-install-cka16/image-20220502124542894.png)
 
 #### Routing
 
@@ -28,7 +28,7 @@ date: "2022-05-02 12:00"
 * 라우터는 스위치에 연결될 떄 해당 네트워크의 IP를 할당받는다.
 * 연결된 라우팅을 통해 네트워크 간 통신이 가능하다
 
-![image-20220502124559312](../../assets/images/posts/2022-05-02-post-install-cka16/image-20220502124559312.png)
+![image-20220502124559312](../../../assets/images/posts/2022-05-02-post-install-cka16/image-20220502124559312.png)
 
 #### GATEWAY
 
@@ -39,9 +39,9 @@ date: "2022-05-02 12:00"
 * 라우터 장비에 있는 게이트웨이에 명시된 IP주소에 따라 라우트 장비로 들어오는 IP대역을 지정할 수 있다.
 * 라우팅 테이블에 `Destination IP`를 `0.0.0.0 or default` 로 지정하면 어떤 퍼블릭 네트워크든 인터넷이 연결되어 있는 어떤 곳으로도 패킷을 전송할 수 있다는 의미가 된다.
 
-![image-20220502124626935](../../assets/images/posts/2022-05-02-post-install-cka16/image-20220502124626935.png)
+![image-20220502124626935](../../../assets/images/posts/2022-05-02-post-install-cka16/image-20220502124626935.png)
 
-![image-20220502125240566](../../assets/images/posts/2022-05-02-post-install-cka16/image-20220502125240566.png)
+![image-20220502125240566](../../../assets/images/posts/2022-05-02-post-install-cka16/image-20220502125240566.png)
 
 * linux에서 한 인터페이스에서 다음 인터페이스로 전달되지 않는다.
 
