@@ -198,7 +198,7 @@ k -f 9.yaml replace --force
 
 **RBAC**
 
-user는 사람이고 serviceAccount는 챗봇같은거다. 하지만 binding시 둘다 user로 통일한다.
+user는 사람이고 serviceAccount는 챗봇같은거다. 
 
 user가 csr을 요청할 경우 kubernetes `k certificate approve`잊지말자
 

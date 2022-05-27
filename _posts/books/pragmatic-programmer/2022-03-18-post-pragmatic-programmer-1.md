@@ -1,5 +1,5 @@
 ---
-title: "실용주의 프로그래머 - 1(책구매인증)"
+title: "실용주의 프로그래머 - 1 (책구매인증)"
 categories:
   - Books
 tags:

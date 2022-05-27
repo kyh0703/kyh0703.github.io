@@ -1,5 +1,5 @@
 ---
-title: "실용주의 프로그래머 - 10(TIL)"
+title: "실용주의 프로그래머 - 10 (TIL)"
 categories:
   - Books
 tags:
