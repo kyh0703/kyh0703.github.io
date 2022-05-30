@@ -75,3 +75,9 @@ print("answer", solution([3, 3, 3, 2, 2, 4]))
 print("answer", solution([3, 3, 3, 2, 2, 2]))
 ```
 
+#### 다른사람의 풀이
+
+```python
+def solution(nums):
+	return min(len(nums)/2, len(set(nums)))
+```
