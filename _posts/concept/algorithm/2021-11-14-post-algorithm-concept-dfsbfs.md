@@ -118,3 +118,48 @@ BFS는 ``넓이우선탐색``으로 가까운 노드부터 탐색하는 알고�
 | ------------------------------------------------- | --------------------------------------- |
 | 현재 정점에서 갈 수 있는 점들까지 들어가면서 탐색 | 현재 정점에 연결된 가까운 점들부터 탐색 |
 | 스택                                              | 큐                                      |
+
+#### 문제풀이
+
+```python
+from collections import deque
+
+
+def dfs(graph, v, visited):
+    visited[v] = True
+    for i in graph[v]:
+        if not visited[i]:
+            dfs(graph, i, visited)
+            print(i)
+
+
+def bfs(graph, v, visited):
+    q = deque([v])
+    visited[v] = True
+    while q:
+        pos = q.popleft()
+        for i in graph[pos]:
+            if not visited[i]:
+                visited[i] = True
+                q.append(i)
+                print(i)
+
+
+graph = [
+    [],
+    [2, 3, 8],
+    [1, 7],
+    [1, 4, 5],
+    [3, 5],
+    [3, 4],
+    [7],
+    [2, 6, 8],
+    [1, 7],
+]
+
+visited = [False] * 9
+
+dfs(graph, 1, visited)
+bfs(graph, 1, visited)
+```
+
