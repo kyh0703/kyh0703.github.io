@@ -20,7 +20,7 @@ grpc-gateway는 간략하게 grpc와 http를 같이 사용하기 위한 플러�
 
 #### 사전 준비사항
 
-* go get grpc-gateway
+- go get grpc-gateway
 
 ```bash
 // go 버전에 따라 install로 설치
@@ -29,13 +29,13 @@ go get google.golang.org/protobuf/cmd/protoc-gen-go
 go get google.golang.org/grpc/cmd/protoc-gen-go-grpc
 ```
 
-* go mod init
+- go mod init
 
 ```bash
 go mod init github.com/myuser/myrepo
 ```
 
-* directory
+- directory
 
 공식 문서에 디렉토리 구조를 보면 `google/api/annotion.proto`, `google/api/annotion.proto` 두개 파일이 존재하는 것을 확인 할 수 있습니다. 저는 아래 구조로 구성하지 않았으며 해당 프로젝트를 현재 디렉토리에 받아 구성하였습니다.
 
@@ -49,7 +49,7 @@ proto
     └── hello_world.proto
 ```
 
-* git clone
+- git clone
 
 `google/api/annotion.proto`, `google/api/annotion.proto` 프로젝트를 받아 오는 작업입니다.
 
@@ -57,7 +57,7 @@ proto
 git clone https://github.com/googleapis/googleapis.git
 ```
 
-* proto
+- proto
 
 ```protobuf
 syntax = "proto3";
@@ -88,7 +88,7 @@ message HelloReply {
 }
 ```
 
-* build
+- build
 
 `-I`옵션으로 git clone으로 받은 프로젝트를 `import`하는 것을 확인 하실 수 있습니다.
 
@@ -98,7 +98,7 @@ protoc -I ./googleapis -I ./proto --go_out ./proto --go_opt paths=source_relativ
 
 #### 사용법
 
-* grpc port와 grpc-gateway port가 같지 않을 경우
+- grpc port와 grpc-gateway port가 같지 않을 경우
 
 ```go
 package main
@@ -175,7 +175,7 @@ func main() {
 }
 ```
 
-* grpc port와 grpc-gateway port가 같은 경우
+- grpc port와 grpc-gateway port가 같은 경우
 
 ```go
 package main
