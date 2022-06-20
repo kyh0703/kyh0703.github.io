@@ -27,8 +27,8 @@ export now="--force --grace-period 0"   # k delete pod x $now
 ```bash
 ~/.vimrc
 set tabstop=2
-set expendtab
-set siftwidth=2
+set expandtab
+set shiftwidth=2
 ```
 
 **context  잘 확인하자!**
