@@ -142,9 +142,54 @@ readinessProbe:
 
 Readinress와 동일한 정책을 가진다.
 
+#### Job
 
+배치 처리 분석, 보고 워크로드, 계산수행, 이미지 처리, 대규모 분석, 데이터 세트, 보고서 생성, 이메일 전송
 
+pod세트를 실행하여 주어진 작업을 완료하는데 사용
 
+`parallelism`으로 작업을 병렬로 생성 할 수 있음
+
+```yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: math-add-job
+sepc:
+  completions: 3
+  parallelism: 3
+  template:
+    sepc:
+      containers:
+        - name: mth-add
+          image: ubuntu
+          command: ['expre', '3', '+', '2']
+      restartPolicy: Newver
+```
+
+#### CronJob
+
+Linux `crontab`과 같다. 주기적으로 실행
+
+```yaml
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: reporting-cron-job
+sepc:
+  Schedule: "*/1 * * * *"
+  jobTemplate:
+    sepc:
+      completions: 3
+      parallelism: 3
+      template:
+        sepc:
+          containers:
+            - name: mth-add
+              image: ubuntu
+              command: ['expre', '3', '+', '2']
+          restartPolicy: Newver
+```
 
 
 
