@@ -1,0 +1,125 @@
+---
+published: true
+title: "CKAD 자격증 따기 - 2"
+categories:
+  - CKA
+tags:
+  - [devops, cka]
+toc: true
+toc_sticky: true
+date: "2022-06-27 19:30"
+---
+
+### 2021 Update
+
+#### Admission Controllers
+
+#### API Version
+
+API 아래의 모든 것이 앱, 확장, 네트워킹과 같은 API그룹이다.
+
+API그룹마다 버전이 다르다.
+
+API그룹이  `V1`에 있으면 안정적인 버전
+
+* GA/Stable
+
+`Alpha`는 API가 처음 개발 되고 Kubernetes코드 베이스에 병합되어 일부가 되는 때 나타남
+
+`Alpha`그룹은 일반적으로 활성화 되어 있지 않음
+
+* /v1alpha
+* /v1beta1
+* 버그가 있을 수 있고 신뢰할 수 없음.
+* 향후 삭제 가능
+
+> 알파 버전에서 모든 주요 버그가 수정되고 테스트가 완료되면 베타 단계로 이동. 향후 GA로 이동할 수 있음
+>
+> 여러 버전이 있을 경우 하나의 버전만 저장소 버전이 될 수 있다.
+
+**특정버전을 활성화 하는 방법**
+
+사용하기 위해서는 해당 버전을 런타임 구성 매개변수에 추가해야 한다.
+
+`kube-apiserver`에서 활성화 되어 있지 않음으로 다음과 같이 추가할수 있다.
+
+```bash
+ExecStart=/usr/local/bin/kube-apiserver \\
+--runtime-config=batch/v2alpha1\\
+```
+
+#### Custom Resource Definition
+
+#### Custom Controllers
+
+#### Deployment Strategy
+
+`recreate`는 전체 파드를 다 종료시킨 후 재 생성한다. 유저가 접근 장애 발생
+
+`rollingupdate`하나 하나 씩 내리면서 접근
+
+istio를 통하여 정확한 비율에 배포를 구성할 수 있다.
+
+**Blue/Green**
+
+트래픽을 한번에 blue => green으로 옮김. 이러한 전략은 `istio`가 잘 구성함
+
+Deployment와 서비스를 연결 (labels version=>v1)
+
+서비스에서 version:=v2로 label을 변경하여 서비스에 트래픽을 전환함
+
+**Carnary**
+
+새버전을 배포 하고 트래픽의 작은 비율만 새 서비스로 전달
+
+1. 서비스와 애플리케이션을 배포(version=v1)
+2. v2 deploy 배포
+3. 동시에 배포 하기 위해서는 공통레이블을 만들고 서비스에서 공통레이블을 지정후 동일하게 배포함(이때 50%임)
+4. 작은 트래픽을 유지하기 위해서는 Canary 배포 파드수를 최저로 줄이면 (83:17%) 까지 내릴 수 있음
+5. 해당 서비스 장애시 다시 제거
+6. 마찬가지로 istio에서 배포 전략을 잘 구성하였음
+
+#### Helm
+
+k8s object들을 배포하는 것은 복잡한 일이다. 단순하게 배포 할 수 있는 방법이 필요함
+
+예를들어 20GB-> 100Gi로 변경 시 각각 Yaml 파일들을 편집하여야 한다. 이를 관리하기 위해서 `helm`을 사용 할 수 있다.
+
+`패키지 관리자`인 헬름을 사용하여 많은 Object파일을 하나의 앱으로 관리 할 수 있다.
+
+**설치**
+
+requirement
+
+* k8s
+* kubectl
+
+**more**
+
+`value.yaml`을 사용하여 value를 overwrap 할수 있다.
+
+템플릿 +  yaml의 조합
+
+helm Chart를 구성한다.
+
+자신만의 차트나 다른 사용자가 업로드 한 차트를 찾을 수 있따.
+
+**search**
+
+```bash
+helm search hub wordpress
+
+helm repo add bitnami https://charts.bitnami.com/bitnali
+
+# install 시마다 다름 독립적임
+helm install [release-name] [char-name]
+
+helm uninstall my-release
+
+# helm 가져오기
+helm pull --untar bitnami/wordpress
+
+```
+
+
+

@@ -7,7 +7,7 @@ tags:
   - [devops, cka]
 toc: true
 toc_sticky: true
-date: "2022-06-20 19:30"
+date: "2022-06-26 19:30"
 ---
 
 #### Multi-Container Pods
