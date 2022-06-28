@@ -48,6 +48,19 @@ ExecStart=/usr/local/bin/kube-apiserver \\
 --runtime-config=batch/v2alpha1\\
 ```
 
+#### API Deprecations
+
+**API 그룹의 수명 주기**
+
+* API요소는 API그룹의 버전을 높여야만 제거 할 수 있다.
+* API 객체는 정보 손실 없이 주어진 릴리스의 API버전 간에 왕복할 수 있어야 한다.
+* 각 트랙의 최신 API 버전 이외의 이전 API 버전은 발표된 사용 중단 아래 릴리스 기간동안만 지원된다. ( 9 ~ 12 개월)
+    * GA: 12 months or 3 releases
+    * Beta: 9 months or 3 releases
+    * Alpha: 0 release
+
+> 최신 버전을 출시 할 떄 이전 버전을 더 이상 사용하지 않고 제거해야됨. 이는 모든 버전을 사용할 수 있어야 되는 것을 보장하는 것은 아니다.
+
 #### Custom Resource Definition
 
 #### Custom Controllers
