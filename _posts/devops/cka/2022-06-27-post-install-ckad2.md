@@ -14,6 +14,65 @@ date: "2022-06-27 19:30"
 
 #### Admission Controllers
 
+kubectl API 요청이 API 서버에 도달하면 인증프로세스를 거친다. 사용자가 유효한지 확인한다.
+
+`RBAC`에 해당하는 경우 통과, 그렇지 않으면 거부됨
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: developer
+rules:
+- apiGroups: [""]
+  resources: ["pods"]
+  verbs: ["create"]
+  resourceNames: ["blue", "orange"] # 리소스 제한가능
+```
+
+기존 `RBAC`로 엑세스 제어를 할 수 없는 몇가지 사항이 있음.
+
+**요청 자체를 변경하거나 포트가 생성되기전에 추가 작업을 수행**
+
+순서: `kubectl > authentication > authorization > Admission Controllers > Create Pod`
+
+`Admission Controller` 는 다음과 같은 역할을 할 수 있다.
+
+* AlwaysPullImages
+* DefaultStorageClass
+* EventRateLimit
+* NamespaceExists
+* May more ...
+
+> 예시)
+>
+> kubectl run nginx --image nginx --namespace blue
+>
+> 네임 스페이스가 존재하지 않으면 error 발생
+>
+> `NamespaceAutoProvision`가 있으면 생성가능
+
+**활성화**
+
+* 승인 목록 확인
+
+```bash
+kube-apiserver -h | grep enable-admission-plugins
+# 승인 목록 표기
+```
+
+* 활성화
+
+```yaml
+ExecStart=/usr/local/bin/kube-apiverser \\
+--enable-admission-plugins=NodeRestriction, NamespaceAutoProvision # 활성화
+--disable-admission-plugins=DefaultStorageClass # 비활성화
+```
+
+#### Validating & Mutating Admission Controllers
+
+
+
 #### API Version
 
 API 아래의 모든 것이 앱, 확장, 네트워킹과 같은 API그룹이다.
@@ -60,6 +119,16 @@ ExecStart=/usr/local/bin/kube-apiserver \\
     * Alpha: 0 release
 
 > 최신 버전을 출시 할 떄 이전 버전을 더 이상 사용하지 않고 제거해야됨. 이는 모든 버전을 사용할 수 있어야 되는 것을 보장하는 것은 아니다.
+>
+> 릴리즈 시 제거 버전에 관련하여 사용자에게 알려야 한다.
+
+* 지정된 그룹에 대한 기본 API 버전과 스토리지 버전을 명시하고 있기 때문에 새버전과 ㅏ이전 버전을 모두 지원하는 릴리스가 나올때까지 진행되지 않을 수 있다.
+
+**변경 명령어**
+
+```bash
+k convert -f nginx.yaml --output-version apps/v1
+```
 
 #### Custom Resource Definition
 
