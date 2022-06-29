@@ -71,7 +71,51 @@ ExecStart=/usr/local/bin/kube-apiverser \\
 
 #### Validating & Mutating Admission Controllers
 
+`Default Storage Class`는  PC 생성 요청을 감시하고 확인한다.
 
+지정하지 않은 경우 `Default`로 지정하고 기본 값을 추가하는데, 이러한 유형의 Admission Controller를 `Mutating Controller`라고 한다.
+
+* Mission Controller는 요청을 확인하고 허용하거나 거부할 수 있는 컨트롤러
+* Mutating Controller는 요청을 변경하고 유효성을 검사 할수 있는 컨트롤러
+
+> 순서는 Mutation -> Mission
+
+**Custom Admission Controller가 필요할 경우**
+
+* Webhook
+  * k8s 클러스터 내에서 호스팅 되는 서버를 가리키도록 웹 훅을 구성할 수 있음
+* Validating
+
+**How?**
+
+자체 로직이 있는 웹 서버를 배포
+
+* 예제 코드는 k8s Doc 참조
+* 변경을 수락하고 API를 확인하고 해당 JSON으로 응답해야 됌
+* 호스팅을 위해서 서버를 실행하거나 Container하여 K8s 클러스터 내 배포
+* `service`배포
+
+> 시험에서는 코드 개발 X, 배포 서버로 수신 및 응답만 시험
+
+```yaml
+apiVersion: admissionregistration.k8s.io/v1
+kind: ValidatingWebhookConfiguration
+metadata:
+  name: "pod-policy.example.com"
+webhooks:
+- name: "pod-policy.example.com"
+  clientConfig:
+    service:
+      namespace: "webhook-namespcae"
+      name: "webhook-service"
+    caBundle: "Ci0t"
+  rules:
+    - apiGroups: [""]
+    - apiVersions: ["v1"]
+    - operations: ["CRETATE"]
+    - resources: ["pods"]
+    - scope: "Namespaced"
+```
 
 #### API Version
 
@@ -130,9 +174,106 @@ ExecStart=/usr/local/bin/kube-apiserver \\
 k convert -f nginx.yaml --output-version apps/v1
 ```
 
-#### Custom Resource Definition
+#### Custom Resource Definition(CRD)
+
+리소스를 만들면 `etcd`에 저장 후 `controller`가 관리한다.
+
+**만드는 방법**
+
+1. Resource 정의
+2. 리소스 생성
+
+```yaml
+apiVersion: flights.com/v1
+kind: FlightTicket
+metadata:
+  name: my-flight-ticket
+spec:
+  from: Mumbai
+  to: London
+  number: 2
+```
+
+예시로 실제 항공 예약을 하는 API를 호출한다 가정한다.
+
+이 API를 호출하기 위해서는 `controller`가 필요하다.
+
+* 사용자 지정 리소스 (정의)
+* 사용자 지정 컨트롤러 (작업)
+
+사용자 지정 리소스를  생성할려고 하면 실패한다.
+
+먼저 생성할려는 리소스가 무엇인지 정의해야 함.
+
+```yaml
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: flighttickets.flights.com
+spec:
+  scope: Namespced
+  group: flights.com # 사용자 지정 리소스에 apiVersion
+  names:
+    kind: FlightTicket
+    singular: flightticket
+    plural: flighttickets
+    shortnames:
+      - ft
+  versions:
+    - name: v1
+      served: true
+      storage: true
+  schema: #사양 섹션에서 지정할 수 있는 모든 매개 변수를 정의
+    openAPIV3Schema:
+      type: object
+      properties:
+        spec:
+          type: object
+          properties:
+            from:
+              type: string
+            to:
+              type: string
+            number:
+              type: integer
+              minimum: 1
+              maximum: 10
+```
 
 #### Custom Controllers
+
+* 모니터링(특정개체의 이벤트 수신)
+* 작업(비행기 예약)
+
+**만드는 방법**
+
+* [샘플컨트롤러](https://github.com/kubernetes/sample-controller) github repositiory확인 후 복사
+
+* go 빌드
+* 컨트롤러 생성
+* 배포를 직접하거나 컨테이너화 하여 k8s에 넣을 수 있음
+
+```bash
+./sample-controller --kubeconfig=$HOME/.kube/config
+```
+
+#### Operator Framework
+
+`crd`와 `controller`를 같이 패키지 하여 배포 하여야 한다.
+
+> Operator Hub가 유명하다
+
+**CRD**
+
+* EtcdCluster
+* EtcdBackup
+* EtcdRestore
+
+**Custom Controller**
+
+* ETCD Controller
+* Backup Operator
+* Restore Operator
 
 #### Deployment Strategy
 
@@ -200,8 +341,4 @@ helm uninstall my-release
 
 # helm 가져오기
 helm pull --untar bitnami/wordpress
-
 ```
-
-
-
