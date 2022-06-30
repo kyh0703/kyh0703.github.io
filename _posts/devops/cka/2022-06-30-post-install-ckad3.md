@@ -40,6 +40,12 @@ set shiftwidth=2
 export do='--dry-run=client -o yaml'
 ```
 
+#### 필요블로그
+
+[파드컨피그맵](https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-configmap/)
+
+[시크릿](https://kubernetes.io/docs/concepts/configuration/secret/)
+
 #### 마치며
 
 마지막 하루 남았는데 화이팅해서 잘 마무리 되고 더 행복해지길..
