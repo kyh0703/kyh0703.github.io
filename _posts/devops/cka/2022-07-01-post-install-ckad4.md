@@ -7,7 +7,7 @@ tags:
   - [devops, cka]
 toc: true
 toc_sticky: true
-date: "2022-06-27 19:30"
+date: "2022-07-01 19:30"
 ---
 
 #### CKAD
