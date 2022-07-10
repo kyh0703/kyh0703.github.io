@@ -1,13 +1,13 @@
 ---
 published: true
-title: "알고리즘 - 이분탐색"
+title: "알고리즘 - 동적계획법"
 categories:
   - Algorithm
 tags:
-  - [algorithm, binarysearch]
+  - [algorithm, dynamic-programming]
 toc: true
 toc_sticky: true
-date: "2022-07-10 19:00"
+date: "2022-07-11 8:00"
 ---
 
 ## 동적계획법
