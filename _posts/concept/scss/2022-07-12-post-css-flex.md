@@ -1,10 +1,10 @@
 ---
 published: true
-title: "scss - 1"
+title: "css - flex"
 categories:
-  - scss
+  - CSS
 tags:
-  - [scss, nomadcoders]
+  - [css, nomadcoders]
 toc: true
 toc_sticky: true
 date: "2022-07-12 21:00"
@@ -65,7 +65,7 @@ date: "2022-07-12 21:00"
 
 ![image-20220713205415940](../../../assets/images/posts/2022-07-12-post-scss-1/image-20220713205415940.png)
 
-#### 1.4 Align-self and order
+#### Align-self and order
 
 Flex에서 `child`에게 줄 수 있는 두가지 속성이 있다.
 
@@ -97,7 +97,7 @@ Flex에서 `child`에게 줄 수 있는 두가지 속성이 있다.
 
 ```
 
-#### 1.5 wrap, nowpra, reverse, align-content
+#### wrap, nowpra, reverse, align-content
 
 `flexbox`는 `item`들이 너비가 바뀌더라도 모두 같은 줄에 있도록 유지한다.
 
@@ -105,7 +105,7 @@ Flex에서 `child`에게 줄 수 있는 두가지 속성이 있다.
 * `reverse`는 순서를 거꾸로
 * `wrap`사용시 세로 중간  공백은 `align-content`로 조정할 수 있다.
 
-#### 1.6 flex-grow, flex-shirnk
+#### flex-grow, flex-shirnk
 
 `child`에게 줄 수 있는 속성
 
@@ -131,3 +131,14 @@ Flex에서 `child`에게 줄 수 있는 두가지 속성이 있다.
 
 * 기본값은 0이다.
 * 만약 여분의 공간이 있으면 `flow-grow`는 그 안으로 들어가서 더 크게 만들어진다.
+
+#### flex-basis
+
+* `child`에서 적용되는 `property`이다.
+* `flex-basis`는 `width`와 같다고 할수 있지만 그렇지는 않고 `flex-basis`는 `element`에게 모든게 찌그러지거나 늘어나기전에 처음 크기를 정해주는 것이다.
+* `flex-basis`는 `main axis`에서 작동한다.
+* `flex-direction`에 따라 width, height가 결정된다.
+
+#### flex-flow
+
+`flex-direction` + `flex-wrap`
