@@ -1,10 +1,10 @@
 ---
 published: true
-title: "AWX설치(v17) - CentOS7"
+title: "AWX설치(Docker) - CentOS7"
 categories:
   - Install
 tags:
-  - [awx, ansible]
+  - [awx, ansible, docker]
 toc: true
 toc_sticky: true
 date: "2022-07-14 15:00"
