@@ -1,113 +1,46 @@
 ---
 published: true
-title: "Ansible - awx사용법"
+title: "Ansible - connection & delegate-to"
 categories:
   - Ansible
 tags:
-  - [devops, Ansible, awx]
+  - [devops, Ansible]
 toc: true
 toc_sticky: true
-date: "2022-07-14 16:30"
+date: "2022-07-04 19:30"
 ---
 
-### AWX 사용법
+### connction & delegate-to
 
-#### Resource
+`playbook`을 작성하다 보면, `hosts`의 정보들을 취합하여 데이터를 저장하여야 되는 경우가 있습니다. 이럴 때 각 `hosts`들의 정보를 각각 `host`에서 처리 할 수 도 있지만, `ansible`을 기동하는 서버에서 데이터를 취합 후 처리할 수 도 있습니다.
 
-Resource 아래 탭을 보면 다음과 같이 구분되어있습니다.
+**상황별 처리 예시**
 
-![image-20220714170058287](../../assets/images/posts/2022-07-04-post-install-ansible3/image-20220714170058287.png)
-
-AWX를 사용해서 아래 인벤토리 파일을 구축하는 방법을 기술합니다.
-
-#### 예시
-
-**인벤토리**
+* 특정 노드에서 호스트 정보를 취합 후 사용
 
 ```yaml
-[rke_masters]
-rke_master1 ansible_host=100.100.103.178 ansible_ssh_pass=1234
-
-[rke_workers]
-rke_worker1 ansible_host=100.100.103.179 ansible_ssh_pass=1234
+- name: RKE Known hosts
+  include: ./known_hosts.yml
+  delegate_to: rke_master1
 ```
 
-먼저 `inventory`파일을 보면 `rke_masters`라는 그룹 아래에 `rke_master` 호스트들이 위치해있습니다.
-
-**inventories**
-
-인벤토리는 실제 위에 기술된 `inventory`파일과 같다고 보면 됩니다.
-
-* "Add" > "Add Inventory " 클릭하여 인벤토리를 추가합니다.
-
-![image-20220714170859027](../../assets/images/posts/2022-07-04-post-install-ansible3/image-20220714170859027.png)
-
-* 인벤토리 추가 후 "Save" 클릭
-
-![image-20220714171052428](../../assets/images/posts/2022-07-04-post-install-ansible3/image-20220714171052428.png)
-
-* "Save"를 누르면 다음과 같은 화면이 생기며, "Groups"를 선택하여 "Add"를 눌러 그룹을 추가합니다.
-
-![image-20220714171215361](../../assets/images/posts/2022-07-04-post-install-ansible3/image-20220714171215361.png)
-
-* 그룹을 생성하여줍니다.
+* known_hosts
 
 ```yaml
-[rke_masters] # group은 이부분을 의미합니다.
-rke_master1 ansible_host=100.100.103.178 ansible_ssh_pass=1234
+- name: known hosts
+  connection: local
+  serial: 1
+  gather_facts: false
+  hosts:
+    - all
+  tasks:
+    - include: ./tasks/known_hosts.yml
 ```
 
+**설명**
 
+`connection`과 `deletegate-to`는 같은 기능을 하지만 주도적으로 담당하는 `host`가 어디인가를 구분 할 수 있습니다. `connection: local`인 경우에는 `ansible`을 기동하는 서버를 기준으로 동작합니다. 마찬가지로 `deletegate_to`를 특정 `host`로 지정하게 된다면 `ansible host`의 역할이 위임되어 지정한 노드를 기준으로 동작하게 됩니다.
 
-![image-20220714171333478](../../assets/images/posts/2022-07-04-post-install-ansible3/image-20220714171333478.png)
+### 마치며
 
-* 그룹에 호스트를 매핑 시켜줍니다.
-
-![image-20220714171448348](../../assets/images/posts/2022-07-04-post-install-ansible3/image-20220714171448348.png)
-
-**Hosts**
-
-Host는 우리가 `ansible`을 통해 프로비저닝 할 정보들을 입력합니다.
-
-```yaml
-[rke_masters]
-rke_master1 ansible_host=100.100.103.178 ansible_ssh_pass=1234 # host 정보
-```
-
-* `Add`를 눌러 `Host`를 추가합니다.
-
-![image-20220714170545563](../../assets/images/posts/2022-07-04-post-install-ansible3/image-20220714170545563.png)
-
-* 다음과 같이 호스트 정보를 입력합니다.
-
-![image-20220714170632538](../../assets/images/posts/2022-07-04-post-install-ansible3/image-20220714170632538.png)
-
-**project**
-
-프로젝트는 작성한 Playbook을 가져오기 위한 곳입니다.
-
-![image-20220714171821894](../../assets/images/posts/2022-07-04-post-install-ansible3/image-20220714171821894.png)
-
-> 저는 개인계정에 Public Repository를 연결하였으나, Private Repository에 경우 Credential에서 자격증명을 생성 후 매핑이 필요합니다.
-
-**Crendential**
-
-자격증명에 관한 곳을 기술합니다. 호스트들의 자격증명의 경우 `Machine`을 선택하여 `username` 및 `password` 그리고 `Privilege Escalation Method`를 각자 OS환경에 맞추어 저장해줍니다.
-
-![image-20220714171942629](../../assets/images/posts/2022-07-04-post-install-ansible3/image-20220714171942629.png)
-
-**Template**
-
-위에 만든것들을 조합하여 최종 완성본을 만들어 `ansible-playbook`을 실행시킵니다.
-
-![image-20220714172210428](../../assets/images/posts/2022-07-04-post-install-ansible3/image-20220714172210428.png)
-
-**실행**
-
-실행을 누르면 `ansible-playbook`으로 명령어를 친것과 같이 `ansible-tower`에서 프로비저닝 과정을 확인하실 수 있습니다.
-
-![image-20220714172312095](../../assets/images/posts/2022-07-04-post-install-ansible3/image-20220714172312095.png)
-
-#### 마치며
-
-정확히 제가 구성한 인벤토리를 어떻게 구성하는지 찾아보는데, 정보가 많이 없었습니다. 구성한 내용을 기억하기 위해 블로그에 작성합니다😊
+`RKE`를 구성할 떄 `RKE를 동작 서버`를 기준으로 처리하여야 하였는데 `delegate-to`를 통해 해결하였습니다.

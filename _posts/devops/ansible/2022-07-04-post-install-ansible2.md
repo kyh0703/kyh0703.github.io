@@ -7,7 +7,7 @@ tags:
   - [devops, Ansible]
 toc: true
 toc_sticky: true
-date: "2022-04-07 19:30"
+date: "2022-07-04 19:30"
 ---
 
 #### Gather_facts
