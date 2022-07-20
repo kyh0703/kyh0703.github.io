@@ -79,7 +79,7 @@
     </li>
     <!--DevOps-->
     <li>
-      <span class="nav__sub-title">DevOps</span>
+      <span class="nav__sub-title">DEVOPS</span>
       <ul>
         <!-- devops -->
         {% for category in site.categories %}
@@ -123,7 +123,7 @@
     </li>
     <!--ETC-->
     <li>
-      <span class="nav__sub-title">Etc</span>
+      <span class="nav__sub-title">ETC</span>
       <ul>
         <!-- Tip -->
         {% for category in site.categories %}
