@@ -2,7 +2,7 @@
 published: true
 title: "Elastic Search - 1"
 categories:
-  - Elastic
+  - elastic
 tags:
   - [devops, elastic]
 toc: true

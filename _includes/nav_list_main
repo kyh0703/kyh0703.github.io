@@ -11,7 +11,7 @@
     </li>
     <!--Front-->
     <li>
-      <span class="nav__sub-title">Front</span>
+      <span class="nav__sub-title">FRONTEND</span>
       <ul>
         <!-- css -->
         {% for category in site.categories %}
@@ -23,7 +23,15 @@
     </li>
     <!--Back-->
     <li>
-      <span class="nav__sub-title">Back</span>
+      <span class="nav__sub-title">BACKEND</span>
+      <ul>
+        <!-- golang -->
+        {% for category in site.categories %}
+        {% if category[0] == "GoLang" %}
+        <li><a href="/categories/golang" class=""> golang ({{category[1].size}})</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
       <ul>
         <!-- css -->
         {% for category in site.categories %}
@@ -33,17 +41,17 @@
         {% endfor %}
       </ul>
       <ul>
-        <!-- golang -->
+        <!-- elk -->
         {% for category in site.categories %}
-        {% if category[0] == "GoLang" %}
-        <li><a href="/categories/golang" class=""> golang ({{category[1].size}})</a></li>
+        {% if category[0] == "elastic" %}
+        <li><a href="/categories/elastic" class=""> elastic ({{category[1].size}})</a></li>
         {% endif %}
         {% endfor %}
       </ul>
     </li>
     <!--CodingTest-->
     <li>
-      <span class="nav__sub-title">CodingTest</span>
+      <span class="nav__sub-title">CODINGTEST</span>
       <ul>
         <!-- algorithm -->
         {% for category in site.categories %}
@@ -76,7 +84,7 @@
         <!-- devops -->
         {% for category in site.categories %}
         {% if category[0] == "Install" %}
-        <li><a href="/categories/install" class=""> Install ({{category[1].size}})</a></li>
+        <li><a href="/categories/install" class=""> install ({{category[1].size}})</a></li>
         {% endif %}
         {% endfor %}
       </ul>
@@ -84,15 +92,7 @@
         <!-- ansible -->
         {% for category in site.categories %}
         {% if category[0] == "Ansible" %}
-        <li><a href="/categories/ansible" class=""> Ansible ({{category[1].size}})</a></li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-      <ul>
-        <!-- elk -->
-        {% for category in site.categories %}
-        {% if category[0] == "ELK" %}
-        <li><a href="/categories/elastic" class=""> Elastic ({{category[1].size}})</a></li>
+        <li><a href="/categories/ansible" class=""> ansible ({{category[1].size}})</a></li>
         {% endif %}
         {% endfor %}
       </ul>
@@ -108,7 +108,7 @@
         <!-- cka -->
         {% for category in site.categories %}
         {% if category[0] == "CKA" %}
-        <li><a href="/categories/cka" class=""> CKA ({{category[1].size}})</a></li>
+        <li><a href="/categories/cka" class=""> cka ({{category[1].size}})</a></li>
         {% endif %}
         {% endfor %}
       </ul>
@@ -116,7 +116,7 @@
         <!-- devops tip -->
         {% for category in site.categories %}
         {% if category[0] == "TroubleShooting" %}
-        <li><a href="/categories/troubleshooting" class=""> TroubleShooting ({{category[1].size}})</a></li>
+        <li><a href="/categories/troubleshooting" class=""> troubleshooting ({{category[1].size}})</a></li>
         {% endif %}
         {% endfor %}
       </ul>
