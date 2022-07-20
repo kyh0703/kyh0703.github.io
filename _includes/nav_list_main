@@ -9,26 +9,6 @@
       📂 <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span
           style="font-family:'Coming Soon';">{{sum}}</style> <span style="font-family:'Cafe24Oneprettynight';">개</style>
     </li>
-    <!--Concept-->
-    <li>
-      <span class="nav__sub-title">Concept</span>
-      <ul>
-        <!-- docker -->
-        {% for category in site.categories %}
-        {% if category[0] == "Docker" %}
-        <li><a href="/categories/docker" class=""> docker ({{category[1].size}})</a></li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-      <ul>
-        <!-- algorithm -->
-        {% for category in site.categories %}
-        {% if category[0] == "Algorithm" %}
-        <li><a href="/categories/algorithm" class=""> algorithm ({{category[1].size}})</a></li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-    </li>
     <!--Front-->
     <li>
       <span class="nav__sub-title">Front</span>
@@ -64,6 +44,14 @@
     <!--CodingTest-->
     <li>
       <span class="nav__sub-title">CodingTest</span>
+      <ul>
+        <!-- algorithm -->
+        {% for category in site.categories %}
+        {% if category[0] == "Algorithm" %}
+        <li><a href="/categories/algorithm" class=""> algorithm ({{category[1].size}})</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
       <ul>
         <!-- coding-test programmers -->
         {% for category in site.categories %}
@@ -105,6 +93,14 @@
         {% for category in site.categories %}
         {% if category[0] == "ELK" %}
         <li><a href="/categories/elastic" class=""> Elastic ({{category[1].size}})</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+      <ul>
+        <!-- docker -->
+        {% for category in site.categories %}
+        {% if category[0] == "Docker" %}
+        <li><a href="/categories/docker" class=""> docker ({{category[1].size}})</a></li>
         {% endif %}
         {% endfor %}
       </ul>
