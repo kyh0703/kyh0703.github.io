@@ -4,16 +4,13 @@
   <input id="ac-toc" name="accordion-toc" type="checkbox" />
   <label for="ac-toc">{{ site.data.ui-text[site.locale].menu_label }}</label>
   <ul class="nav__items" id="category_tag_menu">
-    <!--전체 글 수-->
     <li>
       📂 <span style="font-family:'Cafe24Oneprettynight';">전체 글 수</style> <span
           style="font-family:'Coming Soon';">{{sum}}</style> <span style="font-family:'Cafe24Oneprettynight';">개</style>
     </li>
-    <!--Front-->
     <li>
       <span class="nav__sub-title">FRONTEND</span>
       <ul>
-        <!-- css -->
         {% for category in site.categories %}
         {% if category[0] == "CSS" %}
         <li><a href="/categories/css" class=""> css ({{category[1].size}})</a></li>
@@ -21,11 +18,9 @@
         {% endfor %}
       </ul>
     </li>
-    <!--Back-->
     <li>
       <span class="nav__sub-title">BACKEND</span>
       <ul>
-        <!-- golang -->
         {% for category in site.categories %}
         {% if category[0] == "GoLang" %}
         <li><a href="/categories/golang" class=""> golang ({{category[1].size}})</a></li>
@@ -33,7 +28,6 @@
         {% endfor %}
       </ul>
       <ul>
-        <!-- css -->
         {% for category in site.categories %}
         {% if category[0] == "django" %}
         <li><a href="/categories/django" class=""> django ({{category[1].size}})</a></li>
@@ -41,7 +35,6 @@
         {% endfor %}
       </ul>
       <ul>
-        <!-- elk -->
         {% for category in site.categories %}
         {% if category[0] == "elastic" %}
         <li><a href="/categories/elastic" class=""> elastic ({{category[1].size}})</a></li>
@@ -49,11 +42,9 @@
         {% endfor %}
       </ul>
     </li>
-    <!--CodingTest-->
     <li>
       <span class="nav__sub-title">CODINGTEST</span>
       <ul>
-        <!-- algorithm -->
         {% for category in site.categories %}
         {% if category[0] == "Algorithm" %}
         <li><a href="/categories/algorithm" class=""> algorithm ({{category[1].size}})</a></li>
@@ -61,7 +52,6 @@
         {% endfor %}
       </ul>
       <ul>
-        <!-- coding-test programmers -->
         {% for category in site.categories %}
         {% if category[0] == "Programmers" %}
         <li><a href="/categories/programmers" class=""> programmers ({{category[1].size}})</a></li>
@@ -69,7 +59,6 @@
         {% endfor%}
       </ul>
       <ul>
-        <!-- coding-test book -->
         {% for category in site.categories %}
         {% if category[0] == "Jobcoding" %}
         <li><a href="/categories/jobcoding" class=""> jobcoding ({{category[1].size}})</a></li>
@@ -77,11 +66,9 @@
         {% endfor %}
       </ul>
     </li>
-    <!--DevOps-->
     <li>
       <span class="nav__sub-title">DEVOPS</span>
       <ul>
-        <!-- devops -->
         {% for category in site.categories %}
         {% if category[0] == "Install" %}
         <li><a href="/categories/install" class=""> install ({{category[1].size}})</a></li>
@@ -89,7 +76,6 @@
         {% endfor %}
       </ul>
       <ul>
-        <!-- ansible -->
         {% for category in site.categories %}
         {% if category[0] == "Ansible" %}
         <li><a href="/categories/ansible" class=""> ansible ({{category[1].size}})</a></li>
@@ -97,7 +83,6 @@
         {% endfor %}
       </ul>
       <ul>
-        <!-- docker -->
         {% for category in site.categories %}
         {% if category[0] == "Docker" %}
         <li><a href="/categories/docker" class=""> docker ({{category[1].size}})</a></li>
@@ -105,7 +90,6 @@
         {% endfor %}
       </ul>
       <ul>
-        <!-- cka -->
         {% for category in site.categories %}
         {% if category[0] == "CKA" %}
         <li><a href="/categories/cka" class=""> cka ({{category[1].size}})</a></li>
@@ -113,7 +97,6 @@
         {% endfor %}
       </ul>
       <ul>
-        <!-- devops tip -->
         {% for category in site.categories %}
         {% if category[0] == "TroubleShooting" %}
         <li><a href="/categories/troubleshooting" class=""> troubleshooting ({{category[1].size}})</a></li>
@@ -121,7 +104,6 @@
         {% endfor %}
       </ul>
     </li>
-    <!--ETC-->
     <li>
       <span class="nav__sub-title">ETC</span>
       <ul>
