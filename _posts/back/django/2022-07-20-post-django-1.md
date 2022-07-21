@@ -81,9 +81,23 @@ SECRET_KEY = get_secret("SECRET_KEY")
 
 #### Exec
 
+* 기초작업
+
 ```bash
 $ python manage.py makemigrations
 $ python manage.py migrate
 $ python manage.py runserver
+```
+
+* app 생성
+
+```bash
+django-admin startapp authentication
+```
+
+* python 패키지
+
+```bash
+pip freeze > requirements.txt
 ```
 
