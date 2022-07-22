@@ -16,6 +16,8 @@ date: "2022-07-20 11:00"
 
 ```bash
 pip3 install virtualenv
+pip3 install django
+pip3 install djangorestframework
 ```
 
 * 적용
