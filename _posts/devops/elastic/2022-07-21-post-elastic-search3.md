@@ -1,16 +1,13 @@
-## @@ -0,0 +1,106 @@
-
+---
 published: true
-title: "Elastic Search - 3"
+title: "Elastic Search -3"
 categories:
-
-- elastic
-  tags:
-- [devops, elastic]
-  toc: true
-  toc_sticky: true
-  date: "2022-07-21 19:30"
-
+  - elastic
+tags:
+  - [devops, elastic]
+toc: true
+toc_sticky: true
+date: "2022-07-21 19:30"
 ---
 
 ### Sharding
@@ -100,10 +97,58 @@ categories:
 
 kibana index는 `auto_expand_relicas`라는 설정으로 구성되어 있기에, 값이 `0-1`이다. 동적으로 변경됨.
 
-### 로컬 클러스터 노드 추가
+### 로컬 클러스터 노드 추가(개발)
 
 1. 압축을 풀어 두 개를 더 만든다. 이 때 기존의 생성된 폴더를 복사하지 않도록 주의한다.
 
 ![image-20220721234834223](../../../assets/images/posts/2022-07-21-post-elastic-search3/image-20220721234834223.png)
 
 2. `config/elasticsearch.yml` 수정
+
+```yaml
+# Use a descriptive name for the node:
+#
+#node.name: node-1
+node.name: second-node
+```
+
+3. 기존 노드에서 토큰 생성
+
+```bash
+ ./elasticsearch-create-enrollment-token -s node
+```
+
+4. 추가 노드에서 노드 등록
+
+```bash
+/bin/elasticsearch --entollment-token {token}
+```
+
+#### Node Role
+
+**Master Node**
+
+* 클러스터 전체 작업을 수행
+* 인덱스 생성 및 삭제 노드 추적 및 할당
+* 투표과정이 필요함 (Quorum)
+* 별도의 마스터 구성가능
+
+**Data Node**
+
+* 클러스터 데이터 저장
+* 검색 쿼리 및 데이터 수정
+
+**Coordinating Node**
+
+* 사용자의 요청만 받아서 처리
+* 클러스터 관련 요청은 마스터 노드에 전달하고 데이터 관련 요청은 데이터 노드에게 전달
+
+**Ingrest Node**
+
+* 문서의 전처리 작업을 담당
+* 인덱스 생성 전 문서의 형식을 다양하게 변경 가능
+
+#### Machine Learning
+
+* `node.ml: true` 로 설정하여 학습 노드로 설정
+*  `xpanck.ml.enabled` 머신 러닝 API 요청에 응답함
