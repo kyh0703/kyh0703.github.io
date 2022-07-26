@@ -165,5 +165,42 @@ my_site
 
 ```
 
-#### Filter
+#### 태그 및 URL
+
+`{% url %]`: URL 이름을 기억하기 쉬움
+
+```python
+# url.py
+from django.urls import path
+from . import views
+
+# register the app namespace
+# URL NAMES
+app_name = "my_app"
+
+urlpatterns = [
+	path("", views.example_view, name="example"),
+    path("variable/", views.variable_view, name='variable'),
+]
+```
+
+```html
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>EXAMPLE HTML TEMPLATE</h1>
+    <h1>
+      <a href="{% url 'my_app:variable' %}">CLICK ME TO GO TO VARIABLE</a>
+    </h1>
+  </body>
+</html>
+
+```
+
+
 
