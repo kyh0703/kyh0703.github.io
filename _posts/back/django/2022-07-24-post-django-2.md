@@ -1,13 +1,13 @@
 ---
 published: true
-title: "django - 1"
+title: "django - 2"
 categories:
   - django
 tags:
   - [django]
 toc: true
 toc_sticky: true
-date: "2022-07-20 11:00"
+date: "2022-07-24 21:00"
 ---
 
 #### Django Tree
@@ -227,6 +227,20 @@ urlpatterns = [
 - 찾기 위해서는 특정 상태를 표기
 
 `settings>views.py`
+
+````
+
+#### Static
+
+`app/static/my_app/spider.png`
+
+```html
+{% extends 'base.html' %} {% load static %} {% block content %}
+<h1>THIS IS INSIDE THE BLOCK IN EXAMPLE.HTML</h1>
+<img src="{% static 'my_app/spider.png' %}" alt="my image" />
+
+{% endblock %}
+````
 
 ```python
 from django.shortcuts import render
