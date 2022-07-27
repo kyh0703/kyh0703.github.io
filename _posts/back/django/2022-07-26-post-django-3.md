@@ -38,3 +38,27 @@ app
 4. `makemigration`
 5. `migrate`
 
+#### Data Entry Create
+
+> IPython 설치하면 좋다.. 굳
+
+* Create Object and `.save()` : 정의 후 생성
+
+* `objects.create()`: 정의와 동시 생성
+
+  ![image-20220727235525478](../../../assets/images/posts/2022-07-26-post-django-3/image-20220727235525478.png)`
+
+* `objects.bulk_create()`: 한번에 여러개
+
+![image-20220727235829960](../../../assets/images/posts/2022-07-26-post-django-3/image-20220727235829960.png)
+
+#### Shell 
+
+![image-20220727234936018](../../../assets/images/posts/2022-07-26-post-django-3/image-20220727234936018.png)
+
+**.all()**
+
+```bash
+$ Partient.objects.all()
+```
+
