@@ -51,7 +51,7 @@ def new_view(request, topic):
     return HttpResponse(articles[topic])
 ```
 
-#### Response Not Found  & 404
+#### Response Not Found & 404
 
 ```python
 def new_view(request, topic):
@@ -77,8 +77,8 @@ def num_page_view(request, num_page):
 
 #### Render
 
-* `project/templates/{app_name}/html`파일 생성
-* settings.py template수정
+- `project/templates/{app_name}/html`파일 생성
+- settings.py template수정
 
 ```yaml
 
@@ -108,7 +108,7 @@ TEMPLATES = [
 python manage.py startapp {app}
 ```
 
-* URL, VIEWS 연결
+- URL, VIEWS 연결
 
 2. migrate
 
@@ -162,7 +162,6 @@ my_site
     <h2>{# this i sa comment#}</h2>
   </body>
 </html>
-
 ```
 
 #### 태그 및 URL
@@ -184,7 +183,26 @@ urlpatterns = [
 ]
 ```
 
+````html
+#### Template 상속 `header, navigation, sidebar, footer`등 미리 정의 하여 구성한
+후 아래와 같이 불러올수 있다. ```python # example.html {% extends 'base.html' %}
+{% block content %}
+<h1>THIS IS INSIDE THE BLOCK IN EXAMPLE.HTML</h1>
+
+{% endblock content %}
+````
+
+![image-20220726124202288](../../assets/images/posts/2022-07-24-post-django-2/image-20220726124202288.png)
+
+#### 사용자 정의 오류 템플릿
+
+- 404 page등 사용자 오류 정의 페이지를 만들 수 있다.
+
+- `templates > 404.html`
+- 자동으로 찾아서 보여줌...
+
 ```html
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -200,7 +218,32 @@ urlpatterns = [
   </body>
 </html>
 
+    <h1>MY CUSTOM 404 PAGE</h1>
+  </body>
+</html>
 ```
 
+- 파일을 변경하면 리소스를 찾을 수 없음.
+- 찾기 위해서는 특정 상태를 표기
+
+`settings>views.py`
+
+```python
+from django.shortcuts import render
 
 
+def my_custom_page_not_found_view(request, exception):
+    return render(request, "error_view.html', status=404")
+```
+
+```python
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path("my_app/", include("my_app.urls")),
+    path("admin/", admin.site.urls),
+]
+
+handle404= 'my_site.views.my_custom_page_not_found_view'
+```
