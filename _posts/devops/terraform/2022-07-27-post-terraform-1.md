@@ -58,9 +58,9 @@ date: "2022-07-22 10:30"
 
 특정한 일을 효과적으로 수행하는 지식과 능력
 
-* 프로그래밍
-* 운영체제
-* 서버관리
-* 오픈소스
-* 클라우드
+* 프로그래밍(Go, Python, Node.js)
+* 운영체제(Shell, OS)
+* 서버관리(IaC, CI/CD, API)
+* 오픈소스(nginx, Tomcat, Mysql, ansible, terraform)
+* 클라우드(AWS, Azure)
 
