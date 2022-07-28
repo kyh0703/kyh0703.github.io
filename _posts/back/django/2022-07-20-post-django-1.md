@@ -2,7 +2,7 @@
 published: true
 title: "django - 1"
 categories:
-  - django
+  - Django
 tags:
   - [django]
 toc: true
@@ -12,7 +12,7 @@ date: "2022-07-20 11:00"
 
 #### Requirement
 
-* virtualenv 설치
+- virtualenv 설치
 
 ```bash
 pip3 install virtualenv
@@ -20,13 +20,13 @@ pip3 install django
 pip3 install djangorestframework
 ```
 
-* 적용
+- 적용
 
 ```bash
 virtualenv --python=python3 devenv
 ```
 
-* window 적용
+- window 적용
 
 ```bash
 devenv/Scripts/activate
@@ -42,13 +42,13 @@ django-admin startproject setting
 
 `setting.py`에 있는 `SECCRET_KEY`는 따로 보관 되어야 됌.
 
-* 보관 파일 생성
+- 보관 파일 생성
 
 ```bash
 touch secrets.json
 ```
 
-* 보관
+- 보관
 
 ```bash
 {
@@ -56,7 +56,7 @@ touch secrets.json
 }
 ```
 
-* setting.py 변경
+- setting.py 변경
 
 ```python
 # setting.py
@@ -83,7 +83,7 @@ SECRET_KEY = get_secret("SECRET_KEY")
 
 #### Exec
 
-* 기초작업
+- 기초작업
 
 ```bash
 $ python manage.py makemigrations
@@ -91,15 +91,14 @@ $ python manage.py migrate
 $ python manage.py runserver
 ```
 
-* app 생성
+- app 생성
 
 ```bash
 django-admin startapp authentication
 ```
 
-* python 패키지
+- python 패키지
 
 ```bash
 pip freeze > requirements.txt
 ```
-

@@ -2,7 +2,7 @@
 published: true
 title: "django - 2"
 categories:
-  - django
+  - Django
 tags:
   - [django]
 toc: true
