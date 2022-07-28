@@ -148,8 +148,6 @@ my_site
 
 #### 태그 및 URL
 
-`{% url %]`: URL 이름을 기억하기 쉬움
-
 ```python
 # url.py
 from django.urls import path
