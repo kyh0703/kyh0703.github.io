@@ -146,24 +146,6 @@ my_site
         exmaple.html
 ```
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>VARIABLE.HTML</h1>
-    <h2>Her first name was {{first_name}} and her last was {{last_name}}</h2>
-    <h2>{{some_dict.inside_key}}</h2>
-    <h2>{# this i sa comment#}</h2>
-  </body>
-</html>
-```
-
 #### 태그 및 URL
 
 `{% url %]`: URL 이름을 기억하기 쉬움
