@@ -1,6 +1,6 @@
 ---
 published: true
-title:  "window zsh 사용하기"
+title: "window zsh 사용하기"
 categories:
   - Tip
 tags:
@@ -14,13 +14,13 @@ date: "2022-07-28 22:00"
 
 먼저 `MYSYS2`를 설치하여 주세요!😤
 
-* MYSYS2 설치
+- MYSYS2 설치
 
 ![image-20220728173915458](../../assets/images/posts/2022-07-28-post-window-zsh/image-20220728173915458.png)
 
 MYSYS2를 먼저 설치합니다!
 
-* MYSYS Inherit 설정
+- MYSYS Inherit 설정
 
 ```bash
 C:\msys64\mingw64.ini
@@ -32,7 +32,7 @@ MSYS2_PATH_TYPE=inherit
 MSYSTEM=MINGW64
 ```
 
-* Window Terminal `MYYS2` 추가
+- Window Terminal `MYYS2` 추가
 
 ```bash
 # setting.json
@@ -55,44 +55,44 @@ list: [
 ]
 ```
 
-* 패키지 설치
+- 패키지 설치
 
 ```bash
 pacman -Syu
 ```
 
-* gcc 설치
+- gcc 설치
 
 ```bash
 pacman -S mingw-w64-x86_64-gcc
 ```
 
-* zsh 설치
+- zsh 설치
 
 ```bash
 pacman -S zsh
 ```
 
-* vim 설치
+- vim 설치
 
 ```bash
 pacman -S vim
 ```
 
-* Oh my zsh 설치
+- Oh my zsh 설치
 
 ```bash
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 ```
 
-* [powerlevel10k](https://github.com/romkatv/powerlevel10k#installation) 설치
+- [powerlevel10k](https://github.com/romkatv/powerlevel10k#installation) 설치
 
 ```bash
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 echo 'source ~/powerlevel10k/powerlevel10k.zsh-theme' >>~/.zshrc
 ```
 
-* ~/.zsh 변경
+- ~/.zsh 변경
 
 ```bash
 # ~/.zshrc
@@ -102,11 +102,10 @@ alias vi="vim"
 
 ```
 
-* vscode 설정
+- vscode 설정
 
-    ![image-20220728181349241](../../assets/images/posts/2022-07-28-post-window-zsh/image-20220728181349241.png)
+  ![image-20220728181349241](../../assets/images/posts/2022-07-28-post-window-zsh/image-20220728181349241.png)
 
-* 설치 확인
+- 설치 확인
 
-![image-20220729003216928](../../../assets/images/posts/2022-07-28-post-window-zsh/image-20220729003216928.png)
-
+![image-20220729003216928](../../assets/images/posts/2022-07-28-post-window-zsh/image-20220729003216928.png)
