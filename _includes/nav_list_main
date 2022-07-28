@@ -34,13 +34,6 @@
         {% endif %}
         {% endfor %}
       </ul>
-      <ul>
-        {% for category in site.categories %}
-        {% if category[0] == "elastic" %}
-        <li><a href="/categories/elastic" class=""> elastic ({{category[1].size}})</a></li>
-        {% endif %}
-        {% endfor %}
-      </ul>
     </li>
     <li>
       <span class="nav__sub-title">CODINGTEST</span>
@@ -79,6 +72,20 @@
         {% for category in site.categories %}
         {% if category[0] == "Ansible" %}
         <li><a href="/categories/ansible" class=""> ansible ({{category[1].size}})</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+      <ul>
+        {% for category in site.categories %}
+        {% if category[0] == "Istio" %}
+        <li><a href="/categories/ansible" class=""> ansible ({{category[1].size}})</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+      <ul>
+        {% for category in site.categories %}
+        {% if category[0] == "elastic" %}
+        <li><a href="/categories/elastic" class=""> elastic ({{category[1].size}})</a></li>
         {% endif %}
         {% endfor %}
       </ul>
