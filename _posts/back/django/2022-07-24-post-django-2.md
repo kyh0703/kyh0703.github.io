@@ -192,7 +192,7 @@ urlpatterns = [
 {% endblock content %}
 ````
 
-![image-20220726124202288](../../assets/images/posts/2022-07-24-post-django-2/image-20220726124202288.png)
+![image-20220726124202288](../../../assets/images/posts/2022-07-24-post-django-2/image-20220726124202288.png)
 
 #### 사용자 정의 오류 템플릿
 
