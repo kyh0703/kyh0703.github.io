@@ -61,3 +61,10 @@ app
 ```bash
 $ Partient.objects.all()
 ```
+
+**.Filter() & Get()**
+
+```bash
+$ Partient.objects.get(pk=1)
+```
+
