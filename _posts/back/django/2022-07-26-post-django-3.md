@@ -62,9 +62,31 @@ app
 $ Partient.objects.all()
 ```
 
-**.Filter() & Get()**
+**Get & Filter**
 
 ```bash
-$ Partient.objects.get(pk=1)
+$ Partient.objects.get(pk=1)#  단일객체
+$ Partient.objects.filter(last_name='smith')
+```
+
+**Query Set**
+
+```python
+from django.db.models import Q
+# | or, & and
+Patient.objets.filter(Q(last_name='smith') & Q(age=40))
+```
+
+#### Field lookups
+
+[링크](https://docs.djangoproject.com/en/4.0/ref/models/querysets/#field-lookups)
+
+```bash
+Model.objects.filter(name__startswith="S")
+```
+
+```bash
+Patient.objects.filter(age__in=[20,30,40]).all()
+Patient.objects.filter(last_name__startswith='s')
 ```
 
