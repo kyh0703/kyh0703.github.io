@@ -118,14 +118,13 @@ class Patient(models.Model):
 해킹 시도가 없는지 `Dango`로 구현되는 매커니즘
 
 ```html
-  <form action="" method="POST">
-    <!--{% csrf_token %}-->
-    <div class="form-group">
-      <label for="pk">PK Number:</label>
-      <input class="form-control" type="text" id="pk" name="pk" />
-    </div>
-    <input class="btn btn-primary" type="submit" />
-  </form>
+<form action="" method="POST">
+  <div class="form-group">
+    <label for="pk">PK Number:</label>
+    <input class="form-control" type="text" id="pk" name="pk" />
+  </div>
+  <input class="btn btn-primary" type="submit" />
+</form>
 ```
 
 #### Admin
@@ -138,7 +137,7 @@ python manage.py createsuperuser
 
 **admin page에 테이블 넣기**
 
-* admin.py
+- admin.py
 
 ```python
 from django.contrib import admin
@@ -147,7 +146,7 @@ from cars.models import Car
 admin.site.register(Car)
 ```
 
-* custom
+- custom
 
 ```python
 from django.contrib import admin
