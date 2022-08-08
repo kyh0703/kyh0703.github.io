@@ -64,3 +64,76 @@ istioctl install --set profile=demo
 
 **Custom Profile**
 
+* yaml 파일 추출
+
+```bash
+istioctl profile dump demo
+```
+
+* 적용 방법
+
+```bash
+istioctl install -f ./default-settings.yaml
+```
+
+**access token**
+
+* 서드파티 토큰 사용
+* `istioctl`은 퍼스트 파티 토큰 사용
+
+**hpa**
+
+```yaml
+    pilot:
+      autoscaleEnabled: true
+      autoscaleMax: 5
+      autoscaleMin: 1
+```
+
+* 프로덕션 환경에서 기본으로 사용하다 문제가 생기면 수정.
+
+* `PILOT_TRACE_SAMPLING(demo)` 들어오는 요청 중 얼마만큼 잡아서 추적 시스템이 기록할지 정함
+    * `default는 1%`
+    * `default` 명시 안되어있지만 운영자가 직접 삽입
+* istio request
+
+```yaml
+Request:
+  cpu: 500m
+  memory: 2Gi
+```
+
+**envoy proxy**
+
+* 각 파드별로 `128Mi * N`요청 
+* 클러스터를 돌리고 평균값을 확인 후 `request`를 조정하는것도 방법이다.
+
+```yaml
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 1024Mi
+          requests:
+            cpu: 100m
+            memory: 128Mi
+        statusPort: 15020
+        tracer: zipkin
+      proxy_init:
+        image: proxyv2
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 1024Mi
+          requests:
+            cpu: 10m
+            memory: 10Mi
+```
+
+**Istio Manifest 파일로 변경**
+
+* k8s object.yaml로 변경
+
+```bash
+istioctl manifest generate -f /default-setting.yaml
+```
+
