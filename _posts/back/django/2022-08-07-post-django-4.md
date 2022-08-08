@@ -85,3 +85,15 @@ def thank_you(request):
 </html>
 ```
 
+#### Form Rendering
+
+`{{from as_p}}`: "<p>로 감싼다</p>"
+
+```html
+    <form method="POST">
+      {{form.first_name.label_tag}} {{form.first_name}}
+      <div>{{form.first_name.label_tag}} {{form.first_name}}</div>
+      <input type="submit" />
+    </form>
+```
+
