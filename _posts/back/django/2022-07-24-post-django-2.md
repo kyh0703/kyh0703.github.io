@@ -159,18 +159,9 @@ app_name = "my_app"
 
 urlpatterns = [
 	path("", views.example_view, name="example"),
-    path("variable/", views.variable_view, name='variable'),
+  path("variable/", views.variable_view, name='variable'),
 ]
 ```
-
-````html
-#### Template 상속 `header, navigation, sidebar, footer`등 미리 정의 하여 구성한
-후 아래와 같이 불러올수 있다. ```python # example.html {% extends 'base.html' %}
-{% block content %}
-<h1>THIS IS INSIDE THE BLOCK IN EXAMPLE.HTML</h1>
-
-{% endblock content %}
-````
 
 ![image-20220726124202288](../../../assets/images/posts/2022-07-24-post-django-2/image-20220726124202288.png)
 
@@ -181,28 +172,6 @@ urlpatterns = [
 - `templates > 404.html`
 - 자동으로 찾아서 보여줌...
 - `{% url 'my_app:variable'}`로 호출시킴
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <h1>EXAMPLE HTML TEMPLATE</h1>
-    <h1>
-      <a href="이부분에 URL}">CLICK ME TO GO TO VARIABLE</a>
-    </h1>
-  </body>
-</html>
-
-    <h1>MY CUSTOM 404 PAGE</h1>
-  </body>
-</html>
-```
 
 - 파일을 변경하면 리소스를 찾을 수 없음.
 - 찾기 위해서는 특정 상태를 표기
