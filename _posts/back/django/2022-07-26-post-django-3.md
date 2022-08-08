@@ -119,7 +119,7 @@ class Patient(models.Model):
 
 ```html
   <form action="" method="POST">
-    {% csrf_token %}`
+    <!--{% csrf_token %}-->
     <div class="form-group">
       <label for="pk">PK Number:</label>
       <input class="form-control" type="text" id="pk" name="pk" />
