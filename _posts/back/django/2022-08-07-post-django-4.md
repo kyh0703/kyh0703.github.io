@@ -78,7 +78,7 @@ def thank_you(request):
   <body>
     <h1>RENTAL_REVIEW</h1>
     <form action="" method="POST">
-      {% csrf_token %} {{form}}
+      {{form}}
       <input type="submit" />
     </form>
   </body>
