@@ -78,7 +78,7 @@
       <ul>
         {% for category in site.categories %}
         {% if category[0] == "Istio" %}
-        <li><a href="/categories/istio" class=""> ansible ({{category[1].size}})</a></li>
+        <li><a href="/categories/istio" class=""> istio ({{category[1].size}})</a></li>
         {% endif %}
         {% endfor %}
       </ul>
