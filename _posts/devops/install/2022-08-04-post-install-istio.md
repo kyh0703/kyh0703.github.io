@@ -137,3 +137,55 @@ Request:
 istioctl manifest generate -f /default-setting.yaml
 ```
 
+#### Istio Upgrade
+
+[공식문서](https://istio.io/latest/docs/setup/upgrade/)
+
+* istio 업그레이드의 문제점은 `istio`가 단일 파드가 아닌 인프라라는 것이다.
+* 그렇기 때문에 다운타임이 발생할 가능성이 매우 높다.
+* `addon`의 경우 관리자만 사용하기에 유저에게 직접 영향을 주지 않는다.
+
+**In-place upgrades**
+
+* 가장 쉬운 방법(명령어가 단순하다)
+* 하지만 가장 위험하다.
+* 내부에서 무슨일이 일어나는지 볼 수 없다.
+* 클러스터의 다운타임을 원치 않는다면 절대 사용하면 안된다.
+* 모든 트래픽은 인그레스 게이트웨이를 통해 들어오기 때문에 어떤이유로든 문제가 생기면 사이트가 다운된다.
+
+```bash
+istioctl18 upgrade 
+```
+
+**carnary upgraded**
+
+* revision 테이블이 필터링을 한다.
+* `ingress-gateway`는 업그레이드 시 버전이 같이 변경된다. 제일 위험한 부분
+* `revision`을 1.7로 지정한 후 새버전 설치 그 후 `revision`을 1.8로 변경 
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    istio.io/rev: 1-7
+  name: default 
+```
+
+```bash
+# 상태 조회
+$ istioctl17 proxy-status
+
+# 새버전 설치
+$ istioctl install --set revision=1-8
+```
+
+```yaml
+apiVersion: v1
+kind: Namespace
+metadata:
+  labels:
+    istio.io/rev: 1-8
+  name: default 
+```
+
