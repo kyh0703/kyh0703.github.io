@@ -97,3 +97,26 @@ def thank_you(request):
     </form>
 ```
 
+#### CSS
+
+* Create `app/static/app/custom.css` file
+* html 파일 맨위에 `{% load static %}`추가
+* css를 조작하거나, `widget`을 수정하여 디자인 가능(`widget={widget}`)
+* `forms.py`에 작성할 수 있으나 스파게티 코드가 될 수도 있으니 주의한다.
+
+### Model Form
+
+* `django`에서는 모델과 연결되어있는 폼을 자동으로 생성하는 `ModelForm`클래스를 제공한다.
+
+```python
+from dataclasses import field
+from django import forms
+from .models import Review
+from django.forms import ModelForm
+
+class ReviewForm(ModelForm):
+    class Meta:
+        model = Review
+        fields = ['first_name', 'last_name']
+```
+
