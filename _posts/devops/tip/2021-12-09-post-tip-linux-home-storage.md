@@ -39,7 +39,7 @@ tar zcvf home.tar ./home
 #### UNMOUNT
 
 ```bash
-unmount /dev/mapper/centos-home
+umount /dev/mapper/centos-home
 ```
 
 #### 로지컬 볼륨 삭제
