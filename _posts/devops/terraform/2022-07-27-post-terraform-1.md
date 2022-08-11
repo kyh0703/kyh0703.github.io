@@ -1,10 +1,10 @@
 ---
 published: true
-title: "istio - 1"
+title: "terraform - 1"
 categories:
-  - istio
+  - Terraform 
 tags:
-  - [istio]
+  - [terraform ]
 toc: true
 toc_sticky: true
 date: "2022-07-22 10:30"
