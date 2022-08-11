@@ -64,3 +64,11 @@ date: "2022-07-22 10:30"
 * 오픈소스(nginx, Tomcat, Mysql, ansible, terraform)
 * 클라우드(AWS, Azure)
 
+**Ingrastructure as Code**
+
+`코드로써의 인프라`
+
+* 작성용이성
+* 재사용성
+* 유지보수
+
