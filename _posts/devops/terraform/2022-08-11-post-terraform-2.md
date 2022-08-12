@@ -67,3 +67,4 @@ $ cat ~/.aws/config
 $ cat ~/.aws/credntials
 ```
 
+[테라폼사이트](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket)
