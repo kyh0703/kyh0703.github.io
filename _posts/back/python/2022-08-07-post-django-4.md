@@ -14,18 +14,18 @@ date: "2022-08-07 11:00"
 
 `django`에서는 간단한 폼을 통해 템플릿으로 보낼 수 있는 `form`클래스를 제공
 
->  해커는 위조폼을를 통해 일종의 피싱 사기를 칠 수 있다.
+> 해커는 위조폼을를 통해 일종의 피싱 사기를 칠 수 있다.
 
 `django`에서는 `CSRF(Cross-Site request Forgery)`라는 개념이 있는데 교차 사이트 요청 위조라고 한다.
 
-* 각 개별 세션 동안 모든 폼에 임의의 비밀번호와 토큰을 생성하는 것이다,
-* 서버는 토큰이 현재 세션과 일치하는 지 확인 할 수 있다.
-* `HTML <form>태그`에 <% csrf_token %>을 삽입하면 된다.
+- 각 개별 세션 동안 모든 폼에 임의의 비밀번호와 토큰을 생성하는 것이다,
+- 서버는 토큰이 현재 세션과 일치하는 지 확인 할 수 있다.
+- `HTML <form>태그`에 <% csrf_token %>을 삽입하면 된다.
 
 **django Form**
 
-* 폼 태그
-* `submit input`
+- 폼 태그
+- `submit input`
 
 ```python
 # cars/form.py
@@ -90,23 +90,22 @@ def thank_you(request):
 `{{from as_p}}`: "<p>로 감싼다</p>"
 
 ```html
-    <form method="POST">
-      {{form.first_name.label_tag}} {{form.first_name}}
-      <div>{{form.first_name.label_tag}} {{form.first_name}}</div>
-      <input type="submit" />
-    </form>
+<form method="POST">
+  {{form.first_name.label_tag}} {{form.first_name}}
+  <div>{{form.first_name.label_tag}} {{form.first_name}}</div>
+  <input type="submit" />
+</form>
 ```
 
 #### CSS
 
-* Create `app/static/app/custom.css` file
-* html 파일 맨위에 `{% load static %}`추가
-* css를 조작하거나, `widget`을 수정하여 디자인 가능(`widget={widget}`)
-* `forms.py`에 작성할 수 있으나 스파게티 코드가 될 수도 있으니 주의한다.
+- Create `app/static/app/custom.css` file
+- css를 조작하거나, `widget`을 수정하여 디자인 가능(`widget={widget}`)
+- `forms.py`에 작성할 수 있으나 스파게티 코드가 될 수도 있으니 주의한다.
 
 ### Model Form
 
-* `django`에서는 모델과 연결되어있는 폼을 자동으로 생성하는 `ModelForm`클래스를 제공한다.
+- `django`에서는 모델과 연결되어있는 폼을 자동으로 생성하는 `ModelForm`클래스를 제공한다.
 
 ```python
 from dataclasses import field
@@ -119,4 +118,3 @@ class ReviewForm(ModelForm):
         model = Review
         fields = ['first_name', 'last_name']
 ```
-

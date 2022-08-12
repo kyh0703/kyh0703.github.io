@@ -1,5 +1,5 @@
 ---
-title: "ISTIO"
+title: "istio"
 layout: archive
 permalink: categories/istio
 author_profile: true

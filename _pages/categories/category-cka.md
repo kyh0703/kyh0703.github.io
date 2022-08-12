@@ -1,5 +1,5 @@
 ---
-title: "설치"
+title: "CKA"
 layout: archive
 permalink: categories/cka
 author_profile: true

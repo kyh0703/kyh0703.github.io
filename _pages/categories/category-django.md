@@ -1,5 +1,5 @@
 ---
-title: "django"
+title: "Django"
 layout: archive
 permalink: categories/django
 author_profile: true

@@ -1,5 +1,5 @@
 ---
-title: "기타"
+title: "TroubleShooting"
 layout: archive
 permalink: categories/troubleshooting
 author_profile: true

@@ -1,5 +1,5 @@
 ---
-title: "설치"
+title: "Ansible"
 layout: archive
 permalink: categories/ansible
 author_profile: true

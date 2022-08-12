@@ -77,6 +77,13 @@
       </ul>
       <ul>
         {% for category in site.categories %}
+        {% if category[0] == "Terraform" %}
+        <li><a href="/categories/terraform" class=""> Terraform ({{category[1].size}})</a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+      <ul>
+        {% for category in site.categories %}
         {% if category[0] == "Istio" %}
         <li><a href="/categories/istio" class=""> istio ({{category[1].size}})</a></li>
         {% endif %}
