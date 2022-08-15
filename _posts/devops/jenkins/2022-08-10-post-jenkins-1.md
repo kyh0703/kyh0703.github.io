@@ -1,6 +1,6 @@
 ---
 published: true
-title: "jenkins - 기본 동작"
+title: "jenkins - 2022"
 categories:
   - Jenkins
 tags:
@@ -83,3 +83,4 @@ export PATH
 ![image-20220814175038425](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220814175038425.png)
 
 빌드가 주기적으로 감시하여 변경사항이 있으면 재 빌드 시킴.
+
