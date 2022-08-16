@@ -84,3 +84,22 @@ export PATH
 
 빌드가 주기적으로 감시하여 변경사항이 있으면 재 빌드 시킴.
 
+### Jenkins & Security
+
+![image-20220816112339184](../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816112339184.png)
+
+![image-20220816115016251](../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816115016251.png)
+
+### Jenkins & Ansible
+
+![image-20220816145214150](../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816145214150.png)
+
+![image-20220816145925731](../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816145925731.png)
+
+![image-20220816145946344](../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816145946344.png)
+
+환경 변수도 넣을 수 있다.
+
+### Jenkins & Color
+
+![image-20220816150252321](../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816150252321.png)
