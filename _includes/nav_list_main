@@ -78,7 +78,7 @@
       <ul>
         {% for category in site.categories %}
         {% if category[0] == "Terraform" %}
-        <li><a href="/categories/terraform" class=""> Terraform ({{category[1].size}})</a></li>
+        <li><a href="/categories/terraform" class=""> terraform ({{category[1].size}})</a></li>
         {% endif %}
         {% endfor %}
       </ul>
