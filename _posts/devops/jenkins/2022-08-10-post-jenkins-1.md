@@ -102,30 +102,30 @@ export PATH
 
 ### Jenkins & Color
 
-![image-20220816150252321](../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816150252321.png)
+![image-20220816150252321](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816150252321.png)
 
-![image-20220816155021399](../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816155021399.png)
+![image-20220816155021399](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816155021399.png)
 
-![image-20220816155033064](../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816155033064.png)
+![image-20220816155033064](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816155033064.png)
 
 ### Jenkins & Security
 
 **유저가입허용**
 
-![image-20220816174744947](../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816174744947.png)
+![image-20220816174744947](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816174744947.png)
 
 **보안플러그인 설치**
 
-![image-20220816175049315](../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816175049315.png)
+![image-20220816175049315](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816175049315.png)
 
-![image-20220816175158676](../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816175158676.png)
+![image-20220816175158676](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816175158676.png)
 
-![image-20220816175217441](../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816175217441.png)
+![image-20220816175217441](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816175217441.png)
 
 플러그인 설치 후에는 로그인 시 `access denine`이 발생한다.
 
-![image-20220816175913709](../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816175913709.png)
+![image-20220816175913709](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816175913709.png)
 
 롤을 추가한다.
 
-![image-20220816180021714](../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816180021714.png)
+![image-20220816180021714](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220816180021714.png)

@@ -36,9 +36,9 @@ Amazon VPC는 Amazon에서 제공하는 private한 네트워크 망
 
 * 기존 클래스체계보다 유연하다.
 
-![image-20220812114812067](../../assets/images/posts/2022-08-12-post-terraform-3/image-20220812114812067.png)
+![image-20220812114812067](../../../assets/images/posts/2022-08-12-post-terraform-3/image-20220812114812067.png)
 
-![image-20220812115049696](../../assets/images/posts/2022-08-12-post-terraform-3/image-20220812115049696.png)
+![image-20220812115049696](../../../assets/images/posts/2022-08-12-post-terraform-3/image-20220812115049696.png)
 
 * `Intra-Domain`과 같이 각 네트워크 대역을 구분 짓고 `Inter-Domain`과 같이 구분된 네트워크 간 통신을 위한 주소체계
 
