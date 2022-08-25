@@ -120,7 +120,7 @@
       <ul>
         {% for category in site.categories %}
         {% if category[0] == "TroubleShooting" %}
-        <li><a href="/categories/troubleshooting" class="">⚒️ troubleshooting ({{category[1].size}})</a></li>
+        <li><a href="/categories/troubleshooting" class="">🪰 troubleshooting ({{category[1].size}})</a></li>
         {% endif %}
         {% endfor %}
       </ul>
@@ -131,7 +131,7 @@
         <!-- Tip -->
         {% for category in site.categories %}
         {% if category[0] == "Tip" %}
-        <li><a href="/categories/tip" class=""> tip ({{category[1].size}})</a></li>
+        <li><a href="/categories/tip" class="">👍 tip ({{category[1].size}})</a></li>
         {% endif %}
         {% endfor %}
       </ul>
@@ -139,7 +139,7 @@
         <!-- books -->
         {% for category in site.categories %}
         {% if category[0] == "Books" %}
-        <li><a href="/categories/books" class=""> books ({{category[1].size}})</a></li>
+        <li><a href="/categories/books" class="">📖 books ({{category[1].size}})</a></li>
         {% endif %}
         {% endfor %}
       </ul>
