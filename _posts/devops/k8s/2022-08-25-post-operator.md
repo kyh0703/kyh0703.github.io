@@ -2,9 +2,9 @@
 published: true
 title: "k8s operator 만들기"
 categories:
-  - Istio
+  - Kubernetes
 tags:
-  - [istio]
+  - [kubernetes]
 toc: true
 toc_sticky: true
 date: "2022-08-25 10:30"
