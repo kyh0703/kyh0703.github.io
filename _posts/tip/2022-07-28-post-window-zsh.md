@@ -107,5 +107,3 @@ alias vi="vim"
   ![image-20220728181349241](../../assets/images/posts/2022-07-28-post-window-zsh/image-20220728181349241.png)
 
 - 설치 확인
-
-![image-20220729003216928](../../assets/images/posts/2022-07-28-post-window-zsh/image-20220729003216928.png)
