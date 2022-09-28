@@ -70,3 +70,7 @@ $k9s -n bcloud
 ![image-20220928093705434](../../../assets/images/posts/2022-09-28-post-k8s-cozy/image-20220928093705434.png)
 
 > `?`를 통해서 사용 명령어 확인이 가능합니다.
+
+:입력 후 리소스를 클릭하여 확인 가능
+
+![image-20220928100943784](../../../assets/images/posts/2022-09-28-post-k8s-cozy/image-20220928100943784.png)
