@@ -18,7 +18,7 @@ date: "2022-09-28 09:00"
 
 명령을 통하거나 수동으로 여러 개의 `kubeconfig`파일을 병합하여 `context` 구성
 
-![image-20220928094847492](../../../assets/images/posts/2022-09-28-post-k8s-cozy/image-20220928094847492.png)
+![image-20220928095517414](../../../assets/images/posts/2022-09-28-post-k8s-cozy/image-20220928095517414.png)
 
 ![image-20220928094501358](../../../assets/images/posts/2022-09-28-post-k8s-cozy/image-20220928094501358.png)
 
