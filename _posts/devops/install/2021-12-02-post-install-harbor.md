@@ -166,11 +166,11 @@ private_key: /etc/docker/certs.d/100.100.103.167/100.100.103.167.key
 # 준비
 ./prepare
 
-# 설치
+# 설치 document를 참조하여 --with-trivy --with-chartmuseum등을 추가 할 수 있습니다.
 ./install.sh
 ```
 
-위 내용까지 적용하였을 경우 설치 아이피로 접속하였을때 Harbor 웹페이지가 보입니다. 초기 패스워드는 `admin`에 `Harbor12345`이며 harbor.yml을 통해 설치 시 변경할 수 있습니다.
+위 내용까지 적용하였을 경우 설치 아이피로 접속하였을 때 Harbor 웹페이지가 보입니다. 초기 패스워드는 `admin`에 `Harbor12345`이며 harbor.yml을 통해 설치 시 변경할 수 있습니다.
 
 ### Harbor 인증서 로컬에 적용하기
 
