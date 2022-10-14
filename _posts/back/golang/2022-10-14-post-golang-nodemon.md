@@ -4,7 +4,7 @@ title: "golang - nodemon"
 categories:
   - GoLang
 tags:
-  - [golang, import]
+  - [golang]
 toc: true
 toc_sticky: true
 date: "2022-03-16 12:00"
