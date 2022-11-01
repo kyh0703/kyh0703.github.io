@@ -47,7 +47,7 @@ const LoginForm = () => {
 
 #### 사용법
 
-* `yum`으로 사용할 패키지들을 설치하여 줍니다.
+* `yarn`으로 사용할 패키지들을 설치하여 줍니다.
 
 ```bash
 yarn add react-hook-form yup @hookform/resolvers
