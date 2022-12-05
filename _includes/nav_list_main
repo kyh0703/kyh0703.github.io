@@ -13,21 +13,27 @@
       <ul>
         {% for category in site.categories %}
         {% if category[0] == "CSS" %}
-        <li><a href="/categories/css" class="">🖼️ css ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/css">🖼️ css ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
       <ul>
         {% for category in site.categories %}
         {% if category[0] == 'Regex' %}
-        <li><a href="/categories/regex" class="">🆎 regex ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/regex">🆎 regex ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
       <ul>
         {% for category in site.categories %}
         {% if category[0] == 'React' %}
-        <li><a href="/categories/react" class="">🖌️ react ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/react">🖌️ react ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
@@ -37,14 +43,18 @@
       <ul>
         {% for category in site.categories %}
         {% if category[0] == "GoLang" %}
-        <li><a href="/categories/golang" class="">🎃 golang ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/golang">🎃 golang ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
       <ul>
         {% for category in site.categories %}
         {% if category[0] == "Django" %}
-        <li><a href="/categories/django" class="">🐾 django ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/django">🐾 django ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
@@ -54,21 +64,27 @@
       <ul>
         {% for category in site.categories %}
         {% if category[0] == "Algorithm" %}
-        <li><a href="/categories/algorithm" class="">✍️ algorithm ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/algorithm">✍️ algorithm ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
       <ul>
         {% for category in site.categories %}
         {% if category[0] == "Programmers" %}
-        <li><a href="/categories/programmers" class="">✍️ programmers ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/programmers">✍️ programmers ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor%}
       </ul>
       <ul>
         {% for category in site.categories %}
         {% if category[0] == "Jobcoding" %}
-        <li><a href="/categories/jobcoding" class="">✍️ jobcoding ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/jobcoding">✍️ jobcoding ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
@@ -78,63 +94,72 @@
       <ul>
         {% for category in site.categories %}
         {% if category[0] == "Install" %}
-        <li><a href="/categories/install" class="">⚒️ install ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/install">⚒️ install ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
       <ul>
         {% for category in site.categories %}
         {% if category[0] == "Kubernetes" %}
-        <li><a href="/categories/kubernetes" class="">⚒️ kubernetes ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/kubernetes">⚒️ kubernetes ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
       <ul>
         {% for category in site.categories %}
         {% if category[0] == "Ansible" %}
-        <li><a href="/categories/ansible" class="">⚒️ ansible ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/ansible">⚒️ ansible ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
       <ul>
         {% for category in site.categories %}
         {% if category[0] == "Terraform" %}
-        <li><a href="/categories/terraform" class="">⚒️ terraform ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/terraform">⚒️ terraform ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
       <ul>
         {% for category in site.categories %}
         {% if category[0] == "Istio" %}
-        <li><a href="/categories/istio" class="">⚒️ istio ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/istio">⚒️ istio ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
       <ul>
         {% for category in site.categories %}
         {% if category[0] == "elastic" %}
-        <li><a href="/categories/elastic" class="">⚒️ elastic ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/elastic">⚒️ elastic ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
       <ul>
         {% for category in site.categories %}
         {% if category[0] == "Docker" %}
-        <li><a href="/categories/docker" class="">⚒️ docker ({{category[1].size}})</a></li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-      <ul>
-        {% for category in site.categories %}
-        {% if category[0] == "CKA" %}
-        <li><a href="/categories/cka" class="">⚒️ cka ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/docker">⚒️ docker ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
       <ul>
         {% for category in site.categories %}
         {% if category[0] == "TroubleShooting" %}
-        <li><a href="/categories/troubleshooting" class="">🪰 troubleshooting ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/troubleshooting">🪰 troubleshooting ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
@@ -145,7 +170,9 @@
         <!-- Tip -->
         {% for category in site.categories %}
         {% if category[0] == "Tip" %}
-        <li><a href="/categories/tip" class="">👍 tip ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/tip">👍 tip ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
@@ -153,7 +180,18 @@
         <!-- books -->
         {% for category in site.categories %}
         {% if category[0] == "Books" %}
-        <li><a href="/categories/books" class="">📖 books ({{category[1].size}})</a></li>
+        <li>
+          <a href="/categories/books">📖 books ({{category[1].size}})</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+      <ul>
+        {% for category in site.categories %}
+        {% if category[0] == "Certificate" %}
+        <li>
+          <a href="/categories/certificate">✍️ certificate ({{category[1].size}})</a>
+        </li>
         {% endif %}
         {% endfor %}
       </ul>
