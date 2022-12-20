@@ -568,3 +568,52 @@ EC2 인스턴스는 가상 머신이지만 실제로 하드웨어 서버에 연�
 * 다중 AZ지원
 * 장애조치시간을 66%까지 줄일 수 있음
 * Mysql, PostgresQL, Maria and Aurora
+* Lamda
+
+#### Elastic Cache
+
+* Redis, MemCache등 캐시 기술을 관리
+* 인메모리 데이터베이스
+
+**redis vs Memcache**
+
+* redis(고가용성)
+
+    * redis 는 다중 AZ 가능
+
+    * 읽기전용 인스턴스 확장이 가능
+
+    * 가용성이 높음
+
+    * 백업 복원 기능
+
+* Memcache(단순 분산 캐시)
+    * 샤딩
+    * 데이터 분할 다중 노드
+    * 가용성이 높지 않음
+    * 복제도 없고, 백업, 복원 기능도 없음
+    * 멀티쓰레드
+
+#### Elastiac Cache Security
+
+Redis Auth
+
+* IAM 지원하지 않음
+* API 레벨에서만 IAM을 지원
+* 클러스터 생성시 비밀번호/토큰을 설정가능
+* SSL 보안을 지원할 수 있음
+
+Memcached
+
+* SASL based authentication
+
+**정책**
+
+Lazy Loading: 모든 읽기 데이터를 캐시(캐시 히트가 없을때 디비에서 가져옴)
+
+Write Through:  디비에 쓸 때 캐시를 업데이트함
+
+Session Store: 세션 데이터를 임시로 저장(TTL사용)
+
+
+
