@@ -1258,3 +1258,558 @@ S3 Cross Region Replication
     * S3(including Glacier)
     * EFS
     * FSX
+
+### AWS Integration & Messaging
+
+#### SQS - Standrad Queue Service
+
+* 10년 전부터 사용
+* 디커플링
+* 기본 유지기간: 4일, 최대유지기간 14일
+* 낮은 지연시간(<10ms)
+* Limit 256KB
+* Unlimit number of message
+
+**producing message**
+
+* sdk를 통해 메시지 발행
+* 컨슈머가 삭제를 해줘야됨
+
+**comsuming messaging**
+
+* polling message
+* 메시지 처리 후 삭제 요청 해야됨
+* 제 시간안에 메시지를 처리하지 못하면 중복으로 처리 될수 있음(Message Visibility Timeout)
+    * 기본 30초
+    * `ChangeMessageVisibility`를 사용하여 시간 연장 가능
+
+**security**
+
+암호화
+
+*  HTTPS API
+
+Access Controls
+
+* IAM Role
+
+SQS Access Policies
+
+* Cross account
+* SNS, S3와 연동하여 사용
+
+**Long Polling**
+
+* 자주 엑세스하기보다 롱 폴링 시간을 두어 성능을 향상시킴
+
+**FIFO Queue**
+
+* 선입 선출
+* 이름이 `fifo`로 끝나야됨
+    * queue.fifo
+* 묶음이 아닐경우 초당 300개, 묶음이면 초당 3000개까지 처리가능
+
+**SQS With ASG**
+
+SQS Queue에 `CloudWatch Metric - QueueLength`설정을 한 후 `CloudWatch Alarm`이 울리면 스케일링함
+
+RDS서비스들에 직접적으로 접근을 하게 되면 부하가 일어나서 장애가 발생할 수 있음
+
+따라서 앞에 큐를 넣어서 처리하여 오버로드 조정
+
+#### SNS - Simple Notify Service
+
+* pub / sub
+* SNS topic에 이벤트가 발생했을 때 전달하는 역할
+* 100,000 토픽까지 제한이 있음
+* 초당 12,500,000 토픽 구독 가능
+* 구독대상
+    * SQS
+    * Lambda
+    * Kinesis Data Firehose
+    * Email
+    * SMS Mobile Notification
+    * HTTPS
+
+**How to Pulibsh**
+
+* SDK
+
+**Security**
+
+암호화
+
+* HTTPS API
+* KMS Keys
+* Client-side Encrytion사용가능
+
+Access Controls
+
+* IAM Role
+
+SNS Access Polices
+
+**SNS + SQS - Fanout**
+
+​	* SNS -> SQS Topic
+
+**S3 Events to Multiple queues**
+
+* S3 -> SNS -> SQS QUEUE
+
+**SNS to Amazon S3 Through Kinesis**
+
+* SNS -> Kinesis Data Firehose -> S3
+
+**FIFO TOPIC**
+
+* 메시지 그룹아이디로 오더링
+* 콘텐츠 기반 중복 제거
+* SQS FIFO 큐만 구독 가능
+
+**Message Filtering**
+
+* 메시지를 필터링 하여 전달 가능
+
+#### Kinesis
+
+* 실시간 스트리밍 데이터를 수집하고 처리하고 분석하는데 사용
+* Application Log, Website click, IOT Telemetry data
+
+* 종류
+    * Kinesis Data Stream
+        * 캡처, 처리, 저장
+    * Kinesis Data Firehose
+        * AWS 저장데이터에서 스트림 데이터 로드
+    * Kinesis Data Analytics
+        * 분석(SQL, Apache Flink)
+    * Kinesis Video Stream
+
+**Kinesis Data Stream**
+
+* 1 ~ 365일 동안 유지할 수 있음
+* 메시지를 재 발행 할 수 있음
+* 데이터가 저장되면 지울 수 있음
+* 같은 파티션으로 샤딩됨
+* AWS 카프카 버전
+* 프로듀서
+    * SDK, Kinesis Producer Library, Kinesis Agent
+* 컨슈머
+    * Kinesis Consumer Library, AWS SDK
+    * AWS Lambda, kinesis Data Firehose, Kinesis Data Analytics
+
+**Kinesis Data Stream - Capacity Modes**
+
+Provisioned Mode
+
+* 미리 지정
+* IN 1MB / out 2MB
+* 시간당 비용 지불
+
+Ondemaend Mode
+
+* 사용한 만큼 돈을 지불
+* 초당 4000 레코당 4MB
+* 최근 30일을 최대치를 통해 자동으로 확장
+* 시간당 비용 및 in/out per GB
+
+**Kinesis Data Streams Security**
+
+* Using IAM Role
+* HTTPS Endpoint
+* KMS
+* CVPC Endpoint for Kinesis
+* Monitor API use Cloud Trail
+* Realtime
+
+**Kinesis Data Firehose**
+
+* Full managed Serviece
+* 데이터 양에 따라 지불
+* Near Realtime
+    * 지연시간은 최대 60초
+* 처리에 실패하거나 처리된 모든 데이터를 S3  백업 버킷에 보낼수도 있음
+
+**Amazon MQ**
+
+* MQTT, AMQP, STOMP, Openwire등 온프레미스 프로토콜
+* Rabbit MQ, Active MQ를 관리함
+* Slae up 불가능
+* Multi AZ, Failover사용
+
+### Container
+
+CPU사용량에 따라 돈을 지불하며 `EFS`를 통해 데이터 공유가능
+
+* Amazon Elastic Container Service(ECS)
+
+* Amazon Elastic Kubernetes Service(EKS)
+
+    * 노드타입
+        * Managed Node Group
+        * Self Manages Nodes
+        * Fargate
+
+    * 데이터볼륨(CSI)
+        * EBS
+        * EFS
+        * FSx For Lustre
+        * FSx For NetApp ONTAP
+
+* AWS Fargate
+
+    * 서버리스 컨테이너 서비스
+    * ECS와 EKS와 같이 동작
+
+* AWS ECR(Elastic Container Registry)
+
+### Serverless
+
+Function Of Service
+
+서버가 없다는 소리가 아니라 서버를 관리할 필요가 없단 뜻
+
+* AWS Lambda
+* Dynamo DB
+* AWS Cognito
+* AWS API Gateway
+* AWS S3
+* AWS SNS & SQS
+* AWS Kinesis Data Firehose
+* Aurora Serverless
+* Step Functions
+* Fargate
+
+#### AWS Lambda
+
+* Virtual Function
+* Limited By Time
+* 온디맨드
+* 스케일링 자동화
+
+**장점**
+
+* requst 및 compute time에 따라 돈을 지불
+* 많은 프로그래밍 언어지원
+* `AWS CloudWatch`를 통한 쉬운 모니터링
+* 10GB of RAM
+
+**default**
+
+* 람다는 내 VPI에서 실행 됨
+* 따로 접근권한을 설정 할 필요없음
+
+**Lambda in VPC**
+
+* 람다를 실행 할 서브넷을 지정하여 private에 접근 가능
+* 디비에 직접 접근할려면 `RDS Proxy`를 사용하여야 됨
+    * RDS Proxy = 데이터베이스 연결 풀
+    * 장애 조치 시간 감소
+    * IAM 인증 강제화
+* RDS 프록시는 퍼블렉 엑세스가 불가능함으로 데이터베이스 접근을 위해선 람다를 VPC에서 동작하여야함
+
+#### Edge
+
+* edge를 사용하면 서버를 관리할 필요가 없다
+
+* Customized the CDN Content
+* 사용한 만큼 지불
+* 웹사이트 보안
+* 동적 웹 애플리케이션
+* Search Engine Optimizaion(SEO)
+
+**CloudFront Functions**
+
+* 자바스크립트로 경량화 됨
+* 뷰어 요청, 뷰어 응답
+* 확장성이 높고 지연시간에 민감한데 사용
+* 시작시간은 1ms미만
+* 응답을 보내기전 수정가능
+* 코드 CloudFront에서 관리
+* 초당 수백만게
+* 사용처
+    * 캐시키 정규화
+    * 헤더 조작
+    * URL Rewrite
+    * JWT
+
+**Lamda@Edge**
+
+* 노드js, 파이썬
+* 초당 천개 요청 처리
+* 뷰어와 오리진 요청 둘다 작동함
+* Cloud Front에 비해 느림
+* `us-east-1`리전에만 작성 가능
+* 모든 로케이션에 해당 함수를 복사
+* 사용처
+    * 타사 라이브러리에 코드 종속 시킬수있음
+    * 외부서비스에 적급 가능
+    * 파일 시스템이나 HTTP요청 본문에도 접근 가능
+
+#### Amazon DynamoDB
+
+* No SQL Database
+* Full manages
+* 다중가용역역 복제
+* 스케일
+* 빠른 퍼포먼스
+* IAM for Security
+* 오토 스케일링
+* Maximum size item 400KB
+* 기본키 조합
+* 데이터타입
+    * Scalar
+        * String, Number
+    * Document
+        * List, Map
+    * Set
+        * string Set
+
+* 기본키는 Partition Key + Sort Key
+    * SortKey는 지정하지 않아도 됨
+
+**Provision Mode**
+
+* RCU/WCU 토대로 오토스케일링 함
+
+**OnDemand Mode**
+
+* 예측하기 힘들 때 사용
+
+**DynamoDB Accelerator(DAX)**
+
+* RDS에 ElasticCache가 있다면 NoSQL에는 DAX가 있다
+* 캐시 기능을 지원함
+* TTL
+
+**Dynamo DB Stream**
+
+* 실시간 분석
+* 24시간 유지
+* 컨슈머 제한
+* 람다 트리거, 키네시스 스트림 어댑터
+* 키네시스 보다 느리고 NoSQL에 변화를 전달 할 수 있음
+
+**Global Tables**
+
+* 성능 향상
+* 다중 지역
+* Active - Active 복제
+* READ / WRITE 어떤지역에서도 가능함
+* 사용전에 DynamoDB Stream을 켜야됨
+
+#### AWS Gateway
+
+* AWS Lambda + API Gateway
+* Websocket Protocol 지원
+* 버전관리 지원
+* 다른 환경구성
+* swagger지원
+* 캐시 API response
+
+**Endpoint Type**
+
+* Edge Optimized
+* Regional
+* Private
+
+**security**
+
+사용자 인증
+
+* IAMRole
+* Cognito
+* Custom Authorizer
+
+사용자 도메인
+
+### AWS Database
+
+* `RDBS`: RDS, Aurora
+* `NoSQL`: DymonoDB, Elastic Cache, Neptune(Graph), Document DB(for MongoDB), Keyspaces(for Apache Cassandra)
+* `Object Storage`: S3 / Glacier
+* `Data Warehouse`: Redshift
+* `Search`: Open Search
+* `Graphs`: Amazon Neptune
+    * 유저의 친구는 몇명인가?
+    * 게시물은 댓글이 몇개인가?
+* `Ledger`: Amazon Quantum Ledger Database
+    * 블록체인
+    * 퀀트 투자
+* `Time series`: Amazon Timestream
+
+### Data & Analytics
+
+#### Amazon Athena
+
+* 서버리스
+* bucket query
+* CSV, JSON, ORC, Avro and Parquet 지원
+* $5달러/TB 데이터 스캔
+* S3 분석
+
+**perfomance 향상**
+
+* Columnar data (검색 열을 지정하여 좁힘)
+* 압축(bzip2, gzip)
+* 파티션 처리
+* 128MB 보다  큰 파일
+
+**Federated Query**
+
+* S3뿐만 아니라 어떤 곳의 데이터도 쿼리 할 수 있음
+* 데이터 원본 커넥터를 사용하여 온프레미스 데이터도 쿼리할 수 있음
+* 연합 쿼리
+* 쿼리 결과는   S3 버킷에 저장할 수 있음
+
+#### RedShift
+
+* postgreSQL 기반
+* OLAP(online Analytical Processing)
+* Athena보다 빠름
+* 데이터웨어하우스
+* PB 규모
+* 병렬 쿼리 엔진
+* 프로비저닝한 인스턴스에 대해 지불
+* Amazon Quicksight or Tableau 와 통합하여 사용할 수 있음
+* 쿼리가 복잡하면 Redshift
+* 비용 절약을 위해 예약 인스턴스사용
+    * 리더노드
+    * 컴퓨트 노드
+
+**Snapshot & DR**
+
+* **Multi AZ 모드가 없다**
+* 새로운 클러스터에 스냅샷을 통해 복구할 수 있음
+* 보존기간 설정
+* 클러스터의 스냅샷을 다른 AWS리전에 자동으로 복사하여 재해복구를 가능하게 함
+
+**데이터를 넣는방법**
+
+* Kinesis Data Firehose
+* S3 Useing Copy Command
+* E2c Instance JDBC Driver
+
+**Redsifht Spectrum**
+
+* Redshift를 사용해 분석은 하지만 Redsift에 로드는 하지 않는다.
+* Redshift클러스터가 있어야됨
+* 컴퓨팅 노드에 데이터 분석 요청을 제출
+* Redsifht로 데이터를 로드하지 않아도 사용할 수 있음
+* 과거데이터 분석이라던가
+
+#### OpenSearch
+
+* ELK 스택
+* 어떤 필드는 검색 할 수 있음
+
+#### EMR
+
+* Elastic MapReduce
+* Hadoop
+* Bic Data
+* 노드 타입
+    * 마스터
+    * 코어
+    * Task(option)
+
+#### Amazon QuickSight
+
+* 비즈니스 인텔리전스 서비스
+* 대화형 대시보드
+* 오토스케일링 가능
+* 세션당 비용 지불
+
+* 서버리스 머신러닝 통합 대시보드 지원
+* In Memory Computation use SPICE
+    * Spice 엔진을 통해 데이터를 가져올 때 사용
+* Column Level Security (CLS)
+
+#### **Glue**
+
+* 추출과 변환(ETL 서비스)
+* 분석을 위해 데이터를 변환 할 때 사용
+* 서버리스
+
+#### Lake Formation
+
+* 데이터 분석을 위해 모든 데이터를 한곳으로 모아두는 중앙집중저장소
+* 수개월씩 걸리는 작업을 빠르게 작업할수 있음
+* 데이터 검색, 정제 변환, 주입을 도움
+* **중앙화된 권한**
+    * 보안을 관리할 곳이 많아지는데 Lake Formation을 사용하면 엑세스 제어기능과 행 열 보안을 사용할 수 있음
+
+#### Kinesis Data analytics for apache Flink
+
+#### Amazon Managed Streaming for Apache Kafka
+
+* Kafka를 AWS에서 관리
+* 서버리스
+
+### Machine Learing
+
+#### Amazon Rekogition
+
+* 기계학습을 통해 객체, 사람, 문자, 이미지, 비디오를 찾음
+* 얼굴 분석 비교 사용자 확인
+* 금융 분석
+* **콘텐츠조정기술**
+    * 불쾌한 콘텐츠들을 사전 차단 하는 기능
+    * 신뢰도 임계값을 지정하여 차단할수 있음
+* 사용사례
+    * 얼굴탐지 분석
+    * 표정 분석
+    * 유명인 얼굴 인식
+
+#### Transcribe
+
+* 음성을 텍스트로 전환(STT)
+* 자동음성처리(ASR)
+
+#### Polly
+
+* 텍스트를 음성으로 변환해줌
+* SSML
+* 발음 어휘 목록
+
+#### Translate
+
+* 언어 번역기능
+
+#### Lex + connect
+
+* Alexa 장치 구현
+* 시리, 빅스비 같은 것
+* 대화형 인터페이스
+
+#### Comprehend
+
+* 자연어를 처리하는 NLP 서비스
+* 분석 텍스트를 통해 감정분석
+
+#### Comprehend Medical
+
+* 의사소견서
+* 개인건강정보 탐색
+
+#### SagaMaker
+
+* 어떤 머신러닝 모델이라도 사용가능
+
+#### Forecast
+
+* 예측을 도와주는 기능
+
+#### Kendra
+
+* 완전 관리형 문서 검색 서비스
+
+#### Personalize
+
+* 실시간 맞춤화 추천
+* 쇼핑, 사용자 경험에 따른 추천
+
+#### Texttract
+
+* 텍스트를 추출
+* 주민등록증이나 운전면허증에서 번호 추출
