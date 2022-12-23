@@ -1813,3 +1813,56 @@ Function Of Service
 
 * 텍스트를 추출
 * 주민등록증이나 운전면허증에서 번호 추출
+
+### 재해복구 및 마이그레이션
+
+* 온프레미스
+* 하이브리드
+* AWS
+
+* **RPO(Recovery Point Objective)**
+    * 복구 시점 목표
+    * 재해가 일어났을 때 복구 될 수 있는 지점
+    * 데이터 손실을 얼마나 감수할 것인가
+
+* **RTP(recovery Time Ojbective)**
+    * 복구 시간 목표
+    * 복구에 걸리는 시간
+    * 애플리케이션 다운 타임
+
+**재해복구 전략**
+
+* Backup And Resotre
+    * snow ball을 사용하면 RPO 7일
+    * 스냅샷에 따라 RPO가 달라짐
+    * 데이터 복구가 오래 걸림
+    * 값이 저렴함
+    * 인프라 재생산
+* Pilot Light
+    * 크리티컬 코어 보존
+    * 크리티컬 시스템이 작동하고 있을 떄 크리티컬 데이터베이스만 복제 해주면 문제가 해결
+    * Route 53로 Failover
+* Warm Standby
+    * 시스템 전체를 실행 하되 최소한의 규모로 가동해서 대기하는 방법
+    * 재해 발생하면 프로덕션 로드로 확장 가능
+    * Route 53를 통해 Failover
+    * RDS Slave
+    * 비용이 많이 듬
+        * ELB, EC2 오토스케일링이 동시에 실행
+* Hot Site / Multi Site Approach
+    * 비용이 많이 비쌈
+    * AWS와 온프로미세에 완전 프로덕션 스케일을 가지게 됨
+    * 데이터 복제를 동시에 진행
+    * 액티브 - 액티브
+
+**Faster RTO**
+
+```bash
+--------------------------Faster RTO ------------------>
+
+Backup & Restore | Pilot Light | Warm standby | HotSite
+
+<--------------------------AWS Multi Region ----------
+```
+
+### 기타 서비스
