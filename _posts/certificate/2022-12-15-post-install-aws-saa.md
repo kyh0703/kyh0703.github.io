@@ -1865,4 +1865,23 @@ Backup & Restore | Pilot Light | Warm standby | HotSite
 <--------------------------AWS Multi Region ----------
 ```
 
+#### Database Migration Service
+
+* 온프레미스 시스템에서 AWS로 데이터를 옮길 때 사용
+* 복원성이 좋고 자가 복구 가능
+* 이동 중 소스 데이터베이스도 사용 가능
+* EC2인스턴스를 생성해 복제를 처리하도록 해야됨
+
+**지속적인 복제 설정**
+
+#### Schema Conversion Tool(SCT)
+
+데이터베이스 스키마를 다른 데이터 베이스 타입으로 변환하여 줌
+
+같은 엔진을 쓰는 데이터베이스는 사용하지 않음
+
 ### 기타 서비스
+
+* Cloud Formation
+    * 테라폼 같은 거
+    * Infrastructure as Code
