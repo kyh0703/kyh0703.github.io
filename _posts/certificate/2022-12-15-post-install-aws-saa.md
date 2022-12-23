@@ -315,6 +315,7 @@ EC2 인스턴스는 가상 머신이지만 실제로 하드웨어 서버에 연�
 * 따라서 용량 계획하지 않아도 됨
 * 웹서버, 데이터 공유 word Press에 사용
 * 처리량은 초당 10GB
+* 교차 AZ - 100개의 인스턴스
 
 **성능모드**
 
@@ -335,31 +336,49 @@ EC2 인스턴스는 가상 머신이지만 실제로 하드웨어 서버에 연�
 
 ### 로드밸런서
 
-#### CLB(Classic Loadbalancer)
+#### 로드밸런서 역할
+
+* Health Check
+* 균일한 분배
+* 앱의 단일 지점
+* 분산 처리
+* SSL Termination
+* High Availability
+* public, private 트래픽 분리
+
+#### **로드밸런서 종류**
+
+CLB(Classic Loadbalancer)
 
 * 만료됐음
+* HTTP, HTTPS, TLS, SSL
 
-#### ALB(Application Loadbalancer)
+ALB(Application Loadbalancer)
 
 * L7
 * path, query, header.. 등으로 라우팅 할 수 있음
+* HTTP, HTTPS, Web Socket
 
-#### NLB(Network Loadbalancer)
+NLB(Network Loadbalancer)
+
+* L4
 
 * TCP, TLS, UDP
-* 고성능의 L4 지원 로드 밸런서
+* 고성능
 
-#### GWLB(Gateway Load Balancer)
+GWLB(Gateway Load Balancer)
+
+* L3
 
 * 인그레스 게이트웨이처럼 들어오는 트래픽을 가지고 검증을 한 후 애플리케이션에 분배
 * `GENEVE` 6081 포트를 사용
 
-#### Sticky Sessions(Session Affinity)
+#### **Sticky Sessions(Session Affinity)**
 
-* 쿠키에 데이터를 심어 처음 연결된 인스턴스와 연결 시켜줌
-    * Application Based Coookies
-    * Duration-based Cookie
-        * Cookie Name: `AWSALB`
+쿠키에 데이터를 심어 처음 연결된 인스턴스와 연결 시켜줌
+* Application Based Coookies
+* Duration-based Cookie
+    * Cookie Name: `AWSALB`
 
 #### Cross Zone Load Balancing
 
