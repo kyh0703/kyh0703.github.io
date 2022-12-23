@@ -512,21 +512,32 @@ GWLB(Gateway Load Balancer)
 
 #### 종류
 
-* Postgres
-* Mysql
+* PostgreSQL
+* MySQL
 * maria
 * oracle
 * microsoft sql server
 * aurora
 
-#### Auto Scaling
+#### 특징
+
+* 자동 프로비저닝, OS 패치
+* 지속적인 백업 및 복원
+* 모니터링 대시보드
+* 읽기전용 복제본
+* 다중 가용영역, DR
+* 윈도우 업그레이드
+* 스케일링
+* Storage backged by EBS(gp2 or io1)
+* SSH로 접속불가
+
+#### Storage Auto Scaling
 
 * 오토 스케일링이 활성화 되어 있으면 자동으로 스토리지를 확장해줌
-
 * IOPS 임계값 확인
-* 확장 할 최대치 정하기
+* 확장할 최대치 정하기
+* 예측이 어려울 떄 사용
 * 모든 RDS 데이터베이스 엔진에서 지원
-* Maria, mySql postgres, SQL, oracle
 
 #### 읽기전용 복제본과 다중 AZ
 
@@ -544,8 +555,9 @@ GWLB(Gateway Load Balancer)
 * 재해 복구에 사용
 * 마스터 - 슬레이브
 * 가용성
-* 재해 복구를 위해 읽기전용 복제본을 다중 AZ로 설정 가능
 * 동기식 복제
+* 비용은 무료
+* 재해 복구를 위해 읽기전용 복제본을 다중 AZ로 설정 가능
 
 **시험에 나오는 문제**
 
@@ -555,26 +567,28 @@ GWLB(Gateway Load Balancer)
 
 #### RDS Custom
 
-* 기 데이터베이스와 OS에 엑세스 할 수 있음
-* 오라클 및 MS SQL Server만 관리할 수 있음
+* 기존 데이터베이스와 OS에 엑세스 할 수 있음
+* **오라클 및 MS SQL Server만 관리할 수 있음**
 
 #### Amazon Aurora
 
 * aws의 고유 기술
-* Postgres, Mysql 과 호환
+* Postgres, Mysql과 호환
 * 클라우드에 최적화
 * Mysql 5배, postgres 3배 높은 성능
 * 스토리지 자동 확장 10GB -> 128TB
-* 일기 전용 복제본 15개까지 가능
-* 전체 적으로 다 빠름
+* 읽기 전용 복제본 15개까지 가능
+* 전체적으로 다 빠름
 * 비용은 20% 정도 높음
 * 높은 가용성과 읽기 스케일링
 * 6개의 사본을 저장함 (이중 4개만 있어도 괜찮음)
+* Failover가 30초도 안걸림
 * 수백개의 볼륨 사용
 * 매우 빠른 장애 조치
 * 쓰기 엔드포인터(마스터 인스턴스와 연결됨)
 * 리더 엔드포인터(읽기전용복제본과 연결됨) - 로드벨런싱
 * 백트랙 (과거시점으로 데이터 복원)
+* **크로스 리전 지원**
 
 #### Aurora 고급개념
 
@@ -612,6 +626,8 @@ GWLB(Gateway Load Balancer)
 
 **머신러닝**
 
+* ML 경험이 없어도 됨
+
 * SagaMaker: 어떤 머신 러닝 모델이라도 사용할 수 있게 해줌
 * Amazon Comprehend: 감정분석
 
@@ -621,7 +637,7 @@ GWLB(Gateway Load Balancer)
 
 * 매일 정해진 시간에 데이터베이스를 전체를 백업
 * 5분마다 트랜잭션 로그도 백업
-* 5분전 어떤 시점으로 복구가 가능
+* 5분전 어떤 시점으로라도 복구가 가능
 * 자동 백업 보유기간은 1 - 35일
 * 기간이 지나면 사라짐
 
@@ -639,26 +655,32 @@ GWLB(Gateway Load Balancer)
 * 지정시간 복구기능
 * 원하는 기간 보유가 가능
 
-**RDS & AUrora Retore Option**
+**RDS & Aurora Restore Option**
 
 * 스냅샷
-* S3
-* Aurora Cluster from S3
-    * 온프레미스 데이터베이스를 Percona XtraBackup을 사용하여 s3로 백업
+* Restoring MySQL RDS database from S3
+    * Create Backup of your on-premises database
+    * store it on amazon s3
+    * Restore the backup file onto a New RDS Instance
+
+* Restoring MySQL Aurora Cluster from S3
+    * 온프레미스 데이터베이스를 `Percona XtraBackup`을 사용하여 s3로 백업
 
 **Aurora Database Cloning**
 
 * 기존 데이터베이스로 부터 새로운 Aurora DB 클러스터를 만들 수 있음.
+* 빠른 스냅샷 및 복구
+* `production` 데이터베이스에서 `staging` 데이터베이스로 영향없이 복사 가능
 
-#### RDS Security
+#### Security
 
 * 데이터 암호화
 * KMS를 사용해 모든 데이터를 암호화함
-* 마스터를 암호화하지않았으면 읽기전용도 암호화 되지 않음
+* 마스터를 암호화 하지 않았으면 읽기전용도 암호화 되지 않음
 * 사용자 이름이나 패스워드나 IAM Role
 * 보안 그룹을 통해 특정 접근을 차단 할 수 있음
 
-#### RDS proxy
+#### proxy
 
 * 프록시를 사용하면 데이터베이스 연결 풀을 형성하고 공유할 수 있음
 * 완전한 서버리스
@@ -670,8 +692,13 @@ GWLB(Gateway Load Balancer)
 
 #### Elastic Cache
 
+* RDS 앞에 놓인 캐시서버
 * Redis, MemCache등 캐시 기술을 관리
 * 인메모리 데이터베이스
+* 무상태 앱을 만드는데 도움
+* AWS가 OS, patching, setup, configuation 등 다 관리해줌
+* 앱에서 코드를 많이 바꿔야됨
+* 성능을 향상 시킴
 
 **redis vs Memcache**
 
@@ -692,7 +719,7 @@ GWLB(Gateway Load Balancer)
     * 복제도 없고, 백업, 복원 기능도 없음
     * 멀티쓰레드
 
-#### Elastiac Cache Security
+**Cache Security**
 
 Redis Auth
 
@@ -705,13 +732,60 @@ Memcached
 
 * SASL based authentication
 
-**정책**
+**캐시 사용 패턴**
 
-Lazy Loading: 모든 읽기 데이터를 캐시(캐시 히트가 없을때 디비에서 가져옴)
+* Lazy Loading
+    * 모든 읽기 데이터를 캐시(캐시 히트가 없을때 디비에서 가져옴)
 
-Write Through:  디비에 쓸 때 캐시를 업데이트함
+* Write Through
+    * 디비에 쓸 때 캐시를 업데이트함
 
-Session Store: 세션 데이터를 임시로 저장(TTL사용)
+* Session Store
+    * 세션 데이터를 임시로 저장(TTL사용)
 
-## Route 5
+### Route 53
 
+#### DNS
+
+사람이 읽을 수 있는 주소
+
+#### Amazon Route 53
+
+* 고가용성, 확장성, AWS에 의해 관리됨
+* 도메인 등록
+* 리소스 상태체크
+* 100% SLA 제공
+
+#### Record
+
+* Domain/Subdomain
+    * example.com
+* Record Type
+    * A, AAAA, CNAME, NS...
+* Value
+    * 12.34.56.78]
+* Routping Policy
+* TTL
+
+#### Hosted Zone
+
+호스트 구역당 $0.50달러 지불
+
+* public
+    * internet으로 접근 가능
+* private
+    * 하나 이상의 VPC
+
+#### Records TTL
+
+* TTL 만큼 캐시됨
+
+* TTL 이 지나지 않으면 연결 된 주소를 갱신하지 않음
+
+#### CNAME VS Alias
+
+* `CNAME`은 루트도메인 이름이 아닌 경우에만 동작
+
+* `alias`는 루트 도메인 및 비루트도메인 모두 동작
+    * 비용 무료
+    * 상태체크
