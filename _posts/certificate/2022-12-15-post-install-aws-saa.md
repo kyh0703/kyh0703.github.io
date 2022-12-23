@@ -356,15 +356,32 @@ CLB(Classic Loadbalancer)
 ALB(Application Loadbalancer)
 
 * L7
-* path, query, header.. 등으로 라우팅 할 수 있음
-* HTTP, HTTPS, Web Socket
+* path, query, header.. 등으로 다른 타겟그룹으로 라우팅 할 수 있음
+* HTTP, HTTPS, HTTP/2, Web Socket
+* 400ms
+* 타겟그룹
+    * EC2 Instance
+    * EC2 Tasks
+    * Lambda function
+    * IP Address
+
 
 NLB(Network Loadbalancer)
 
 * L4
+* 100ms
 
 * TCP, TLS, UDP
 * 고성능
+* EIP
+* 타겟그룹
+    * EC2 Instances
+    * IP Address
+    * Application Load Balancer
+
+* 상태확인
+    * TCP, HTTP, HTTPS
+
 
 GWLB(Gateway Load Balancer)
 
@@ -372,69 +389,105 @@ GWLB(Gateway Load Balancer)
 
 * 인그레스 게이트웨이처럼 들어오는 트래픽을 가지고 검증을 한 후 애플리케이션에 분배
 * `GENEVE` 6081 포트를 사용
+* 타겟 그룹
+    * EC2 instance
+    * IP Address - must be private IPs
 
-#### **Sticky Sessions(Session Affinity)**
 
-쿠키에 데이터를 심어 처음 연결된 인스턴스와 연결 시켜줌
+#### **Sticky Sessions (Session Affinity)**
+
+쿠키에 데이터를 심어 처음 연결된 인스턴스와 연결 시켜줌. ALB & CLB만 사용가능
+
 * Application Based Coookies
+    * Custom Cookie
+        * `AWSALB`, `WWSALBAPP`, `AWSALBTG` 사용하면 안됨
+    * Application Cookie
+        * Generate by load balancer
 * Duration-based Cookie
-    * Cookie Name: `AWSALB`
+    * Generate by load balancer
+    * Cookie Name: `AWSALB`, `AWSELB`
 
 #### Cross Zone Load Balancing
 
-크로스 로드밸런서를 사용하면 다른 가용영역안에 인스턴스들에게 동일한 트래픽을 분배함
+다른 가용영역안에 인스턴스들에게 동일한 트래픽을 분배함
 
-**ALB**
+**Application LoadBalancer**
 
 * 항상 켜져 있음
 * 끌 수 없다
+* 돈을 지불하지 않음
 
-**NLB**
+**Network LoadBalancer & Gateway Load Balancer**
 
 * 기본 값 꺼져있음
 * 키면 돈을 지불함
 
-**CLB**
+**Classic Load Balancer**
 
 * 기본 값 꺼져있음
 * 켜도 돈을 지불하지 않음
 
-#### Elastic Load Balance(ELB) - SSL 인증서
+#### SSL 인증서
 
 * `ACM(AWS Certificate Manager)`를 통해 SSL인증서를 관리할 수 있음
+* x509 인증 방식 사용
+* 사용자 인증서로 교체 가능
 
-**SNI**(sever Name Indication)
+**SNI(sever Name Indication)**
 
 * 최신 프로토콜
-* 대상 서버의 호스트이름을 지정하여야 됨
+* 대상 서버의 호스트 이름을 지정하여야 됨
 * ALB, NLB 같은 최신 로드밸런서에서 사용가능
 * 서로 다른 인증서를 사용하여 다른 웹사이트로 연결되는 다수의 대상그룹을 가질 수 있음
     * CLB는 하나의 인증서만
-    * NLB, ALB는 다수의 리스너를 지원
+    * NLB, ALB는 다수의 인증서와 SNI를 지원
 
-#### Elastring Load Balancer-Connection Draining
+#### Connection Draining
 
 * 연결드레이닝 = 등록 취소 지연
 * 인스턴스가 등록 취소, 혹은 비정상적인 상태에 있을 때 어느정도 시간을 주어 활성 요청을 완료할 수 있는 기능
+* 1 - 3600초 (기본은 300초)
+* 끌 수 도 있음
 
 #### Auto Scaling Group(ASG)
 
 * 스케일 인 / 스케일 아웃 할 때 사용
 * 최소 및 최대 갯수, 목표 개수 설정 가능
 * 로드 밸런서에 묶어서 사용할 수 있음
+* 최소 개수의 인스턴스 실행을 보장한다.
+* 상태가 비정상이면 EC2인스턴스를 재 생성한다.
 * 비용은 무료
 * `ASG Launch Template`으로 생성
 * `Cloud Watch`에 경보를 통해 ASG를 컨트롤(ex 평균 CPU 사용량)
 
-#### Auto Scaling Groups - Dynamic  Scaling Polices
+#### Group Attribute
+
+* Launch Configuration은 만료됐음
+
+* Launch Template를 사용
+    * AMI + Instance Type
+    * EC2 User Data
+    * EBS Volumes
+    * Security Group
+    * SSH Key pair
+    * IAM Role
+    * Load Balancer Infomation
+* Min / Max / Init Capacity
+* Scaling Policies
+
+#### Cloud Watch Alarms & Scaling
+
+* Cloud Watch 알람을 통해 스케일 업/다운
+* Average CPU or custom metric
+
+#### Dynamic  Scaling Polices
 
 * Target Tracking Scaling
     * 대상 추적 스케일링
     * 가장 단순하고 설정하기 쉬움
     * 평균 CPU 사용량처럼 기준 선을 세워두고 사용
 * Smple/step scaling
-    * Cloud Watch 경보를 설정하고 인스턴스를 추가
-    * 기준선 아래면 인스턴스를 삭제하는 옵션도 추가할 수 있음
+    * Cloud Watch 경보를 설정하고 인스턴스를 추가하거나 삭제
 * Sheduled Action
     * 사용패턴을 바탕으로 스케일링을 예상
     * 5시에 행사가 있을 때 해당 시간에 인스턴스 수를 늘림
@@ -442,22 +495,22 @@ GWLB(Gateway Load Balancer)
     * 시간에 걸쳐 과거 로드를 분석하여 인스턴스 수를 조정
     * 머신러닝 기반
 
-**정책**
+**Good Metrics to sclae on**
 
 * CPUUtilzation: CPU 평균
 * RequestCountPerTarget: EC2 인스턴스에 request 사용량
 * Average Network In / out: 네트워크 병목 현상 기준으로
 * Any: `CloudWatch`에서 커스텀하여 직접 설정할 수 있음
 
-**Scaling Cooldowns**
+#### Scaling Cooldowns
 
 스케일링이 작업이 끝날 떄마다 인스턴스의 추가 또는 삭제를 막론하고 5분 혹은 300초의 휴식 기간을 갖는것
 
 휴식기간에는 추가인스턴스를 실행 또는 종료 할 수 없다.
 
-## RDS
+### RDS
 
-**종류**
+#### 종류
 
 * Postgres
 * Mysql
