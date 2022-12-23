@@ -789,3 +789,299 @@ Memcached
 * `alias`는 루트 도메인 및 비루트도메인 모두 동작
     * 비용 무료
     * 상태체크
+
+#### Alias Records
+
+| RecordName  | Type | Value      |
+| ----------- | ---- | ---------- |
+| example.com | A    | MYALB..... |
+
+* A / AAAA for AWS resource
+* TTL을 사용할 수 없음
+* 레코드 지정
+    * Eleastic Load Balancer
+    * CloudFront Distributions
+    * API Gateway
+    * Elastic Beanstalk
+    * S3 Website
+    * VPC Interface Endpoint
+    * Global Accelerator
+    * 같은 호스트 존 Route 53
+
+> Alias는 EC2 DNS Name은 지정할 수 없다
+
+#### Route Policies
+
+**유형**
+
+* Simple
+    * 물리적인 싱글 리소스로 라우팅
+    * Single / Multiple Value
+        * A 111.22.33.44
+        * A 55.66.77.88
+    * 멀티 일 경우 랜덤으로 하나가 지정됨
+    * 상태체크와 연결 시킬 수 없다.
+* Weighted
+    * 가중치
+    * 70:20:10의 비율로 분배가능
+    * 가중치는 100이 아니여도 된다
+    * 0으로 지정할 경우 보내지 않음
+        * 모두가 0이면 같은 비율로 리턴
+* Failover
+    * 상태 체크를 하여 primary/secondary 전환
+* Lantency based
+    * user와 aws 리전 간 최적의 라우팅
+* Geolocation
+    * 유저의 지역에 따라 라우팅 함
+* Multi-Value Answer
+    * 여러 리소스에 라우팅 할 떄 사용
+    * 헬스 체크와 같이 사용할 수 있음
+* GeoProximity
+    * `bias`를 두어 유저의 위치와 가중치를 비교하여 높은`bias`기준으로 라우팅
+
+**상태체크**
+
+* 퍼블릭 리소스에 한해 체크함
+* 헬스체크는 CW Metrics과 통합됨
+* 200 ~ 300은 정상
+* 5120 bytes on response
+* 프라이빗의 경우는 `CloudWatch Metric`과 `CloudWatch Alarm`을 통해 상태체크를 진행
+
+#### Elastic Beanstalk
+
+* 개발자가 인프라를 신경 쓰지 않게 자동으로 구성해줌
+* 오토 스케일링, 프로비저닝, 앱 모니터링
+* 개발자는 코드만 작성하면 됨
+* WebServer Tier
+    * ELB + ASG
+* Worker Tier
+    * SQS + ASG
+
+### S3
+
+#### 용도
+
+* 백업 및 저장
+* DR(Disaster Recovery)
+* 기록 저장소
+* 하이브리드 클라우드 스토리지
+* 앱 호스팅
+* 미디어 호스팅
+* 빅데이터 분석
+* 앱 전송
+* 정적 웹사이트
+
+#### Buckets
+
+* 전세계적으로 이름은 유니크 해야된다.
+* 지역별로 생성
+
+#### Object
+
+* prefix + objectname
+* `/`를 이용해 구분
+* MAX 5TB
+* 5GB이상은 `멀티업로드`기능을 사용해야함
+
+> 100MB이상이면 멀티업로드 기능 권장
+
+#### security
+
+* User Based
+    * IAM
+* Resource-Based
+    * Buckey Polices
+    * Object ACL
+    * Bucket ACL
+* 암호화
+
+#### Statica Website Hosting
+
+* 정적 웹사이트를 올릴 수 있다.
+* URL은 지역에 종속적임
+* 403 Fobidden error가 뜬다면 bucket 정책 확인 필요
+
+#### Version
+
+* 버킷에서 버전관리를 활성화
+* 버전 관리 전 파일은 `null`로 버전 아이디가 지정됨
+* 파일을 삭제 하지 않게 도와줌
+* Delete Marker를 구성
+
+#### Replication
+
+* Cross-Region Replication(CRR)
+* Same-Region Replication(SRR)
+* 비동기 적 복사
+* A->B->C로 복사 안 되며, A -> B, A -> C로 복사시켜야 됨
+
+#### Storage Classes
+
+* S3 Standard - General Purpose
+    * 99.99 Avaliability
+    * 자주 접근되는 데이터
+    * 짧은 지연시간, 고성능
+    * 빅데이터, 모바일 앱...
+* S3 Standard - Infrequent Access(IA)
+    * 조금 덜 접근하는 데이터이지만 빠르게 접근이 가능해야될때
+    * Standard 보다 조금 더 저렴
+    * 99.9 Avaliability
+    * Diaster Recovery, backup
+    * 최소 30일
+* S3 One Zone - Infrequent Access
+    * 99.999999999%
+    * Single AZ
+    * 99.5 Avaliability
+    * Copy On-premises data
+    * 최소 30일
+* S3 Glacier Instant Retrieval
+    * 최소 90일
+    * 분기에 한번 엑세스 하는 데이터에 적합
+    * 밀리초 검색
+* S3 Glacier Flexible Retrieval
+    * 정책
+        * Expeited(1 - 5 minutes)
+        * Standard(3 - 5 hours)
+        * Bulk(5 - 12 hours)
+    * 최소 90일
+* S3 Glacier Deep Archive
+    * 정책
+        * Standard(12 hours)
+        * Bulk(48 hours)
+    * 최소 180일
+* S3 Inteligent Tiering
+    * 사용 패턴에 따라 엑세스 티어간 객체를 이동할수 있게 해줌
+    * 자동으로 이동 시켜줌
+    * 검색 비용이 없음
+        * Frequent Access tier (automatic): default tier
+        *  Infrequent Access tier (automatic): objects not accessed for 30 days
+        * Archive Instant Access tier (automatic): objects not accessed for 90 days
+        * Archive Access tier (optional): configurable from 90 days to 700+ days
+        * Deep Archive Access tier (optional): config. from 180 days to 700+ days
+
+#### Lifecycle Rules
+
+특정 이름만 가진 객체로 분리하여도 사용가능
+
+시험 단골 문제
+
+**Transition Action**
+
+* 다른 스토리지 클래스로 객체를 이동 시키도록 구성
+
+**Expiration action**
+
+* 일정 시간이 지나면 데이터를 삭제하도록 구성
+* 완료되지 않은 멀티파트 업로드를 삭제하도록도 구성 가능
+
+#### Analytics - Storage Class Analysis
+
+* 최적의 기간을 뽑을 때 사용
+* Onezone IA or Glacier는 사용하지 않음
+* Stand Stand IA만 사용
+* 매일 기록들을 업데이트함
+* 24 - 48 시간 분석
+
+#### Requester Pays
+
+대부분 S3에 사용자가 돈을 지불하지만 S3데이터를 요청한 인가된 사용자에게  요금을 지불 할 수 있음
+
+#### Event Notifications
+
+* SNS, SQS, Lamda Function으로 S3이벤트들을 전달 할 수 있음
+* 몇 초 혹은 몇 분이 걸릴 수도 있음
+* `Amazon EventBridge`를 사용하여  `bucket`에 이벤트를 전달 할 수 있음
+    * 필터링
+    * 다중 목적지 전달(kinesis, Firehose...)
+
+#### Baseline Perfomance
+
+* 요청이 많을 때 자동으로 확장 됨
+* 지연시간 100 - 200ms
+* 접두사당 초당 3500개의 `put/copy/post/delete`처리
+* 접두사당 초당 5500개의 `GET/HEAD`처리
+* 버킷 내 접두사에 제한이 없음
+
+#### Perfomace
+
+**Multi Upload**
+
+* 100MB 이상이면 사용하도록 권장
+* 최대 5GB
+* 병렬처리로 빠름
+
+**S3 Transfer Accelation**
+
+* 파일을 AWS 엣지 로케이션으로 전송해서 전송 속도를 올려줌
+* 멀티파트와 같이 사용할 수 있음
+
+#### Select & Glacier Select
+
+* s3 파일을 검색할 때 쉽게 질의할 수 있게 사용 가능
+* 서버측 필터링
+
+#### Batch Operation
+
+* 단일요청으로 대량 요청을 진행 할 떄 사용
+* 배치 작업으로 s3버킷간 객체 복사
+* 암호화 되지 않은 객체를 암호화 시킬 수 있음
+* 많은 객체를 복사 할 수 있음
+* 사용자 지정작업도 가능
+
+#### Security
+
+**객체암호화**
+
+* 서버사이드 암호화(SSE)
+    * SSE-S3
+        * AWS가 전적으로 관리
+        * AES-256
+        * `x-amz-server-side-encryption: AES256`
+    * SSE-KMS
+        * AWS에서 암호화가 일어나고 AWS가 암호화키를 관리하게 되지만 암호화키의 교체 정책은 당사자가 관리
+        * `x-amz-server-side-encryption: aws:kms`
+    * SSE-C
+        * AWS에서 암호화가 일어나지만 당사자가 암호화키를 전적으로 관리
+        * HTTPS만 사용
+* 클라이언트 암호화
+
+**CORS**
+
+* Cross-Origin Resource Sharing
+* `origin`과 비교하여 틀릴경우 에러가 발생함
+* `Access-Control-Allow-Origin`을 사용하여 허용 가능
+
+**MFA Delete**
+
+* 객체 삭제 시 MFA 인증 활성화 가능
+
+**Access Log**
+
+* 엑세스 로그를 활성화하여 s3 요청 메시지를 로그 s3로 이동 가능
+
+* 같은 리전이여야 함
+
+**Pre signed URL**
+
+* s3 console, aws cli, sdk로 생성 가능
+    * S3 Console (1 - 720min)
+    * AWS CLI (기본:3600초, max:168hours)
+
+**Glacier Valut Lock**
+
+* Valut를 사용하여 객체 락
+* 객체는 삭제 되지 않음
+
+#### EC2 Instance Metadata
+
+* http://169.254.169.254/latest/meta-data
+* curl을 통해 메타 정보를 가져 올 수 있음
+
+### Global Infrastructure
+
+#### Cloud Front
+
+* CDN(Content Dlivery Network)
+* 읽기 성능을 향상 시키며 엣지에 캐시
+* DDOS를 막을 수 있다(With Shield, With Web Application Firewall)
+
