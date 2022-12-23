@@ -1085,3 +1085,176 @@ Memcached
 * 읽기 성능을 향상 시키며 엣지에 캐시
 * DDOS를 막을 수 있다(With Shield, With Web Application Firewall)
 
+**origins**
+
+s3 bucket
+
+* OAI를 통해 보안을 강화할 수 있음
+* ingress를 사용한다(upload file to s3)
+
+custom origin(http)
+
+* ALB
+* EC2 Instance
+* S3 Website
+* Any HTTP Backend
+
+**CloudFront VS S3 Cross Region Replications**
+
+CloudFont
+
+* Global Edge network
+* 파일 캐시, TTL
+* 정적인 컨텐츠에 적합
+
+S3 Cross Region Replication
+
+* 각 지역에서 앱 설치
+* 실시간으로 업데이트
+* 읽기 전용
+
+**Geo Restriction**
+
+* Allow List
+* BlockList
+
+#### Global Accelerator
+
+* EIP, EC2 Instance, ALB, NLB, public or private
+* UDP, TCP, VOIP
+* 고정 아이피 필요
+* 동시성 향상
+    * 낮은 지연시간
+* 상태 체크
+* 보안
+    * DDos 보호 (With AWS Shield)
+
+### Advanced Storage on AWS
+
+#### Snow Family
+
+오프라인 장치에 데이터를 이전하는데 사용
+
+광산이나 배 또한 트럭 이런 곳에서 사용
+
+스노우볼은 Glacier에 직접적으로 임포트 할수 없으며 S3를 통해야 됨
+
+* Data migration
+    * snowcone
+    * snowball Edge
+    * snow mobile
+* Edge Computing
+    * snowcone
+    * sonwball Edge
+
+**Snowball Edge**
+
+* move TBs or PBs of data AWS
+* 전송 job에 따라 돈을 지불
+* 80 TBs
+* 옵션
+    * Snowball Edge Storage Optimized
+        * 80TB of HDD Capacity
+        * 40 vCPU
+    * Snowball Edge Compute Optimized
+        * 42TB of HDD Capacity
+        * 52 vCPU, 208 GiB
+
+**Snowcone**
+
+* 작고 가볍다
+* 2 CPU, 4GB of Memory
+* 8TBs of Usable Storage
+* 베터리와 케이블을 제공해야됨
+* `AWS DataSync`로 전송
+
+**Snowmobile**
+
+* 트럭임...
+* 1EP를 전송하는데 사용(1000PB)
+* 100PB 이상이면...
+
+#### Amazon FSx
+
+**Amazon FSx for windows**
+
+* fully manage
+* SMP protocol & NTFS
+* Linux EC2 인스턴스에 마운트 가능
+* DFS(Distributed File System) 지원
+
+**Amazon FSx for Lustre**
+
+* HPC(High Performance Computing)
+* Scaled up to 100s GB/s
+* Seamless intefration With S3
+* 온프레미스 서버에서 사용가능(Aws VPN, AWS Direct Connect)
+* `hotdata`
+
+**Amazon FSx for NetApp ONTAP**
+
+* NetApp OnTAP
+
+* NFS, SMB, ISCSi Protocol
+* Linux, window, mac, VMWare
+* testing Network
+
+**Amazon FSx for OpenZFS**
+
+* NFS
+* 1,000,000 IOPS
+
+#### Hybrid Cloud for Storage
+
+* 온프레미스 머신과 같이 사용
+* AWS Storage GateWay를 사용함
+
+**AWS Storage Gateway**
+
+* 온프레미스 데이터와 클라우드 데이터사이에 브릿지
+
+* 온프레미스 - Storage Gateway -  aws
+
+* 백업 및 복구
+
+* 온프레미스 캐쉬
+
+* 종류
+
+    * S3 File Gateway
+        * NFS, SMB
+        * 가장 최근에 사용된 사용자 데이터를 캐시함
+        * Glacier를 사용할려면 S3에  LifeCycle Policy를 적용
+        * IAM Role for each  File Gateway
+        * S3, Glacier
+    * FSx File Gateway
+        * Window File Server
+        * 자주 접근되는 데이터를 캐시함
+        * SMB, NTFS, Active Diretory
+        * `S3`
+
+    * Volume GateWay
+        * iSCSi Protocol
+        * S3 버킷을 통해 `EBS Snapshot`백업
+        * 캐시 볼륨
+        * S3에 예약 백업
+    * Tape Gateway
+        * Vrtiaul Tape Library(VTL)
+        * S3 To `Glacier`
+        * 물리적인 테이프
+
+#### AWS Transfer Faimily
+
+* FTP
+* FTPS
+* SFTP
+
+#### AWS Data Sync
+
+* 온프레미스나 다른 클라우드의 경우 에이전트가 필요하다
+* 파일권한과 파일 메타데이터는 보존된다.
+* 복제는 시간, 일, 주로 구성할 수 있음
+* 복제 목적지
+    * S3(including Glacier)
+    * EFS
+    * FSX
