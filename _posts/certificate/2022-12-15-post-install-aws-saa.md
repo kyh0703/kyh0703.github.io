@@ -1814,6 +1814,84 @@ Function Of Service
 * 텍스트를 추출
 * 주민등록증이나 운전면허증에서 번호 추출
 
+### AWS 모니터링 및 감사
+
+#### Cloud Watch
+
+* aws의 모든 서비스에 대한 지표를 제공
+* `Metric`은 모니터링 할 변수
+* 서비스당 `namespace`는 하나
+* `Demension` 측정 기준
+* `Metric`당 `Demension` 최대 10개
+* `Metric`은 `timestamps`를 가짐
+* 지표가 많아지면 대시보드를 사용하여 볼 수 있음
+* 사용자 지표를 추가 하여 볼 수 있음
+
+**Cloud watch metric stream**
+
+* 외부로 스트리밍 할 수 있음
+* 거의 실시간으로 동작함
+* 원하는 대상으로 스트리밍
+  * Amazon Kinesis Data Firehose
+  * 3rd Party: DataDog...
+
+**CloudWatch log**
+
+* aws 로그를 저장하는 최고의 저장소
+* 로그그룹
+  * 애플리케이션이름으로 지정
+  * 로그 스트림
+    * 애플리케이션
+    * 로그파일
+    * 컨테이너
+* 로그 만료일(영원히 만료되지 않게하거나 30일, 그리고 기타)
+* Send
+  * s3
+  * kinesis Data stream
+  * kinesis Data Firehose
+  * lambda
+  * eleastic search
+
+#### CloudTrail
+
+* AWS 계정의 거버넌스, 감사 및 규정 준수를 도움
+
+* 기본적으로 활성화
+
+* AWS 계정 내의 모든 이벤트 및 API 호출 기록을 가져올 수 있음
+
+* CloudTrail로그를 CloudWatch Logs나 S3로 이동시킬 수 있음
+
+* 누군가가 aws에서 무언가를 삭제 했을 떄 대처 할 수 있음
+
+  > 누군가가 EC2인스턴스를 삭제했다?
+  >
+  > 그러면 Cloudtrail을 봐야된다
+
+* 모든 리전에 걸친 이벤트를 한 곳에 모을 수 있음(글로벌 서비스)
+
+#### AWS Config
+
+* config는 aws내 리소스에 대한 감사와 규정준수 여부를 확인
+* 기록할 수 있다.
+* 예시
+  * 보안그룹에 제한되지 않은 SSH 접근이 있나?
+  * 버킷에 공용엑세스가 있나
+  * 시간이 지나며 변화한 ALB 설정이 있나
+* 알람을 받을 수 있다(SNS Notification)
+
+* 리전 별 서비스이기에 모든 리전별로 구성해야됨
+* 리전과 계정 간 데이터를 통합 할 수 있음
+* S3에 저장후 차후 분석 가능(Athena...)
+
+**config Rule**
+
+* 75가지의 룰
+* AWS Lambda를 통해 config rule설정
+* 규정 준수를 위한 것임으로 차단같은 개념을 지정할수 없음
+* 비용이 비쌈
+* `config`를 차단할 수 없지만 SSM 문서를 통해 규칙을 수정할 수 있음
+
 ### 재해복구 및 마이그레이션
 
 * 온프레미스
