@@ -4,10 +4,10 @@ title: "docker remote로 연결하기"
 categories:
   - Kubernetes
 tags:
-  - [kubernetes, docker]
+  - [kubernetes]
 toc: true
 toc_sticky: true
-date: "2023-03-14 09:00
+date: "2023-03-14 09:00"
 ---
 
 window에서 `docker-desktop`을 설치하여 `WSL`을 사용하다보면 이미지 빌드 시마다 디스크 용량이 점유하여 디스크가 부족한 경우들이 있습니다. 또한 사용하다보면 컴퓨터가 느려지는 느낌이 드는데요. 처음 생각했던 것은 `kubectl`처럼 `docker-cli`도 `api`를 호출하는 것 뿐인데 원격으로 사용할 수 없을까하다 방법을 찾아서 정리합니다.
