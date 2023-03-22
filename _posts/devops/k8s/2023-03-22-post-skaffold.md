@@ -51,7 +51,7 @@ build:
       docker:
         buildArgs:
           CI_USER: kyh0703
-          CI_TOKEN: hkUy7Pv-xDrBZmabUYW7
+          CI_TOKEN: **
         dockerfile: Dockerfile
       sync:
         manual:
