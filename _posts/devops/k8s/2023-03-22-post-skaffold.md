@@ -42,7 +42,7 @@ metadata:
 build:
   tagPolicy:
     envTemplate:
-      template: '{{.IMAGE_VERSION}}'
+      template: {{.IMAGE_VERSION}}
   local:
     push: true
     useDockerCLI: true
@@ -50,8 +50,8 @@ build:
     - image: 100.100.103.167/ipron/call-svc
       docker:
         buildArgs:
-          CI_USER: ***************
-          CI_TOKEN: ***************
+          CI_USER: kyh0703
+          CI_TOKEN: hkUy7Pv-xDrBZmabUYW7
         dockerfile: Dockerfile
       sync:
         manual:
@@ -65,7 +65,8 @@ deploy:
         valuesFiles:
           - deploy/v1.2.0/values.yaml
         version: 1.2.0
-        namespace: core
+        namespace: bcloud-core
+
 ```
 
 **command**
