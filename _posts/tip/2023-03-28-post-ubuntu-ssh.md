@@ -4,7 +4,7 @@ title: "ubuntu ssh 접속이 안될 때"
 categories:
   - Tip
 tags:
-  - [tip, github, wakatime]
+  - [tip, ubuntu]
 toc: true
 toc_sticky: true
 date: "2023-02-06 10:00"

@@ -4,7 +4,7 @@ title: "ubuntu root 사용법"
 categories:
   - Tip
 tags:
-  - [tip, github, wakatime]
+  - [tip, ubuntu]
 toc: true
 toc_sticky: true
 date: "2023-02-06 10:00"
