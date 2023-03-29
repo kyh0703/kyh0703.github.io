@@ -24,6 +24,7 @@ systemctl edit docker
 
 ```bash
 [Service]
+ExecStart=
 ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 --containerd=/run/containerd/containerd.sock
 ```
 
