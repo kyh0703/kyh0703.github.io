@@ -108,8 +108,12 @@ var _ = Describe("TransactionService", func() {
 )
 ```
 
-`Describe, It, BeforeEach` 등 많은 키워드를 제공합니다.  `gingo watch` 명령어를 통해서 `jest`와 같이 모니터링 하며 코드를 작성 할 수도 있습니다.
+`Describe, It, BeforeEach` 등 많은 키워드를 제공합니다.  `ginkgo watch` 명령어를 통해서 `jest`와 같이 모니터링 하며 코드를 작성 할 수도 있습니다.
 
 #### 결과
+
+```bash
+$ ginkgo watch
+```
 
 ![image-20230331113807415](../../../assets/images/posts/2023-03-31-post-golang-test-framework/image-20230331113807415.png)
