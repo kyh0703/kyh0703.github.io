@@ -16,12 +16,23 @@ date: "2023-03-31 09:00"
 
 ![image-20230403123734488](../../../assets/images/posts/2023-04-03-post-golang-tdd-mock/image-20230403123734488.png)
 
+#### Interface
+
+```go
+package auth
+
+type Service interface {
+    CheckSpam(tenant string, ani string) (bool, error)
+    CheckTodayHoliday(tenant string, ani string) (bool, error) {
+}
+```
+
 #### unimpl 구성
 
 ```go
 package unimpl
 
-import "gitlab.com/ipron-cloud/call-service/internal/app/auth"
+import ".../internal/app/auth"
 
 type AuthServiceUnImpl struct{}
 
@@ -41,15 +52,15 @@ var _ auth.Service = (*AuthServiceUnImpl)(nil)
 #### 사용 시
 
 ```go
-type CallsServiceMock struct {
-	callssvc.CallsServiceUnImpl
+type AUthServiceMock struct {
+	authsvc.AuthServiceUnImpl
 }
 
-func (m *CallsServiceMock) AllocCall(ctx context.Context, id string) (*entity.Call, error) {
+func (m *CallsServiceMock) CheckSpam(tenant string, ani string) (bool, error) {
     .. 필요한 method만 작성 가능
 }
 ```
 
 #### 설명
 
-`umimplement`를 구성하여 해당 서비스에 대한 내용을 자동완성으로 만듭니다. 그 다음 사용할 `mock`구조체에서 임베드하여 필요한 부분만 기술하여 테스트를 진행합니다.
+`umimplement`를 구성하여 해당 서비스에 대한 내용을 자동 완성으로 만듭니다. 그 다음 사용할 `mock`구조체에서 `embed` 하여 필요한 `method`만 기술하여 테스트를 진행합니다.
