@@ -1,6 +1,6 @@
 ---
 published: true
-title: "prometheus - 1"
+title: "prometheus - layout"
 categories:
   - Prometheus 
 tags:
