@@ -12,7 +12,7 @@ date: "2023-04-23 10:30"
 
 ### Dashboard
 
-![image-20230423003211207](/home/overthinker1127/Project/kyh0703.github.io/assets/images/posts/2023-04-23-post-prometheus-2/image-20230423003211207.png)
+![image-20230423003211207](../../../assets/images/posts/2023-04-23-post-prometheus-basic/image-20230423003211207.png)
 
 * 9090포트를 사용함
 

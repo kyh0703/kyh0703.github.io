@@ -27,14 +27,14 @@ date: "2023-04-23 18:30"
 * 쿼리 평가 시점 전 가장 최근 샘플의 데이터
 * 모든 값에 대해 타임 스탬프를 가지고 있다.
 
-![image-20230423204818940](/home/overthinker1127/Project/kyh0703.github.io/assets/images/posts/2023-04-23-post-prometheus-promql/image-20230423204818940.png)
+![image-20230423204818940](../../../assets/images/posts/2023-04-23-post-prometheus-promql/image-20230423204818940.png)
 
 **범위 벡터**
 
 * 범위를 포함하는 시계열 집합
 * 쿼리시점까지 Time Duration에 대해 일치하는 모든 시계열을 가지고 있다.
 
-![image-20230423205006376](/home/overthinker1127/Project/kyh0703.github.io/assets/images/posts/2023-04-23-post-prometheus-promql/image-20230423205006376.png)
+![image-20230423205006376](../../../assets/images/posts/2023-04-23-post-prometheus-promql/image-20230423205006376.png)
 
 **스케일러**
 
@@ -47,7 +47,7 @@ date: "2023-04-23 18:30"
 
 ### Selectors & Matchers
 
-![image-20230423205830402](/home/overthinker1127/Project/kyh0703.github.io/assets/images/posts/2023-04-23-post-prometheus-promql/image-20230423205830402.png)
+![image-20230423205830402](../../../assets/images/posts/2023-04-23-post-prometheus-promql/image-20230423205830402.png)
 
 ```bash
 process_cpu_seconds_total{job="node_exporter",instance="localhost:9100"}
@@ -65,11 +65,11 @@ process_cpu_seconds_total{job="node_exporter",instance="localhost:9100"}
   * ex) =~"/api.*"
 * Negative Regular expression matcher (!~)
 
-![image-20230423210605685](/home/overthinker1127/Project/kyh0703.github.io/assets/images/posts/2023-04-23-post-prometheus-promql/image-20230423210605685.png)
+![image-20230423210605685](../../../assets/images/posts/2023-04-23-post-prometheus-promql/image-20230423210605685.png)
 
 ### 연산자
 
-![image-20230423210905261](/home/overthinker1127/Project/kyh0703.github.io/assets/images/posts/2023-04-23-post-prometheus-promql/image-20230423210905261.png)
+![image-20230423210905261](../../../assets/images/posts/2023-04-23-post-prometheus-promql/image-20230423210905261.png)
 
 산술 연산자
 
@@ -140,7 +140,7 @@ $ count(node_cpu_seconds_total)
 
 **rate**
 
-![image-20230423213908156](/home/overthinker1127/Project/kyh0703.github.io/assets/images/posts/2023-04-23-post-prometheus-promql/image-20230423213908156.png)
+![image-20230423213908156](../../../assets/images/posts/2023-04-23-post-prometheus-promql/image-20230423213908156.png)
 
 * 주로 카운터 유형 메트릭과 함께 사용하며 초당 계산함.
 * 초당 평균 변화율을 계산함
