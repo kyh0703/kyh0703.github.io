@@ -169,5 +169,3 @@ changes(process_start_time_seconds{job="node_exporter"}[1h])
 * 게이지의 이전 패턴을 확인하여 미래 가치를 예측
 
 **max_over_time**
-
-* 
