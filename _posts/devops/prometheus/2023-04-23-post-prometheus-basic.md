@@ -10,7 +10,7 @@ toc_sticky: true
 date: "2023-04-23 10:30"
 ---
 
-#### Dashboard
+### Dashboard
 
 ![image-20230423003211207](/home/overthinker1127/Project/kyh0703.github.io/assets/images/posts/2023-04-23-post-prometheus-2/image-20230423003211207.png)
 
@@ -22,7 +22,7 @@ date: "2023-04-23 10:30"
 
 * alert, graph, status등 여러 부분을 확인 할 수 있음
 
-#### Prometheus.yml
+### Prometheus.yml
 
 * 메트릭을 스크랩
 * 대상을 지정
@@ -66,7 +66,7 @@ scrape_configs:
 
 ```
 
-#### Metrics
+### Metrics
 
 ```yaml
 # HELP net_conntrack_dialer_conn_attempted_total Total number of connections attempted by the given dialer a given name.
