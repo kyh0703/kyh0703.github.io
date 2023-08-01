@@ -41,7 +41,7 @@
         {% for category in site.categories %}
         {% if category[0] == 'Vue' %}
         <li>
-          <a href="/categories/vue">🖌️ react ({{category[1].size}})</a>
+          <a href="/categories/vue">🖌️ vue ({{category[1].size}})</a>
         </li>
         {% endif %}
         {% endfor %}
@@ -141,6 +141,15 @@
         {% if category[0] == "Istio" %}
         <li>
           <a href="/categories/istio">⚒️ istio ({{category[1].size}})</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+      <ul>
+        {% for category in site.categories %}
+        {% if category[0] == "Jenkins" %}
+        <li>
+          <a href="/categories/jenkins">⚒️ jenkins ({{category[1].size}})</a>
         </li>
         {% endif %}
         {% endfor %}
