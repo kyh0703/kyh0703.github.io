@@ -14,11 +14,7 @@ date: "2022-08-08 11:00"
 
 SSH로 리모트 호스트를 제어하기 위해선 SSH 플러그인을 먼저 설치해줍니다.
 
-![image-20220812202726845](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220812202726845.png)
-
  SSH HOST를 추가합니다.
-
-![image-20220812203227280](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220812203227280.png)
 
 ### Jenkins & Maven(CENTOS7)
 
@@ -55,15 +51,9 @@ export PATH
 
 4. maven 플러그인 설치
 
-![image-20220812204959367](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220812204959367.png)
-
 5. jenkins 설정
 
-![image-20220812205436594](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220812205436594.png)
-
 6. 프로젝트 확인
-
-![image-20220812205635140](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220812205635140.png)
 
 ### Jenkins & Tomcat
 
@@ -71,16 +61,10 @@ export PATH
 2. `deploy to container` plugin 설치
 3. `빌드 후 조치` 추가
 
-![image-20220813001546671](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220813001546671.png)
-
 ### Jenkins & Git
-
-![image-20220814174034012](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220814174034012.png)
 
 * Poll SCM: 빌드 정책에 따라 지속적 확인(cronjob)
 * BUild Periodically: 지속적인 감시
-
-![image-20220814175038425](../../../assets/images/posts/2022-08-10-post-jenkins-1/image-20220814175038425.png)
 
 빌드가 주기적으로 감시하여 변경사항이 있으면 재 빌드 시킴.
 
