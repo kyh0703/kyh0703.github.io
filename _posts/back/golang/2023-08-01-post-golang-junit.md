@@ -53,4 +53,4 @@ test:
 	@echo ""
 ```
 
-![image-20230801132902399](C:\Users\bt-rnd6-user\AppData\Roaming\Typora\typora-user-images\image-20230801132902399.png)
+![image-20230801133224789](../../../assets/images/posts/2023-08-01-post-golang-junit/image-20230801133224789.png)
