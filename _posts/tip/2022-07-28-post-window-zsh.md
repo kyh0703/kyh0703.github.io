@@ -102,8 +102,19 @@ alias vi="vim"
 
 ```
 
-- vscode 설정
+- vscode 설정(settings.json)
 
-  ![image-20220728181349241](../../assets/images/posts/2022-07-28-post-window-zsh/image-20220728181349241.png)
+```bash
+  "terminal.integrated.profiles.windows": {
+    "zsh": {
+      "path": "D:\\msys64\\usr\\bin\\zsh.exe",
+      "args": [
+        "--login"
+      ],
+      "icon": "terminal-bash"
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "zsh",
+```
 
 - 설치 확인
