@@ -17,10 +17,9 @@ dark_theme_toggle: true
 
 footer_scripts:
   - /assets/js/custom/dark-theme.js
-
 # Site Settings
-locale: "ko-KR"
-title: "기술의 추월차선"
+locale: "ko-KR
+title: "적자생존"
 title_separator: "-"
 subtitle: #""
 name: "yeonho"

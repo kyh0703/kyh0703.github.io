@@ -2,9 +2,9 @@
 published: true
 title: "typescript paths + eslint"
 categories:
-  - Nodejs
+  - Javascript
 tags:
-  - [nodejs, jest]
+  - [Javascript, jest]
 toc: true
 toc_sticky: true
 date: "2023-09-04 10:00"
@@ -12,7 +12,7 @@ date: "2023-09-04 10:00"
 
 #### require
 
-* eslit-import-resolver-typescript
+- eslit-import-resolver-typescript
 
 ```bash
 $ yarn add -D eslint-import-resolver-typescript
@@ -24,10 +24,8 @@ $ yarn add -D eslint-import-resolver-typescript
 {
   "compilerOptions": {
     "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    },
+      "@/*": ["./src/*"]
+    }
   }
 }
 ```
@@ -36,15 +34,11 @@ $ yarn add -D eslint-import-resolver-typescript
 
 ```json
 {
-    "import/parsers": {
-      "@typescript-eslint/parser": [
-        ".ts",
-        ".tsx"
-      ]
-    },
-    "import/resolver": {
-      "typescript": {}
-    }
+  "import/parsers": {
+    "@typescript-eslint/parser": [".ts", ".tsx"]
+  },
+  "import/resolver": {
+    "typescript": {}
+  }
 }
 ```
-

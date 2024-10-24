@@ -60,18 +60,9 @@
       </ul>
       <ul>
         {% for category in site.categories %}
-        {% if category[0] == "Django" %}
+        {% if category[0] == "Javascript" %}
         <li>
-          <a href="/categories/django">🐾 django ({{category[1].size}})</a>
-        </li>
-        {% endif %}
-        {% endfor %}
-      </ul>
-      <ul>
-        {% for category in site.categories %}
-        {% if category[0] == "Nodejs" %}
-        <li>
-          <a href="/categories/nodejs">🐾 nodejs ({{category[1].size}})</a>
+          <a href="/categories/javascript">🐾 javascript ({{category[1].size}})</a>
         </li>
         {% endif %}
         {% endfor %}
